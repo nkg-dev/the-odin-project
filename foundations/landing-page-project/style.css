@@ -7,9 +7,6 @@
 	font-size: 16px;
 }
 
-body {
-}
-
 main {
 	display: flex;
 	justify-content: center;
@@ -21,7 +18,14 @@ main {
 li {
 	list-style-type: none;
 	display: inline;
-	padding-left: 16px;
+	padding: 4px 8px;
+}
+
+li:hover {
+	background-color: white;
+	color: #1f2937;
+	border-radius: 2px;
+	cursor: pointer;
 }
 
 button {
@@ -39,6 +43,14 @@ footer {
 	align-items: center;
 }
 
+.navbar,
+.top,
+.footer {
+	background-color: #1f2937;
+	padding-left: 128px;
+	padding-right: 128px;
+}
+
 .logo,
 .navbar,
 .top,
@@ -51,14 +63,6 @@ footer {
 .logo {
 	font-size: 24px;
 	font-weight: 700;
-}
-
-.navbar,
-.top,
-.footer {
-	background-color: #1f2937;
-	padding-left: 128px;
-	padding-right: 128px;
 }
 
 .top {
@@ -138,11 +142,23 @@ footer {
 	border: 0px solid #f9faf8;
 }
 
+.button1:hover {
+	background-color: #f9faf8;
+	color: #1f2937;
+	cursor: pointer;
+}
+
 .button2 {
 	border: 2px solid white;
 	padding: 0.5rem 2rem;
 	font-size: 1.5rem;
 	font-weight: 700;
+}
+
+.button2:hover {
+	background-color: white;
+	color: #3882f6;
+	cursor: pointer;
 }
 
 .quote {
