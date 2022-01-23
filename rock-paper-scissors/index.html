@@ -5,7 +5,40 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<script src="script.js"></script>
+		<link rel="stylesheet" type="text/css" href="style.css" />
 		<title>Rock Paper Scissors</title>
 	</head>
-	<body> </body>
+	<body>
+		<header
+			><h1>Rock • Paper • Scissors</h1>
+			<h2>Let's go!</h2>
+		</header>
+		<main>
+			<section>
+				<button class="play" id="Player1">Play!</button>
+			</section>
+			<section class="choice-player">
+				<img id="rock-player" src="./img/hand-rock.svg" alt="rock" />
+				<img id="paper-player" src="./img/hand-paper.svg" alt="paper" />
+				<img
+					id="scissors-player"
+					src="./img/hand-scissors.svg"
+					alt="scissors"
+				/>
+			</section>
+			<section>Game winner and score go here</section>
+			<section class="choice-computer">
+				<img id="rock-computer" src="./img/hand-rock.svg" alt="rock" />
+				<img id="paper-computer" src="./img/hand-paper.svg" alt="paper" />
+				<img
+					id="scissors-computer"
+					src="./img/hand-scissors.svg"
+					alt="scissors"
+				/>
+			</section>
+			<section>
+				<button class="gray" id="computerPlay">Computer</button>
+			</section>
+		</main>
+	</body>
 </html>
