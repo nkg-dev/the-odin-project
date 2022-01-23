@@ -1,14 +1,17 @@
 * {
-	padding: 0;
-	margin: 0;
-	font-family: Verdana, Geneva, Tahoma, sans-serif;
 	font-size: 20px;
+	box-sizing: border-box;
+	padding: 0.5rem;
+	margin: 0.5rem;
+	font-family: Verdana, Geneva, Tahoma, sans-serif;
 	border: 1px dotted purple;
+	border-radius: 4px;
 }
 
 body {
 	display: flex;
 	flex-direction: column;
+	/* background-color: #111; */
 }
 
 header {
@@ -30,5 +33,55 @@ img {
 	width: 3rem;
 	transform: rotate(90deg);
 	transform: rotateY(180deg);
+	/* color: blue; */
+	fill: blue;
 	/* border: 2px dotted magenta; */
 }
+
+.svg-rock-computer,
+.svg-paper-computer {
+	fill: red;
+	height: 6rem;
+	width: 6rem;
+	transform: rotate(90deg);
+}
+.svg-scissors-computer {
+	fill: red;
+	height: 6rem;
+	width: 6rem;
+	transform: rotateY(180deg);
+}
+
+.svg-rock-player,
+.svg-paper-player {
+	fill: blue;
+	height: 6rem;
+	width: 6rem;
+	transform: rotate(-90deg) rotateY(180deg);
+}
+.svg-scissors-player {
+	fill: blue;
+	height: 6rem;
+	width: 6rem;
+	/* transform: rotateY(180deg); */
+}
+
+svg:hover {
+	background-color: rgba(255, 0, 0, 0.2);
+	/* height: 6.2rem;
+	width: 6.2rem; */
+	border: 1px solid red;
+
+	/* transform: rotateY(180deg); */
+	/* transform: rotateX(180deg); */
+}
+/* svg {
+	fill: green;
+} */
+
+/* #first-arrow {
+	fill: red;
+}
+#second-arrow {
+	fill: red;
+} */
