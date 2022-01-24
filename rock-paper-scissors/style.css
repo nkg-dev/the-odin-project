@@ -1,9 +1,9 @@
 * {
-	font-size: 20px;
+	font-size: 16px;
 	box-sizing: border-box;
-	padding: 0.5rem;
-	margin: 0.5rem;
-	font-family: Verdana, Geneva, Tahoma, sans-serif;
+	padding: 0.1rem;
+	margin: 0.1rem;
+	font-family: Verdana, Tahoma, sans-serif;
 	border: 1px dotted purple;
 	border-radius: 4px;
 }
@@ -11,7 +11,7 @@
 body {
 	display: flex;
 	flex-direction: column;
-	/* background-color: #111; */
+	background-color: whitesmoke;
 }
 
 header {
@@ -28,60 +28,91 @@ h2 {
 	font-style: italic;
 }
 
-img {
-	height: 3rem;
-	width: 3rem;
-	transform: rotate(90deg);
-	transform: rotateY(180deg);
-	/* color: blue; */
-	fill: blue;
-	/* border: 2px dotted magenta; */
+h3 {
+	font-size: 1.25rem;
+	margin: 0;
+	padding: 0;
+	border: none;
+}
+
+.game-play {
+	display: flex;
+	justify-content: space-between;
+}
+
+.choice-player,
+.choice-computer {
+	display: flex;
+	justify-content: flex-start;
+}
+
+.choice-player {
+	flex-direction: row-reverse;
+}
+#computer-rock,
+#computer-paper,
+#computer-scissors,
+#player-rock,
+#player-paper,
+#player-scissors {
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+	align-items: center;
+	margin: 0.25rem;
+	padding: 0px;
+	width: 7rem;
+	height: 7rem;
+	border: 2px solid mediumblue;
+	/* border: 2px solid rgba(0, 0, 0, 0); */
+}
+
+svg {
+	padding: 0.1rem;
+	margin: 0;
+	border: 2px solid rgba(0, 0, 0, 0);
+}
+
+#computer-paper:hover,
+#computer-scissors:hover,
+#computer-rock:hover {
+	color: red;
+	background-color: rgba(255, 0, 0, 0.2);
+	border: 2px solid red;
+}
+
+#player-paper:hover,
+#player-scissors:hover,
+#player-rock:hover {
+	color: blue;
+	background-color: rgba(0, 0, 255, 0.2);
+	border: 2px solid blue;
 }
 
 .svg-rock-computer,
 .svg-paper-computer {
 	fill: red;
-	height: 6rem;
-	width: 6rem;
+	height: 5rem;
+	width: 5rem;
 	transform: rotate(90deg);
 }
 .svg-scissors-computer {
 	fill: red;
-	height: 6rem;
-	width: 6rem;
+	height: 5rem;
+	width: 5rem;
 	transform: rotateY(180deg);
 }
 
 .svg-rock-player,
 .svg-paper-player {
 	fill: blue;
-	height: 6rem;
-	width: 6rem;
+	height: 5rem;
+	width: 5rem;
 	transform: rotate(-90deg) rotateY(180deg);
 }
 .svg-scissors-player {
 	fill: blue;
-	height: 6rem;
-	width: 6rem;
+	height: 5rem;
+	width: 5rem;
 	/* transform: rotateY(180deg); */
 }
-
-svg:hover {
-	background-color: rgba(255, 0, 0, 0.2);
-	/* height: 6.2rem;
-	width: 6.2rem; */
-	border: 1px solid red;
-
-	/* transform: rotateY(180deg); */
-	/* transform: rotateX(180deg); */
-}
-/* svg {
-	fill: green;
-} */
-
-/* #first-arrow {
-	fill: red;
-}
-#second-arrow {
-	fill: red;
-} */
