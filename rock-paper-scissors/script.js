@@ -14,7 +14,7 @@ function computerPlays() {
 	}
 }
 
-let c = computerPlays();
+// let c = computerPlays();
 
 function userPlays(i) {
 	let input = i;
@@ -59,74 +59,68 @@ function userPlays(i) {
 	}
 }
 
-let u = userPlays();
+//let u = userPlays();
 
-function gamePlay(computer, user) {
+function gamePlay(computer, user, count) {
 	let cPlay = computer;
 	let uPlay = user;
-	let gameCounter = 5;
-	console.log('Computer played ' + cPlay);
-	console.log('You played ' + uPlay);
-	while (gameCounter > 0) {
+	let i = count;
+	while (i <= 5) {
+		console.log('Computer played ' + cPlay);
+		console.log('You played ' + uPlay);
 		if (uPlay === cPlay) {
 			console.log("It's a draw :|");
-			console.log('Draw');
-			gameCounter--;
-			return keepScore('Draw');
+			i++;
+			return keepScore('Draw', i);
 		} else if (uPlay == 'Rock' && cPlay == 'Scissors') {
 			console.log('Rock beats Scissors! You win!');
-			console.log('User');
-			gameCounter--;
-			return keepScore('User');
+			i++;
+			return keepScore('User', i);
 		} else if (uPlay == 'Scissors' && cPlay == 'Paper') {
 			console.log('Scissors beats Paper! You win!');
-			console.log('User');
-			gameCounter--;
-			return keepScore('User');
+			i++;
+			return keepScore('User', i);
 		} else if (uPlay == 'Paper' && cPlay == 'Rock') {
 			console.log('Paper beats Rock! You win!');
-			console.log('User');
-			gameCounter--;
-			return keepScore('User');
+			i++;
+			return keepScore('User', i);
 		} else if (uPlay == 'Rock' && cPlay == 'Paper') {
 			console.log('Paper beats Rock. You lose. :(');
-			console.log('Comp');
-			gameCounter--;
-			return keepScore('Comp');
+			i++;
+			return keepScore('Comp', i);
 		} else if (uPlay == 'Paper' && cPlay == 'Scissors') {
 			console.log('Scissors beats Paper. You lose. :(');
-			console.log('Comp');
-			gameCounter--;
-			return keepScore('Comp');
+			i++;
+			return keepScore('Comp', i);
 		} else if (uPlay == 'Scissors' && cPlay == 'Rock') {
 			console.log('Rock beats Scissors. You lose. :(');
-			console.log('Comp');
-			gameCounter--;
-			return keepScore('Comp');
+			i++;
+			return keepScore('Comp', i);
 		}
 	}
 }
 
-function keepScore(result) {
-	let u = 0,
-		c = 0,
-		d = 0;
-	switch (result) {
-		case 'User':
-			u++;
-			console.log(`User: ${u}; Computer: ${c}; Draw: ${d}`);
-			break;
-		case 'Comp':
-			c++;
-			console.log(`User: ${u}; Computer: ${c}; Draw: ${d}`);
-			break;
-		case 'Draw':
-			d++;
-			console.log(`User: ${u}; Computer: ${c}; Draw: ${d}`);
-			break;
+let u = 0,
+	c = 0,
+	d = 0;
+
+function keepScore(result, gameCount) {
+	let i = gameCount - 1;
+	if (i <= 5) {
+		switch (result) {
+			case 'User':
+				u++;
+				break;
+			case 'Comp':
+				c++;
+				break;
+			case 'Draw':
+				d++;
+				break;
+		}
+		console.log(`User: ${u}\nComputer: ${c}\nDraw: ${d}`);
+		i++;
 	}
-	// i++;
-	// return i++;
 }
 
 // function gameTracker() {
@@ -136,11 +130,11 @@ function keepScore(result) {
 // }
 
 function letsPlay() {
-	let gameCounter = 5;
-	while (gameCounter > 0) {
-		console.log('Games left ' + gameCounter);
-		gamePlay(c, u);
-		gameCounter--;
+	let i = 1;
+	while (i <= 5) {
+		console.log('Game #' + i);
+		gamePlay(computerPlays(), userPlays(), i);
+		i++;
 	}
 }
 
