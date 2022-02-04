@@ -1,5 +1,10 @@
 'use strict';
 
+//* Variables used to track score across 5 games
+let userWins = 0,
+	computerWins = 0,
+	drawGames = 0;
+
 function computerPlays() {
 	//* hardcoding '* 3' (rather than '* max')
 	//* since it's 3 max (rock-paper-scissors)
@@ -32,94 +37,88 @@ function userPlays(i) {
 		);
 	}
 	//* Let's format the user's text entry
-	//* trim the whitespace
 	input = input.trim();
-	//* convert input to all lowercase
 	let inputLower = input.toLowerCase();
-	//* create variable to store the lowercase text
-	let textFix = [...inputLower];
-	//* Replace first letter with uppercase, leaving rest of string unaffected
-	textFix.splice(0, 1, inputLower[0].toUpperCase());
-	//* variable textScrubbed to store Titlecase inputText value
-	let textScrubbed = '';
-	//* join array into string, use empty string as separator string
-	textScrubbed = textFix.join('');
-	//* check if entry is valid (Rock, Paper, Scissors) or not
+	let titleCase = [...inputLower];
+	titleCase.splice(0, 1, inputLower[0].toUpperCase());
+	let inputScrubbed = '';
+	inputScrubbed = titleCase.join('');
+	//* check if the scrubbed input is valid
 	if (
-		textScrubbed === 'Rock' ||
-		textScrubbed === 'Paper' ||
-		textScrubbed === 'Scissors'
+		inputScrubbed === 'Rock' ||
+		inputScrubbed === 'Paper' ||
+		inputScrubbed === 'Scissors'
 	) {
-		return textScrubbed;
+		return inputScrubbed;
 	} else {
-		//* if entry isn't valid, call function again
-		return userPlays(textScrubbed);
+		//* if entry not valid, call function again
+		return userPlays(inputScrubbed);
 	}
 }
 
-function gamePlay(computer, user, count) {
-	let cPlay = computer;
-	let uPlay = user;
-	let i = count;
-	while (i <= 5) {
-		console.log('Computer played ' + cPlay);
-		console.log('You played ' + uPlay);
-		i++;
-		if (uPlay === cPlay) {
-			console.log("It's a draw :|");
-			return keepScore('Draw', i);
-		} else if (uPlay == 'Rock' && cPlay == 'Scissors') {
-			console.log('Rock beats Scissors! You win!');
-			return keepScore('User', i);
-		} else if (uPlay == 'Scissors' && cPlay == 'Paper') {
-			console.log('Scissors beats Paper! You win!');
-			return keepScore('User', i);
-		} else if (uPlay == 'Paper' && cPlay == 'Rock') {
-			console.log('Paper beats Rock! You win!');
-			return keepScore('User', i);
-		} else if (uPlay == 'Rock' && cPlay == 'Paper') {
-			console.log('Paper beats Rock. You lose. :(');
-			return keepScore('Comp', i);
-		} else if (uPlay == 'Paper' && cPlay == 'Scissors') {
-			console.log('Scissors beats Paper. You lose. :(');
-			return keepScore('Comp', i);
-		} else if (uPlay == 'Scissors' && cPlay == 'Rock') {
-			console.log('Rock beats Scissors. You lose. :(');
-			return keepScore('Comp', i);
-		}
-	}
-}
-
-//* variables to track score
-let u = 0,
-	c = 0,
-	d = 0;
-
-function keepScore(result, gameCount) {
-	let i = gameCount - 1;
-	if (i <= 5) {
+function trackScore(result, gameCount) {
+	let gameNum = gameCount - 1;
+	if (gameNum <= 5) {
 		switch (result) {
 			case 'User':
-				u++;
+				userWins++;
 				break;
 			case 'Comp':
-				c++;
+				computerWins++;
 				break;
 			case 'Draw':
-				d++;
+				drawGames++;
 				break;
 		}
-		console.log(`User: ${u}\nComputer: ${c}\nDraw: ${d}`);
-		i++;
+		console.log(
+			`User: ${userWins}\nComputer: ${computerWins}\nDraw: ${drawGames}`
+		);
+		gameNum++;
+	}
+}
+
+//* take the computer's choice and user's choice
+//* to determine a winnner;
+//* pass game number to track score
+function gamePlay(computer, user, count) {
+	let computerPlay = computer;
+	let userPlay = user;
+	let gameNum = count;
+	while (gameNum <= 5) {
+		console.log('Computer played ' + computerPlay);
+		console.log('You played ' + userPlay);
+		gameNum++;
+		if (userPlay === computerPlay) {
+			console.log("It's a draw :|");
+			return trackScore('Draw', gameNum);
+		} else if (userPlay == 'Rock' && computerPlay == 'Scissors') {
+			console.log('Rock beats Scissors! You win!');
+			return trackScore('User', gameNum);
+		} else if (userPlay == 'Scissors' && computerPlay == 'Paper') {
+			console.log('Scissors beats Paper! You win!');
+			return trackScore('User', gameNum);
+		} else if (userPlay == 'Paper' && computerPlay == 'Rock') {
+			console.log('Paper beats Rock! You win!');
+			return trackScore('User', gameNum);
+		} else if (userPlay == 'Rock' && computerPlay == 'Paper') {
+			console.log('Paper beats Rock. You lose. :(');
+			return trackScore('Comp', gameNum);
+		} else if (userPlay == 'Paper' && computerPlay == 'Scissors') {
+			console.log('Scissors beats Paper. You lose. :(');
+			return trackScore('Comp', gameNum);
+		} else if (userPlay == 'Scissors' && computerPlay == 'Rock') {
+			console.log('Rock beats Scissors. You lose. :(');
+			return trackScore('Comp', gameNum);
+		}
 	}
 }
 
 function letsPlay() {
-	let i = 1;
-	while (i <= 5) {
-		console.log('*** Game #' + i + ' ***');
-		gamePlay(computerPlays(), userPlays(), i);
-		i++;
+	let gameNum = 1;
+	while (gameNum <= 5) {
+		console.log('*** Game #' + gameNum + ' ***');
+		gamePlay(computerPlays(), userPlays(), gameNum);
+		gameNum++;
 	}
 }
 
