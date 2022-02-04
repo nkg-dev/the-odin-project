@@ -14,17 +14,15 @@ function computerPlays() {
 	}
 }
 
-// let c = computerPlays();
-
 function userPlays(i) {
 	let input = i;
-	//* If 'i' is not null, then give invalid entry prompt
+	//* If 'i' is not undefined [meaning invalid entry], special prompt
 	if (input !== undefined) {
 		input = window.prompt(
 			'INVALID ENTRY!\n\nPlease enter Rock, Paper, Scissors'
 		);
 	} else {
-		//* Prompt user to input text
+		//* Otherwise, prompt user to input text
 		input = window.prompt('Chose one: Rock, Paper, Scissors');
 	}
 	//* check to make sure user has input text
@@ -59,8 +57,6 @@ function userPlays(i) {
 	}
 }
 
-//let u = userPlays();
-
 function gamePlay(computer, user, count) {
 	let cPlay = computer;
 	let uPlay = user;
@@ -68,44 +64,40 @@ function gamePlay(computer, user, count) {
 	while (i <= 5) {
 		console.log('Computer played ' + cPlay);
 		console.log('You played ' + uPlay);
+		i++;
 		if (uPlay === cPlay) {
 			console.log("It's a draw :|");
-			i++;
 			return keepScore('Draw', i);
 		} else if (uPlay == 'Rock' && cPlay == 'Scissors') {
 			console.log('Rock beats Scissors! You win!');
-			i++;
 			return keepScore('User', i);
 		} else if (uPlay == 'Scissors' && cPlay == 'Paper') {
 			console.log('Scissors beats Paper! You win!');
-			i++;
 			return keepScore('User', i);
 		} else if (uPlay == 'Paper' && cPlay == 'Rock') {
 			console.log('Paper beats Rock! You win!');
-			i++;
 			return keepScore('User', i);
 		} else if (uPlay == 'Rock' && cPlay == 'Paper') {
 			console.log('Paper beats Rock. You lose. :(');
-			i++;
 			return keepScore('Comp', i);
 		} else if (uPlay == 'Paper' && cPlay == 'Scissors') {
 			console.log('Scissors beats Paper. You lose. :(');
-			i++;
 			return keepScore('Comp', i);
 		} else if (uPlay == 'Scissors' && cPlay == 'Rock') {
 			console.log('Rock beats Scissors. You lose. :(');
-			i++;
 			return keepScore('Comp', i);
 		}
 	}
 }
 
+//* variables to track score
 let u = 0,
 	c = 0,
 	d = 0;
 
 function keepScore(result, gameCount) {
 	let i = gameCount - 1;
+	let outcomes = {};
 	if (i <= 5) {
 		switch (result) {
 			case 'User':
@@ -123,21 +115,13 @@ function keepScore(result, gameCount) {
 	}
 }
 
-// function gameTracker() {
-// 	let num;
-// 	num = num + 1;
-// 	return num;
-// }
-
 function letsPlay() {
 	let i = 1;
 	while (i <= 5) {
-		console.log('Game #' + i);
+		console.log('*** Game #' + i + ' ***');
 		gamePlay(computerPlays(), userPlays(), i);
 		i++;
 	}
 }
 
 letsPlay();
-
-//gamePlay(c, u);
