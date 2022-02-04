@@ -97,7 +97,6 @@ let u = 0,
 
 function keepScore(result, gameCount) {
 	let i = gameCount - 1;
-	let outcomes = {};
 	if (i <= 5) {
 		switch (result) {
 			case 'User':
