@@ -1,9 +1,15 @@
 'use strict';
 
+const mediaQueryList = window.matchMedia('(orientation: portrait)');
+console.log('Device is in Portrait mode? ' + mediaQueryList.matches);
+
+const vWidth = window.visualViewport.width;
+console.log(vWidth);
+
 //* Variables used to track score across 5 games
 let userWins = 0,
 	computerWins = 0,
-	drawGames = 0;
+	tieGames = 0;
 
 function computerPlays() {
 	//* hardcoding '* 3' (rather than '* max')
@@ -66,12 +72,12 @@ function trackScore(result, gameCount) {
 			case 'Comp':
 				computerWins++;
 				break;
-			case 'Draw':
-				drawGames++;
+			case 'Tie':
+				tieGames++;
 				break;
 		}
 		console.log(
-			`User: ${userWins}\nComputer: ${computerWins}\nDraw: ${drawGames}`
+			`User: ${userWins}\nComputer: ${computerWins}\nTie: ${tieGames}`
 		);
 		gameNum++;
 	}
@@ -89,8 +95,8 @@ function gamePlay(computer, user, count) {
 		console.log('You played ' + userPlay);
 		gameNum++;
 		if (userPlay === computerPlay) {
-			console.log("It's a draw :|");
-			return trackScore('Draw', gameNum);
+			console.log("It's a tie. :|");
+			return trackScore('Tie', gameNum);
 		} else if (userPlay == 'Rock' && computerPlay == 'Scissors') {
 			console.log('Rock beats Scissors! You win!');
 			return trackScore('User', gameNum);
@@ -122,4 +128,4 @@ function letsPlay() {
 	}
 }
 
-letsPlay();
+// letsPlay();
