@@ -1,7 +1,17 @@
 'use strict';
 
+const interval = 500;
+
+const cRockDiv = document.getElementById('computer-rock'),
+	cPaperDiv = document.getElementById('computer-paper'),
+	cScissorsDiv = document.getElementById('computer-scissors');
+
+const cDivColorOff = 'var(--color-player-three)';
+const cDivColorOn = 'var(--color-player-four)';
+
 const mediaQueryList = window.matchMedia('(orientation: portrait)');
-console.log('Device is in Portrait mode? ' + mediaQueryList.matches);
+document.getElementById('gameText').textContent =
+	'Device is in Portrait mode? ' + mediaQueryList.matches;
 
 const vWidth = window.visualViewport.width;
 console.log(vWidth);
@@ -11,22 +21,69 @@ let userWins = 0,
 	computerWins = 0,
 	tieGames = 0;
 
-function computerPlays() {
+const cRockDivOn = function () {
+	cRockDiv.style.borderColor = cDivColorOn;
+	cRockDiv.style.backgroundColor = cDivColorOn;
+};
+
+const cRockDivOff = function () {
+	cRockDiv.style.borderColor = cDivColorOff;
+	cRockDiv.style.backgroundColor = cDivColorOff;
+};
+
+const cPaperDivOn = function () {
+	cPaperDiv.style.borderColor = cDivColorOn;
+	cPaperDiv.style.backgroundColor = cDivColorOn;
+};
+
+const cPaperDivOff = function () {
+	cPaperDiv.style.borderColor = cDivColorOff;
+	cPaperDiv.style.backgroundColor = cDivColorOff;
+};
+
+const cScissorsDivOn = function () {
+	cScissorsDiv.style.borderColor = cDivColorOn;
+	cScissorsDiv.style.backgroundColor = cDivColorOn;
+};
+
+const cScissorsDivOff = function () {
+	cScissorsDiv.style.borderColor = cDivColorOff;
+	cScissorsDiv.style.backgroundColor = cDivColorOff;
+};
+
+const cChoice = function () {
 	//* hardcoding '* 3' (rather than '* max')
 	//* since it's 3 max (rock-paper-scissors)
 	//* 'num' should return 0, 1 or 2
 	let num = Math.floor(Math.random() * 3);
+	// setTimeout(num, 1500);
 	if (num === 0) {
+		cRockDivOn();
 		return 'Rock';
 	} else if (num === 1) {
+		cPaperDivOn();
 		return 'Paper';
 	} else {
+		cScissorsDivOn();
 		return 'Scissors';
 	}
+};
+
+function computerPlays() {
+	setTimeout(cRockDivOn, interval * 1);
+	setTimeout(cRockDivOff, interval * 2);
+	setTimeout(cPaperDivOn, interval * 3);
+	setTimeout(cPaperDivOff, interval * 4);
+	setTimeout(cScissorsDivOn, interval * 5);
+	setTimeout(cScissorsDivOff, interval * 6);
+	setTimeout(cChoice, interval * 7);
 }
+
+//addEventListener('click', userPlays());
 
 function userPlays(i) {
 	let input = i;
+
 	//* If 'i' is not undefined [meaning invalid entry], special prompt
 	if (input !== undefined) {
 		input = window.prompt(
@@ -128,4 +185,4 @@ function letsPlay() {
 	}
 }
 
-// letsPlay();
+// computerPlays();
