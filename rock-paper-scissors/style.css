@@ -331,10 +331,17 @@ footer {
 #player-paper:hover,
 #player-scissors:hover,
 #player-rock:hover {
-	/* background-color: rgba(0, 0, 255, 0.2); */
 	background-color: var(--color-player-two);
 	border: 3px solid var(--color-player-two);
-	/* box-shadow: 2px 2px 12px -6px rgba(0, 0, 0, 0); */
+	box-shadow: 0px 0px 0px 0px var(--color-player-one);
+}
+
+#player-paper:active,
+#player-scissors:active,
+#player-rock:active {
+	background-color: var(--color-player-four);
+	border: 3px solid var(--color-player-four);
+	color: var(--color-player-three);
 	box-shadow: 0px 0px 0px 0px var(--color-player-one);
 }
 
