@@ -1,10 +1,13 @@
-@import url('https://fonts.googleapis.com/css2?family=Grandstander:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Outfit:wght@100;200;300;400;500;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Grandstander:wght@400;700&family=Outfit&display=swap');
 
 :root {
+	--font-size: 0.875rem;
 	--font-fun: 'Grandstander', Arial, sans-serif;
 	--font-serious: 'Outfit', Verdana, sans-serif;
-	--size-icon-reg: clamp(2rem, 3rem, 4rem);
-	--size-icon-score: clamp(1.5rem, 1.8rem, 2.4rem);
+	--size-icon-reg: calc(var(--font-size) * 2);
+	--size-icon-score: calc(var(--font-size) * 1.5);
+	/* --size-icon-reg: clamp(2rem, 3rem, 4rem); */
+	/* --size-icon-score: clamp(1.5rem, 1.8rem, 2.4rem); */
 	/* --size-icon-reg: clamp(40px, 96px, 144px); */
 	/* --size-icon-reg: clamp(20vw, 3vw, 5vw); */
 	/* --color-player-two: rgb(105, 105, 230); */
@@ -22,16 +25,28 @@
 	--shadow-off: 0px 0px 0px 0px var(--color-player-one);
 }
 
+@media screen and (min-width: 20rem) {
+	:root {
+		--font-size: calc(0.875rem + 0.5 * ((100vw - 20rem) / 60));
+	}
+}
+
+@media screen and (min-width: 80rem) {
+	:root {
+		--font-size: 1.375rem;
+	}
+}
+
 *,
 *::before,
 *::after {
-	font-size: 1rem;
+	font-size: var(--font-size);
 	box-sizing: border-box;
 	margin: 0;
 	font-family: var(--font-fun);
 	color: #971c00;
 	color: var(--color-player-three);
-	border-radius: 8px;
+	border-radius: calc(var(--font-size) * 0.5);
 	/* border: 1px dotted steelblue; */
 }
 
@@ -54,7 +69,9 @@ main {
 	justify-content: flex-start;
 	align-items: center;
 	padding: clamp(0.5rem, 1rem, 2rem);
+	padding: calc(var(--font-size) * 0.75);
 	margin: clamp(0rem, 0.5rem, 1rem);
+	margin: calc(var(--font-size) * 0.15);
 	background-color: #a05fc5;
 	background-color: var(--color-player-four);
 	/* background-color: var(--color-player-two); */
@@ -63,25 +80,31 @@ main {
 	/* background-color: #dfada5; */
 	/* height: 100vh; */
 	max-width: 750px;
+	/* max-width: calc(var(--font-size) * 40); */
 }
 
 h1 {
 	font-size: clamp(1.5rem, 3rem, 4rem);
+	font-size: calc(var(--font-size) * 2);
 	font-weight: 700;
 	text-align: center;
 	margin-bottom: 1rem;
+	margin-bottom: calc(var(--font-size) * 1);
 }
 
 h2 {
 	font-size: clamp(1.5rem, 2.5vw, 4vw);
+	font-size: calc(var(--font-size) * 1.35);
 	font-style: italic;
 }
 
 h3 {
 	font-size: clamp(1.25rem, 1.5rem, 2rem);
+	font-size: calc(var(--font-size) * 1.25);
 	font-weight: 700;
 	margin: 0;
 	padding: 0.25rem 0 0rem 0.5rem;
+	padding: calc(var(--font-size) * 0.25) calc(var(--font-size) * 0.5) 0;
 	border: none;
 	color: var(--color-player-one);
 }
@@ -107,6 +130,7 @@ a {
 
 footer {
 	font-family: var(--font-serious);
+	font-size: calc(var(--font-size) * 0.6);
 	color: var(--color-player-four);
 }
 
@@ -115,7 +139,9 @@ footer {
 	border: 3px solid var(--color-player-three);
 	width: 100%;
 	margin: 1rem 0;
+	margin: calc(var(--font-size) * 1) 0;
 	padding: 1rem;
+	padding: calc(var(--font-size) * 1);
 	display: flex;
 	justify-content: space-between;
 }
@@ -124,18 +150,23 @@ footer {
 	display: flex;
 	justify-content: space-between;
 	align-items: flex-end;
+	gap: calc(var(--font-size) * 0.5);
 	color: var(--color-player-three);
 	width: 100%;
 }
 
 .game-text {
 	font-size: clamp(1rem, 1.5rem, 2rem);
+	font-size: calc(var(--font-size) * 1);
 	line-height: 1.2;
 }
 
 .reset {
 	align-self: flex-end;
 	padding: 0.5rem 0.75rem 0.25rem;
+	padding: calc(var(--font-size) * 0.5) calc(var(--font-size) * 0.75)
+		calc(var(--font-size) * 0.25);
+	font-size: calc(var(--font-size) * 0.75);
 	border: 1px solid var(--color-player-three);
 	background-color: var(--color-player-one);
 }
@@ -152,25 +183,31 @@ footer {
 	justify-content: space-around;
 	align-items: center;
 	gap: 1rem;
+	gap: calc(var(--font-size) * 1);
 	font-size: clamp(1.25rem, 1.5rem, 2rem);
+	font-size: calc(var(--font-size) * 1.25);
 	font-weight: 700;
 	color: var(--color-player-one);
 	padding: 0.25rem;
+	padding: calc(var(--font-size) * 0.25);
 }
 
 .score-header-text {
 	background-color: var(--color-player-three);
 	/* border: 3px solid var(--color-player-one); */
 	font-size: clamp(1.25rem, 1.5rem, 2rem);
+	font-size: calc(var(--font-size) * 1.25);
 	font-family: var(--font-fun);
 	font-weight: 700;
 	color: var(--color-player-one);
 	padding: 0.25rem 0 0;
+	padding: calc(var(--font-size) * 0.25) 0 0;
 	margin: auto;
 }
 
 .game-score-text {
 	font-size: clamp(1.25rem, 1.5rem, 2rem);
+	font-size: calc(var(--font-size) * 1.25);
 	padding: 0;
 	margin: 0;
 }
@@ -182,19 +219,23 @@ footer {
 	justify-content: space-around;
 	flex-wrap: nowrap;
 	padding: 0.25rem 0.25rem 0;
+	padding: calc(var(--font-size) * 0.25) calc(var(--font-size) * 0.25) 0;
 	gap: 0.5rem;
+	gap: calc(var(--font-size) * 0.5);
 	border: 2px solid var(--color-player-one);
 }
 
 #playerScore,
 #computerScore {
 	font-size: clamp(1.5rem, 2rem, 3rem);
+	font-size: calc(var(--font-size) * 1.5);
 	font-family: var(--font-fun);
 	font-weight: 700;
 	color: var(--color-player-one);
 	margin: auto;
 	padding: 0;
 	width: clamp(1.5rem, 1.8rem, 2.4rem);
+	width: calc(var(--font-size) * 1.5);
 }
 
 .choice-player,
@@ -203,20 +244,26 @@ footer {
 	justify-content: space-between;
 	flex-wrap: wrap;
 	gap: 0.5rem;
+	gap: calc(var(--font-size) * 0.5);
 	padding: 1rem 0;
+	padding: calc(var(--font-size) * 1) 0;
 }
 
 .computer-section {
 	background-color: var(--color-player-three);
 	margin: 1rem 0;
+	margin: calc(var(--font-size) * 1) 0;
 	padding: 0 1rem;
+	padding: 0 calc(var(--font-size) * 1);
 	width: 100%;
 }
 
 .player-section {
 	background-color: var(--color-player-three);
 	margin: 1rem 0;
+	margin: calc(var(--font-size) * 1) 0;
 	padding: 0 1rem;
+	padding: 0 calc(var(--font-size) * 1);
 	width: 100%;
 }
 
@@ -225,6 +272,7 @@ footer {
 	justify-content: space-between;
 	align-items: center;
 	padding: 1rem 0 0;
+	padding: calc(var(--font-size) * 1) 0 0;
 }
 
 .player-header-text {
@@ -233,11 +281,14 @@ footer {
 	justify-content: flex-start;
 	align-items: center;
 	gap: 0.5rem;
+	gap: calc(var(--font-size) * 0.5);
 	font-size: clamp(1rem, 1.25rem, 1.5rem);
+	font-size: calc(var(--font-size) * 1);
 	font-family: var(--font-fun);
 	font-weight: 700;
 	color: var(--color-player-one);
 	padding: 0.25rem 0.75rem;
+	padding: calc(var(--font-size) * 0.25) calc(var(--font-size) * 0.75);
 	/* border: 3px solid var(--color-player-one); */
 }
 
@@ -267,8 +318,12 @@ footer {
 	display: flex;
 	justify-content: flex-start;
 	align-items: center;
-	width: 12rem;
+	/* width: 12rem; */
+	/* width: calc(var(--font-size) * 12); */
+	/* width: calc(var(--font-size) * 10); */
+	flex: 1 0 auto;
 	padding: 0 0 0 1rem;
+	padding: 0 0 0 calc(var(--font-size) * 1);
 }
 
 #computer-rock,
