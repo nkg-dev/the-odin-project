@@ -5,7 +5,7 @@
 	--font-fun: 'Grandstander', Arial, sans-serif;
 	--font-serious: 'Outfit', Verdana, sans-serif;
 	--size-icon-reg: calc(var(--font-size) * 2);
-	--size-icon-score: calc(var(--font-size) * 1.5);
+	--size-icon-score: calc(var(--font-size) * 1.6);
 	/* --size-icon-reg: clamp(2rem, 3rem, 4rem); */
 	/* --size-icon-score: clamp(1.5rem, 1.8rem, 2.4rem); */
 	/* --size-icon-reg: clamp(40px, 96px, 144px); */
@@ -71,7 +71,7 @@ main {
 	padding: clamp(0.5rem, 1rem, 2rem);
 	padding: calc(var(--font-size) * 0.75);
 	margin: clamp(0rem, 0.5rem, 1rem);
-	margin: calc(var(--font-size) * 0.15);
+	margin: calc(var(--font-size) * 0.5) calc(var(--font-size) * 0.15);
 	background-color: #a05fc5;
 	background-color: var(--color-player-four);
 	/* background-color: var(--color-player-two); */
@@ -80,7 +80,8 @@ main {
 	/* background-color: #dfada5; */
 	/* height: 100vh; */
 	max-width: 750px;
-	/* max-width: calc(var(--font-size) * 40); */
+	max-width: calc(var(--font-size) * 48);
+	max-width: 70ch;
 }
 
 h1 {
@@ -128,7 +129,12 @@ a {
 	text-decoration: none;
 }
 
+button {
+	padding: 0;
+}
+
 footer {
+	padding: 0 0 calc(var(--font-size) * 2);
 	font-family: var(--font-serious);
 	font-size: calc(var(--font-size) * 0.6);
 	color: var(--color-player-four);
@@ -249,6 +255,7 @@ footer {
 	padding: calc(var(--font-size) * 1) 0;
 }
 
+.player-section,
 .computer-section {
 	background-color: var(--color-player-three);
 	margin: 1rem 0;
@@ -258,13 +265,9 @@ footer {
 	width: 100%;
 }
 
-.player-section {
-	background-color: var(--color-player-three);
-	margin: 1rem 0;
-	margin: calc(var(--font-size) * 1) 0;
-	padding: 0 1rem;
-	padding: 0 calc(var(--font-size) * 1);
-	width: 100%;
+.computer-section {
+	margin: 1rem 0 0;
+	margin: calc(var(--font-size) * 1) 0 0;
 }
 
 .player-header {
@@ -322,8 +325,8 @@ footer {
 	/* width: calc(var(--font-size) * 12); */
 	/* width: calc(var(--font-size) * 10); */
 	flex: 1 0 auto;
-	padding: 0 0 0 1rem;
-	padding: 0 0 0 calc(var(--font-size) * 1);
+	padding: 0 0 0 0.75rem;
+	padding: 0 0 0 calc(var(--font-size) * 0.75);
 }
 
 #computer-rock,
