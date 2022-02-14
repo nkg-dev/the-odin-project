@@ -27,7 +27,6 @@
 *::after {
 	font-size: 1rem;
 	box-sizing: border-box;
-	/* padding: 0.1rem; */
 	margin: 0;
 	font-family: var(--font-fun);
 	color: #971c00;
@@ -45,22 +44,17 @@ body {
 	flex-direction: column;
 	/* justify-content: center; */
 	align-items: center;
-	background-color: #fff6f4;
-	/* background-color: #4f0113; */
-	background-color: #fbf1e2;
-	background-color: #100714;
 	background-color: var(--color-player-three);
 	/* border: 1px solid blueviolet; */
 }
 
 main {
-	/* border: 1px solid white; */
 	display: flex;
 	flex-direction: column;
 	justify-content: flex-start;
 	align-items: center;
-	padding: 2rem;
-	margin: 0.5rem;
+	padding: clamp(0.5rem, 1rem, 2rem);
+	margin: clamp(0rem, 0.5rem, 1rem);
 	background-color: #a05fc5;
 	background-color: var(--color-player-four);
 	/* background-color: var(--color-player-two); */
@@ -72,26 +66,18 @@ main {
 }
 
 h1 {
-	font-family: var(--font-fun);
-	/* font-size: 7vw; */
-	/* font-size: clamp(2.5rem, 5vw, 7vw); */
-	font-size: clamp(2rem, 3rem, 4rem);
+	font-size: clamp(1.5rem, 3rem, 4rem);
 	font-weight: 700;
 	text-align: center;
 	margin-bottom: 1rem;
 }
 
 h2 {
-	font-family: var(--font-fun);
 	font-size: clamp(1.5rem, 2.5vw, 4vw);
-	/* font-size: 1.5rem; */
 	font-style: italic;
 }
 
 h3 {
-	font-family: var(--font-fun);
-	/* font-size: 1.25rem; */
-	/* font-size: clamp(1rem, 1.25rem, 4vw); */
 	font-size: clamp(1.25rem, 1.5rem, 2rem);
 	font-weight: 700;
 	margin: 0;
@@ -100,6 +86,8 @@ h3 {
 	color: var(--color-player-one);
 }
 
+/** Hide the Computer's Rock,*/
+/** Paper, Scissors options  */
 h3.computer {
 	color: var(--color-player-three);
 }
@@ -119,7 +107,6 @@ a {
 
 footer {
 	font-family: var(--font-serious);
-	color: var(--color-player-two);
 	color: var(--color-player-four);
 }
 
@@ -135,7 +122,6 @@ footer {
 
 .game-play-text {
 	display: flex;
-	/* flex-direction: column; */
 	justify-content: space-between;
 	align-items: flex-end;
 	color: var(--color-player-three);
@@ -152,45 +138,34 @@ footer {
 	padding: 0.5rem 0.75rem 0.25rem;
 	border: 1px solid var(--color-player-three);
 	background-color: var(--color-player-one);
-	/* letter-spacing: 1px; */
-	/* font-family: var(--font-serious); */
 }
 
 .reset:hover {
 	background-color: var(--color-player-three);
 	color: var(--color-player-one);
-	/* border: 1px solid var(--color-player-three); */
-}
-
-.game-play-header {
-	/* margin: -20rem 0 0 0; */
 }
 
 .game-play-header-text {
 	background-color: var(--color-player-three);
 	border: 3px solid var(--color-player-three);
 	display: flex;
-	/* flex-direction: row; */
 	justify-content: space-around;
 	align-items: center;
 	gap: 1rem;
 	font-size: clamp(1.25rem, 1.5rem, 2rem);
-	/* font-family: var(--font-serious); */
-	font-family: var(--font-fun);
 	font-weight: 700;
 	color: var(--color-player-one);
 	padding: 0.25rem;
-	/* border: 3px solid var(--color-player-one); */
 }
 
 .score-header-text {
 	background-color: var(--color-player-three);
+	/* border: 3px solid var(--color-player-one); */
 	font-size: clamp(1.25rem, 1.5rem, 2rem);
 	font-family: var(--font-fun);
 	font-weight: 700;
 	color: var(--color-player-one);
 	padding: 0.25rem 0 0;
-	/* border: 3px solid var(--color-player-one); */
 	margin: auto;
 }
 
@@ -211,21 +186,14 @@ footer {
 	border: 2px solid var(--color-player-one);
 }
 
-.pScore {
-	/* background-color: var(--color-player-two); */
-}
-
 #playerScore,
 #computerScore {
 	font-size: clamp(1.5rem, 2rem, 3rem);
-	/* font-size: clamp(1.25rem, 1.5rem, 2rem); */
-	/* font-family: var(--font-serious); */
 	font-family: var(--font-fun);
 	font-weight: 700;
 	color: var(--color-player-one);
 	margin: auto;
 	padding: 0;
-	/* padding: 0.5rem 0.75rem; */
 	width: clamp(1.5rem, 1.8rem, 2.4rem);
 }
 
@@ -243,7 +211,6 @@ footer {
 	margin: 1rem 0;
 	padding: 0 1rem;
 	width: 100%;
-	/* border: 4px solid var(--color-player-three); */
 }
 
 .player-section {
@@ -251,7 +218,6 @@ footer {
 	margin: 1rem 0;
 	padding: 0 1rem;
 	width: 100%;
-	/* border: 4px solid var(--color-player-one); */
 }
 
 .player-header {
@@ -264,7 +230,6 @@ footer {
 .player-header-text {
 	background-color: var(--color-player-two);
 	display: flex;
-	flex-basis: content;
 	justify-content: flex-start;
 	align-items: center;
 	gap: 0.5rem;
@@ -273,11 +238,10 @@ footer {
 	font-weight: 700;
 	color: var(--color-player-one);
 	padding: 0.25rem 0.75rem;
-	/* box-shadow: var(--shadow-on); */
 	/* border: 3px solid var(--color-player-one); */
 }
 
-.player-header-score {
+/* .player-header-score {
 	background-color: var(--color-player-two);
 	display: flex;
 	justify-content: center;
@@ -288,14 +252,11 @@ footer {
 	font-weight: 700;
 	color: var(--color-player-one);
 	padding: 0.25rem 1rem 0;
-	/* border-radius: 50%; */
 	width: 2.5rem;
 	height: 2.5rem;
-	/* margin: -2.5rem 0 0 90%; */
 	margin-top: -2.5rem;
 	margin-left: 94%;
-	/* transform: rotate(180deg); */
-}
+} */
 
 #computer-rock,
 #computer-paper,
@@ -316,9 +277,6 @@ footer {
 	background-color: var(--color-player-three);
 	fill: var(--color-player-three);
 	color: var(--color-player-three);
-	/* border: 4px solid #5b2b77; */
-	/* border: 4px solid var(--color-player-three); */
-	/* box-shadow: var(--shadow-on); */
 }
 
 #player-rock,
@@ -326,32 +284,29 @@ footer {
 #player-scissors {
 	background-color: var(--color-player-three);
 	border: 3px solid var(--color-player-four);
-	/* border: 4px solid var(--color-player-three); */
 	box-shadow: var(--shadow-on);
 }
 
 #player-paper:hover,
 #player-scissors:hover,
 #player-rock:hover {
+	box-shadow: var(--shadow-off);
 	background-color: var(--color-player-two);
 	border: 3px solid var(--color-player-two);
-	box-shadow: var(--shadow-off);
 }
 
 #player-paper:active,
 #player-scissors:active,
 #player-rock:active {
+	box-shadow: var(--shadow-off);
 	background-color: var(--color-player-four);
 	border: 3px solid var(--color-player-four);
 	color: var(--color-player-three);
-	box-shadow: var(--shadow-off);
 }
 
 svg {
 	border-radius: 0;
-	/* padding: 0.5rem; */
 	margin: 0;
-	/* border: 2px solid rgba(0, 0, 0, 1); */
 }
 
 .svg-rock-computer,
@@ -360,54 +315,35 @@ svg {
 	width: var(--size-icon-reg);
 	height: var(--size-icon-reg);
 	transform: rotate(-90deg) rotateY(180deg);
-	/* border: 2px solid blue; */
 }
 .svg-scissors-computer {
 	fill: var(--color-computer-three);
 	width: var(--size-icon-reg);
 	height: var(--size-icon-reg);
 	transform: rotateY(180deg);
-	/* border: 2px solid blue; */
 }
 
 .svg-rock-player,
 .svg-paper-player {
-	/* background-color: var(--color-player-two); */
 	fill: var(--color-player-one);
 	width: var(--size-icon-reg);
 	height: var(--size-icon-reg);
 	transform: rotate(90deg);
-	/* transform: rotate(-90deg) rotateY(180deg); */
-	/* border: 3px solid var(--color-player-one); */
 }
 
 .svg-scissors-player {
-	/* background-color: var(--color-player-two); */
 	fill: var(--color-player-one);
 	width: var(--size-icon-reg);
 	height: var(--size-icon-reg);
-	/* transform: rotateY(180deg); */
-	/* border: 3px solid var(--color-player-one); */
 }
 
 .svg-bot-icon,
 .svg-user-icon,
 .svg-tie-icon {
-	/* background-color: var(--color-player-two); */
 	fill: var(--color-player-one);
 	width: var(--size-icon-score);
 	height: var(--size-icon-score);
-	/* transform: rotateY(180deg); */
-	/* border: 1px dashed white; */
 }
-
-/* #computer-paper:hover,
-#computer-scissors:hover,
-#computer-rock:hover {
-	color: var(--color-computer-two);
-	background-color: rgba(255, 0, 0, 0.2);
-	border: 2px solid red;
-} */
 
 @media (min-width: 760px) {
 }
