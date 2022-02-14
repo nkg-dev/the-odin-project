@@ -2,22 +2,37 @@
 
 const interval = 500;
 
-const cRockDiv = document.getElementById('computer-rock'),
-	cPaperDiv = document.getElementById('computer-paper'),
-	cScissorsDiv = document.getElementById('computer-scissors');
+const gameText = document.getElementById('gameText');
+
+const cScore = document.getElementById('computerScore');
+const pScore = document.getElementById('playerScore');
+
+const cRockDiv = document.getElementById('computer-rock');
+const cPaperDiv = document.getElementById('computer-paper');
+const cScissorsDiv = document.getElementById('computer-scissors');
 
 const cDivColorOff = 'var(--color-player-three)';
 const cDivColorOn = 'var(--color-player-four)';
 
-const mediaQueryList = window.matchMedia('(orientation: portrait)');
-document.getElementById('gameText').textContent =
-	'Device is in Portrait mode? ' + mediaQueryList.matches;
+const pRockDiv = document.getElementById('player-rock');
+const pPaperDiv = document.getElementById('player-paper');
+const pScissorsDiv = document.getElementById('player-scissors');
 
-const vWidth = window.visualViewport.width;
-console.log(vWidth);
+const pDivColorOff = 'var(--color-player-three)';
+const pDivColorOn = 'var(--color-player-two)';
+const pDivBorderColorOff = 'var(--color-player-four)';
+const pDivBorderColorOn = 'var(--color-player-two)';
+const pDivShadowOff = 'var(--shadow-off)';
+const pDivShadowOn = 'var(--shadow-on)';
+
+// const mediaQueryList = window.matchMedia('(orientation: portrait)');
+// gameText.textContent = 'Device is in Portrait mode? ' + mediaQueryList.matches;
+
+// const vWidth = window.visualViewport.width;
+// console.log(vWidth);
 
 //* Variables used to track score across 5 games
-let userWins = 0,
+let playerWins = 0,
 	computerWins = 0,
 	tieGames = 0;
 
@@ -56,7 +71,6 @@ const cChoice = function () {
 	//* since it's 3 max (rock-paper-scissors)
 	//* 'num' should return 0, 1 or 2
 	let num = Math.floor(Math.random() * 3);
-	// setTimeout(num, 1500);
 	if (num === 0) {
 		cRockDivOn();
 		return 'Rock';
@@ -69,120 +83,160 @@ const cChoice = function () {
 	}
 };
 
-function computerPlays() {
-	setTimeout(cRockDivOn, interval * 1);
-	setTimeout(cRockDivOff, interval * 2);
-	setTimeout(cPaperDivOn, interval * 3);
-	setTimeout(cPaperDivOff, interval * 4);
-	setTimeout(cScissorsDivOn, interval * 5);
-	setTimeout(cScissorsDivOff, interval * 6);
-	setTimeout(cChoice, interval * 7);
-}
+// function computerPlays() {
+// 	setTimeout(cRockDivOn, interval * 1);
+// 	setTimeout(cRockDivOff, interval * 2);
+// 	setTimeout(cPaperDivOn, interval * 3);
+// 	setTimeout(cPaperDivOff, interval * 4);
+// 	setTimeout(cScissorsDivOn, interval * 5);
+// 	setTimeout(cScissorsDivOff, interval * 6);
+// 	setTimeout(cChoice, interval * 7);
+// }
 
-//addEventListener('click', userPlays());
+const pRockDivOn = function () {
+	pRockDiv.style.borderColor = pDivBorderColorOn;
+	pRockDiv.style.boxShadow = pDivShadowOff;
+	pRockDiv.style.backgroundColor = pDivColorOn;
+};
+
+const pRockDivOff = function () {
+	pRockDiv.style.borderColor = pDivBorderColorOff;
+	pRockDiv.style.boxShadow = pDivShadowOn;
+	pRockDiv.style.backgroundColor = pDivColorOff;
+};
+
+const pPaperDivOn = function () {
+	pPaperDiv.style.borderColor = pDivBorderColorOn;
+	pPaperDiv.style.boxShadow = pDivShadowOff;
+	pPaperDiv.style.backgroundColor = pDivColorOn;
+};
+
+const pPaperDivOff = function () {
+	pPaperDiv.style.borderColor = pDivBorderColorOff;
+	pPaperDiv.style.boxShadow = pDivShadowOn;
+	pPaperDiv.style.backgroundColor = pDivColorOff;
+};
+
+const pScissorsDivOn = function () {
+	pScissorsDiv.style.borderColor = pDivBorderColorOn;
+	pScissorsDiv.style.boxShadow = pDivShadowOff;
+	pScissorsDiv.style.backgroundColor = pDivColorOn;
+};
+
+const pScissorsDivOff = function () {
+	pScissorsDiv.style.borderColor = pDivBorderColorOff;
+	pScissorsDiv.style.boxShadow = pDivShadowOn;
+	pScissorsDiv.style.backgroundColor = pDivColorOff;
+};
 
 function userPlays(i) {
 	let input = i;
-
-	//* If 'i' is not undefined [meaning invalid entry], special prompt
-	if (input !== undefined) {
-		input = window.prompt(
-			'INVALID ENTRY!\n\nPlease enter Rock, Paper, Scissors'
-		);
+	if (input === 'Rock') {
+		pScissorsDivOff();
+		pPaperDivOff();
+		pRockDivOn();
+		gameText.textContent = input;
+		return letsPlay(input);
+	} else if (input === 'Paper') {
+		pScissorsDivOff();
+		pRockDivOff();
+		pPaperDivOn();
+		gameText.textContent = input;
+		return letsPlay(input);
+	} else if (input === 'Scissors') {
+		pRockDivOff();
+		pPaperDivOff();
+		pScissorsDivOn();
+		gameText.textContent = input;
+		return letsPlay(input);
 	} else {
-		//* Otherwise, prompt user to input text
-		input = window.prompt('Chose one: Rock, Paper, Scissors');
-	}
-	//* check to make sure user has input text
-	if (input === null) {
-		input = window.prompt(
-			'OOPS!\n\nYou forgot enter one: Rock, Paper, Scissors'
-		);
-	}
-	//* Let's format the user's text entry
-	input = input.trim();
-	let inputLower = input.toLowerCase();
-	let titleCase = [...inputLower];
-	titleCase.splice(0, 1, inputLower[0].toUpperCase());
-	let inputScrubbed = '';
-	inputScrubbed = titleCase.join('');
-	//* check if the scrubbed input is valid
-	if (
-		inputScrubbed === 'Rock' ||
-		inputScrubbed === 'Paper' ||
-		inputScrubbed === 'Scissors'
-	) {
-		return inputScrubbed;
-	} else {
-		//* if entry not valid, call function again
-		return userPlays(inputScrubbed);
+		resetGame();
 	}
 }
 
-function trackScore(result, gameCount) {
-	let gameNum = gameCount - 1;
-	if (gameNum <= 5) {
-		switch (result) {
-			case 'User':
-				userWins++;
-				break;
-			case 'Comp':
-				computerWins++;
-				break;
-			case 'Tie':
-				tieGames++;
-				break;
-		}
-		console.log(
-			`User: ${userWins}\nComputer: ${computerWins}\nTie: ${tieGames}`
-		);
-		gameNum++;
+function trackScore(result) {
+	switch (result) {
+		case 'Player':
+			playerWins++;
+			break;
+		case 'Computer':
+			computerWins++;
+			break;
+		case 'Tie':
+			tieGames++;
+			break;
+	}
+	pScore.textContent = playerWins;
+	cScore.textContent = computerWins;
+	if (playerWins == 5) {
+		window.alert("Congratulations! You're the winner! :)");
+		resetAll();
+	} else if (computerWins == 5) {
+		window.alert('Sorry. The computer is the winner. :(');
+		resetAll();
+	} else {
+		setTimeout(resetGame, interval * 10);
 	}
 }
 
 //* take the computer's choice and user's choice
 //* to determine a winnner;
 //* pass game number to track score
-function gamePlay(computer, user, count) {
+function gamePlay(computer, player) {
 	let computerPlay = computer;
-	let userPlay = user;
-	let gameNum = count;
-	while (gameNum <= 5) {
-		console.log('Computer played ' + computerPlay);
-		console.log('You played ' + userPlay);
-		gameNum++;
-		if (userPlay === computerPlay) {
-			console.log("It's a tie. :|");
-			return trackScore('Tie', gameNum);
-		} else if (userPlay == 'Rock' && computerPlay == 'Scissors') {
-			console.log('Rock beats Scissors! You win!');
-			return trackScore('User', gameNum);
-		} else if (userPlay == 'Scissors' && computerPlay == 'Paper') {
-			console.log('Scissors beats Paper! You win!');
-			return trackScore('User', gameNum);
-		} else if (userPlay == 'Paper' && computerPlay == 'Rock') {
-			console.log('Paper beats Rock! You win!');
-			return trackScore('User', gameNum);
-		} else if (userPlay == 'Rock' && computerPlay == 'Paper') {
-			console.log('Paper beats Rock. You lose. :(');
-			return trackScore('Comp', gameNum);
-		} else if (userPlay == 'Paper' && computerPlay == 'Scissors') {
-			console.log('Scissors beats Paper. You lose. :(');
-			return trackScore('Comp', gameNum);
-		} else if (userPlay == 'Scissors' && computerPlay == 'Rock') {
-			console.log('Rock beats Scissors. You lose. :(');
-			return trackScore('Comp', gameNum);
-		}
+	let playerChoice = player;
+	if (playerChoice === computerPlay) {
+		gameText.textContent = "It's a tie. :|";
+		return trackScore('Tie');
+	} else if (playerChoice === 'Rock' && computerPlay === 'Scissors') {
+		gameText.textContent = 'Rock beats Scissors! You win!';
+		return trackScore('Player');
+	} else if (playerChoice === 'Scissors' && computerPlay === 'Paper') {
+		gameText.textContent = 'Scissors beats Paper! You win!';
+		return trackScore('Player');
+	} else if (playerChoice === 'Paper' && computerPlay === 'Rock') {
+		gameText.textContent = 'Paper beats Rock! You win!';
+		return trackScore('Player');
+	} else if (playerChoice === 'Rock' && computerPlay === 'Paper') {
+		gameText.textContent = 'Paper beats Rock. You lose. :(';
+		return trackScore('Computer');
+	} else if (playerChoice === 'Paper' && computerPlay === 'Scissors') {
+		gameText.textContent = 'Scissors beats Paper. You lose. :(';
+		return trackScore('Computer');
+	} else if (playerChoice === 'Scissors' && computerPlay === 'Rock') {
+		gameText.textContent = 'Rock beats Scissors. You lose. :(';
+		return trackScore('Computer');
 	}
 }
 
-function letsPlay() {
-	let gameNum = 1;
-	while (gameNum <= 5) {
-		console.log('*** Game #' + gameNum + ' ***');
-		gamePlay(computerPlays(), userPlays(), gameNum);
-		gameNum++;
+function letsPlay(player) {
+	let playerChoice = player;
+	let computerPick;
+	if (playerChoice !== undefined) {
+		computerPick = cChoice();
+		// computerPick = setTimeout(computerPlays, interval * 8);
 	}
+	return gamePlay(computerPick, playerChoice);
 }
 
-// computerPlays();
+function resetGame() {
+	pRockDivOff();
+	pPaperDivOff();
+	pScissorsDivOff();
+	cRockDivOff();
+	cPaperDivOff();
+	cScissorsDivOff();
+	gameText.textContent = 'First to 5 is the winner!';
+}
+
+function resetAll() {
+	pRockDivOff();
+	pPaperDivOff();
+	pScissorsDivOff();
+	cRockDivOff();
+	cPaperDivOff();
+	cScissorsDivOff();
+	gameText.textContent = 'Please pick Rock, Paper, or Scissors.';
+	pScore.textContent = 0;
+	cScore.textContent = 0;
+}
