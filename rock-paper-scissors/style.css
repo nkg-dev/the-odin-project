@@ -16,9 +16,10 @@
 	/* --color-player-one: #241130; */
 	/* --color-player-two: #ff876c; */
 	/* --color-player-three: #ffd1c7; */
+	/* --color-player-three: #e6d5f0; */
 	--color-player-one: #1f0f29;
 	--color-player-two: #caa6df;
-	--color-player-three: #e6d5f0;
+	--color-player-three: #f7f2fa;
 	--color-player-four: #5b2b77;
 	--color-computer-one: #555;
 	--color-computer-two: #ccc;
@@ -74,14 +75,11 @@ main {
 	background-color: #a05fc5;
 	background-color: var(--color-player-four);
 	max-width: calc(var(--font-size) * 32);
-	/* background-color: var(--color-player-two); */
-	/* background-color: #a5a7df; */
-	/* background-color: #dfa5ba; */
-	/* background-color: #dfada5; */
-	/* height: 100vh; */
+	border-radius: calc(var(--font-size) * 0.75);
+	/* height: 86vh; */
 	/* max-width: 750px; */
 	/* max-width: 60ch; */
-	/* max-width: 70rem; */
+	/* max-width: 60ch; */
 }
 
 h1 {
@@ -89,8 +87,8 @@ h1 {
 	font-size: calc(var(--font-size) * 2.2);
 	font-weight: 700;
 	text-align: center;
-	margin-bottom: 1rem;
-	margin-bottom: calc(var(--font-size) * 1);
+	/* margin-bottom: 1rem; */
+	margin-top: calc(var(--font-size) * 0.5);
 }
 
 h2 {
