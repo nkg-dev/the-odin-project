@@ -1,9 +1,20 @@
 'use strict';
 
-const interval = 500;
+const gamesToWin = 2;
+// ms intervals for setTimeout call
+// when resetting after a single game
+const gameInterval = 2500;
+// when resetting after winner reaches ${gamesToWin}
+const winnerInterval = 4000;
+
+const gameTextDefault = `Let's Play!`;
+const ruleTextDefault = `Play to ${gamesToWin}!`;
 
 const gameText = document.getElementById('gameText');
+const ruleText = document.getElementById('ruleText');
+const winnerText = document.getElementById('winnerText');
 
+//! c denotes Computer, p is for Player
 const cScore = document.getElementById('computerScore');
 const pScore = document.getElementById('playerScore');
 
@@ -18,10 +29,10 @@ const pRockDiv = document.getElementById('player-rock');
 const pPaperDiv = document.getElementById('player-paper');
 const pScissorsDiv = document.getElementById('player-scissors');
 
-const pDivColorOff = 'var(--color-player-three)';
-const pDivColorOn = 'var(--color-player-two)';
 const pDivBorderColorOff = 'var(--color-player-four)';
 const pDivBorderColorOn = 'var(--color-player-two)';
+const pDivColorOff = 'var(--color-player-three)';
+const pDivColorOn = 'var(--color-player-two)';
 const pDivShadowOff = 'var(--shadow-off)';
 const pDivShadowOn = 'var(--shadow-on)';
 
@@ -31,39 +42,39 @@ const pDivShadowOn = 'var(--shadow-on)';
 // const vWidth = window.visualViewport.width;
 // console.log(vWidth);
 
-//* Variables used to track score across 5 games
+//* Variables used to track score till someone wins
 let playerWins = 0,
 	computerWins = 0,
 	tieGames = 0;
 
 const cRockDivOn = function () {
-	cRockDiv.style.borderColor = cDivColorOn;
 	cRockDiv.style.backgroundColor = cDivColorOn;
+	cRockDiv.style.borderColor = cDivColorOn;
 };
 
 const cRockDivOff = function () {
-	cRockDiv.style.borderColor = cDivColorOff;
 	cRockDiv.style.backgroundColor = cDivColorOff;
+	cRockDiv.style.borderColor = cDivColorOff;
 };
 
 const cPaperDivOn = function () {
-	cPaperDiv.style.borderColor = cDivColorOn;
 	cPaperDiv.style.backgroundColor = cDivColorOn;
+	cPaperDiv.style.borderColor = cDivColorOn;
 };
 
 const cPaperDivOff = function () {
-	cPaperDiv.style.borderColor = cDivColorOff;
 	cPaperDiv.style.backgroundColor = cDivColorOff;
+	cPaperDiv.style.borderColor = cDivColorOff;
 };
 
 const cScissorsDivOn = function () {
-	cScissorsDiv.style.borderColor = cDivColorOn;
 	cScissorsDiv.style.backgroundColor = cDivColorOn;
+	cScissorsDiv.style.borderColor = cDivColorOn;
 };
 
 const cScissorsDivOff = function () {
-	cScissorsDiv.style.borderColor = cDivColorOff;
 	cScissorsDiv.style.backgroundColor = cDivColorOff;
+	cScissorsDiv.style.borderColor = cDivColorOff;
 };
 
 const cChoice = function () {
@@ -83,50 +94,41 @@ const cChoice = function () {
 	}
 };
 
-// function computerPlays() {
-// 	setTimeout(cRockDivOn, interval * 1);
-// 	setTimeout(cRockDivOff, interval * 2);
-// 	setTimeout(cPaperDivOn, interval * 3);
-// 	setTimeout(cPaperDivOff, interval * 4);
-// 	setTimeout(cScissorsDivOn, interval * 5);
-// 	setTimeout(cScissorsDivOff, interval * 6);
-// 	setTimeout(cChoice, interval * 7);
-// }
-
+// when player button is ON, shadow is OFF
 const pRockDivOn = function () {
+	pRockDiv.style.backgroundColor = pDivColorOn;
 	pRockDiv.style.borderColor = pDivBorderColorOn;
 	pRockDiv.style.boxShadow = pDivShadowOff;
-	pRockDiv.style.backgroundColor = pDivColorOn;
 };
 
 const pRockDivOff = function () {
+	pRockDiv.style.backgroundColor = pDivColorOff;
 	pRockDiv.style.borderColor = pDivBorderColorOff;
 	pRockDiv.style.boxShadow = pDivShadowOn;
-	pRockDiv.style.backgroundColor = pDivColorOff;
 };
 
 const pPaperDivOn = function () {
+	pPaperDiv.style.backgroundColor = pDivColorOn;
 	pPaperDiv.style.borderColor = pDivBorderColorOn;
 	pPaperDiv.style.boxShadow = pDivShadowOff;
-	pPaperDiv.style.backgroundColor = pDivColorOn;
 };
 
 const pPaperDivOff = function () {
+	pPaperDiv.style.backgroundColor = pDivColorOff;
 	pPaperDiv.style.borderColor = pDivBorderColorOff;
 	pPaperDiv.style.boxShadow = pDivShadowOn;
-	pPaperDiv.style.backgroundColor = pDivColorOff;
 };
 
 const pScissorsDivOn = function () {
+	pScissorsDiv.style.backgroundColor = pDivColorOn;
 	pScissorsDiv.style.borderColor = pDivBorderColorOn;
 	pScissorsDiv.style.boxShadow = pDivShadowOff;
-	pScissorsDiv.style.backgroundColor = pDivColorOn;
 };
 
 const pScissorsDivOff = function () {
+	pScissorsDiv.style.backgroundColor = pDivColorOff;
 	pScissorsDiv.style.borderColor = pDivBorderColorOff;
 	pScissorsDiv.style.boxShadow = pDivShadowOn;
-	pScissorsDiv.style.backgroundColor = pDivColorOff;
 };
 
 function userPlays(i) {
@@ -135,19 +137,16 @@ function userPlays(i) {
 		pScissorsDivOff();
 		pPaperDivOff();
 		pRockDivOn();
-		gameText.textContent = input;
 		return letsPlay(input);
 	} else if (input === 'Paper') {
 		pScissorsDivOff();
 		pRockDivOff();
 		pPaperDivOn();
-		gameText.textContent = input;
 		return letsPlay(input);
 	} else if (input === 'Scissors') {
 		pRockDivOff();
 		pPaperDivOff();
 		pScissorsDivOn();
-		gameText.textContent = input;
 		return letsPlay(input);
 	} else {
 		resetGame();
@@ -166,16 +165,20 @@ function trackScore(result) {
 			tieGames++;
 			break;
 	}
+
 	pScore.textContent = playerWins;
 	cScore.textContent = computerWins;
-	if (playerWins == 5) {
-		window.alert("Congratulations! You're the winner! :)");
-		resetAll();
-	} else if (computerWins == 5) {
-		window.alert('Sorry. The computer is the winner. :(');
-		resetAll();
+
+	if (playerWins == gamesToWin) {
+		winnerText.style.display = 'flex';
+		winnerText.textContent = "Yay! You're the winner! 😎";
+		setTimeout(resetAll, winnerInterval);
+	} else if (computerWins == gamesToWin) {
+		winnerText.style.display = 'flex';
+		winnerText.textContent = 'Boo! The computer is the winner. 😕';
+		setTimeout(resetAll, winnerInterval);
 	} else {
-		setTimeout(resetGame, interval * 10);
+		setTimeout(resetGame, gameInterval);
 	}
 }
 
@@ -185,26 +188,28 @@ function trackScore(result) {
 function gamePlay(computer, player) {
 	let computerPlay = computer;
 	let playerChoice = player;
+	let winText = ' You win! 😀';
+	let lossText = ' You lose. 😕';
 	if (playerChoice === computerPlay) {
-		gameText.textContent = "It's a tie. :|";
+		gameText.textContent = "It's a tie. 😐 Play again!";
 		return trackScore('Tie');
 	} else if (playerChoice === 'Rock' && computerPlay === 'Scissors') {
-		gameText.textContent = 'Rock beats Scissors! You win!';
+		gameText.textContent = `Rock beats Scissors!${winText}`;
 		return trackScore('Player');
 	} else if (playerChoice === 'Scissors' && computerPlay === 'Paper') {
-		gameText.textContent = 'Scissors beats Paper! You win!';
+		gameText.textContent = `Scissors beats Paper!${winText}`;
 		return trackScore('Player');
 	} else if (playerChoice === 'Paper' && computerPlay === 'Rock') {
-		gameText.textContent = 'Paper beats Rock! You win!';
+		gameText.textContent = `Paper beats Rock!${winText}`;
 		return trackScore('Player');
 	} else if (playerChoice === 'Rock' && computerPlay === 'Paper') {
-		gameText.textContent = 'Paper beats Rock. You lose. :(';
+		gameText.textContent = `Paper beats Rock!${lossText}`;
 		return trackScore('Computer');
 	} else if (playerChoice === 'Paper' && computerPlay === 'Scissors') {
-		gameText.textContent = 'Scissors beats Paper. You lose. :(';
+		gameText.textContent = `Scissors beats Paper.${lossText}`;
 		return trackScore('Computer');
 	} else if (playerChoice === 'Scissors' && computerPlay === 'Rock') {
-		gameText.textContent = 'Rock beats Scissors. You lose. :(';
+		gameText.textContent = `Rock beats Scissors.${lossText}`;
 		return trackScore('Computer');
 	}
 }
@@ -212,10 +217,10 @@ function gamePlay(computer, player) {
 function letsPlay(player) {
 	let playerChoice = player;
 	let computerPick;
-	if (playerChoice !== undefined) {
-		computerPick = cChoice();
-		// computerPick = setTimeout(computerPlays, interval * 8);
-	}
+	// if (playerChoice !== undefined) {
+	computerPick = cChoice();
+	// computerPick = setTimeout(computerPlays, interval * 8);
+	// }
 	return gamePlay(computerPick, playerChoice);
 }
 
@@ -226,17 +231,36 @@ function resetGame() {
 	cRockDivOff();
 	cPaperDivOff();
 	cScissorsDivOff();
-	gameText.textContent = 'First to 5 is the winner!';
+	gameText.textContent = gameTextDefault;
 }
 
 function resetAll() {
-	pRockDivOff();
-	pPaperDivOff();
-	pScissorsDivOff();
-	cRockDivOff();
-	cPaperDivOff();
-	cScissorsDivOff();
-	gameText.textContent = 'Please pick Rock, Paper, or Scissors.';
-	pScore.textContent = 0;
-	cScore.textContent = 0;
+	resetGame();
+	playerWins = 0;
+	computerWins = 0;
+	tieGames = 0;
+	pScore.textContent = playerWins;
+	cScore.textContent = computerWins;
+	winnerText.style.display = 'none';
+	winnerText.textContent = '';
 }
+
+const resetButton = document.getElementById('resetButton');
+const modalResetContainer = document.getElementById('modalResetContainer');
+const resetYes = document.getElementById('resetYes');
+const resetNo = document.getElementById('resetNo');
+
+resetButton.addEventListener('click', () => {
+	modalResetContainer.classList.add('show');
+});
+
+resetNo.addEventListener('click', () => {
+	modalResetContainer.classList.remove('show');
+});
+
+resetYes.addEventListener('click', () => {
+	modalResetContainer.classList.remove('show');
+	resetAll();
+});
+
+ruleText.textContent = ruleTextDefault;
