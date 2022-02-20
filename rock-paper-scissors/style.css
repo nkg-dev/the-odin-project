@@ -1,32 +1,67 @@
 @import url('https://fonts.googleapis.com/css2?family=Grandstander:wght@700&family=Outfit&display=swap');
 
 :root {
-	/** Calculation for font size is used   */
-	/** for icons, padding, and margins, too  */
+	/*! Calculation for font size is used   */
+	/*! for icons, padding, and margins, too  */
 	/** Calculation courtesy of Michael Riethmuller                */
 	/** https://websemantics.uk/tools/responsive-font-calculator/  */
 	--font-size: calc(0.875rem + ((1vw - 0.01rem) * 0.5));
+
+	--font-serious: 'Outfit', Verdana, sans-serif;
+
 	/** this is a kid's game, so the font should be fun!  */
 	--font-fun: 'Grandstander', Arial, sans-serif;
-	--font-serious: 'Outfit', Verdana, sans-serif;
+
 	--size-icon-reg: calc(var(--font-size) * 2);
 	--size-icon-score: calc(var(--font-size) * 1.6);
-	--color-player-one: hsl(283, 20%, 10%);
-	--color-player-two: hsl(103, 75%, 50%);
-	--color-player-three: hsl(283, 20%, 90%);
-	--color-player-four: hsl(283, 75%, 50%);
-	--shadow-on: 2px 2px 12px -6px var(--color-player-one);
-	--shadow-off: 0px 0px 0px 0px var(--color-player-one);
+
+	--shadow-on: 2px 2px 12px -6px var(--color-one);
+	--shadow-off: 0px 0px 0px 0px var(--color-one);
 }
 
-/* @media (prefers-color-scheme: dark) {
-	:root {
-		--color-player-one: hsl(103, 20%, 90%);
-		--color-player-two: hsl(283, 75%, 50%);
-		--color-player-three: hsl(103, 20%, 10%);
-		--color-player-four: hsl(103, 75%, 50%);
-	}
-} */
+/** "light--hidden" elements will be hidden */
+/** when the site is set to Light Mode      */
+:root[color-mode='light'] .light--hidden {
+	display: none;
+}
+
+/** "dark--hidden" elements will be hidden */
+/** when the site is set to Dark Mode      */
+:root[color-mode='dark'] .dark--hidden {
+	display: none;
+}
+
+html[color-mode='dark'] {
+	--color-one: hsl(103, 20%, 90%);
+	--color-two: hsl(283, 75%, 50%);
+	--color-three: hsl(103, 20%, 10%);
+	--color-four: hsl(103, 75%, 50%);
+}
+
+html[color-mode='light'] {
+	--color-one: hsl(283, 20%, 10%);
+	--color-two: hsl(103, 75%, 50%);
+	--color-three: hsl(283, 20%, 90%);
+	--color-four: hsl(283, 75%, 50%);
+}
+
+/** Rather than abrupt switch between Light */
+/** and Dark modes, soften with transiton  */
+html,
+html *,
+html *::before,
+html *::after {
+	--font-size: calc(0.875rem + ((1vw - 0.01rem) * 0.5));
+	transition: all 400ms linear;
+}
+
+html.transition,
+html.transition *,
+html.transition *::before,
+html.transition *::after {
+	--font-size: calc(0.875rem + ((1vw - 0.01rem) * 0.5));
+	transition: all 400ms linear;
+}
 
 @media screen and (min-width: 76rem) {
 	:root {
@@ -37,13 +72,14 @@
 *,
 *::before,
 *::after {
-	font-size: var(--font-size);
 	box-sizing: border-box;
-	margin: 0;
-	font-family: var(--font-fun);
-	font-weight: 700;
-	color: var(--color-player-three);
 	border-radius: calc(var(--font-size) * 0.5);
+	color: var(--color-three);
+	font-family: var(--font-fun);
+	font-size: var(--font-size);
+	font-weight: 700;
+	margin: 0;
+	/* border: 1px dotted dodgerblue; */
 }
 
 html {
@@ -54,7 +90,7 @@ body {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	background-color: var(--color-player-three);
+	background-color: var(--color-three);
 }
 
 main {
@@ -64,7 +100,7 @@ main {
 	align-items: center;
 	padding: calc(var(--font-size) * 0.75);
 	margin: calc(var(--font-size) * 0.5) calc(var(--font-size) * 0.15);
-	background-color: var(--color-player-four);
+	background-color: var(--color-four);
 	border-radius: calc(var(--font-size) * 0.75);
 	max-width: calc(var(--font-size) * 32);
 	/* box-shadow: var(--shadow-on); */
@@ -79,35 +115,29 @@ header {
 	/* border: 1px dotted white; */
 }
 
-/* header > div {
-	border: 1px dotted white;
-} */
-
 h1 {
 	font-size: calc(var(--font-size) * 2.2);
-	font-weight: 700;
 	text-align: center;
 }
 
 h2 {
 	font-size: calc(var(--font-size) * 1.75);
-	font-weight: 700;
 	margin: 0 0 calc(var(--font-size) * 1.25);
 }
 
 h3 {
 	font-size: calc(var(--font-size) * 1.25);
-	font-weight: 700;
-	margin: 0;
+	/* margin: 0; */
 	padding: calc(var(--font-size) * 0.25) calc(var(--font-size) * 0.5) 0;
 	border: none;
-	color: var(--color-player-one);
+	color: var(--color-one);
 }
 
 /** Hide the Computer's Rock, Paper, Scissors options  */
 /** by setting font color to background color  */
 h3.computer {
-	color: var(--color-player-three);
+	color: var(--color-three);
+	transition: none;
 }
 
 fieldset {
@@ -127,6 +157,7 @@ button {
 	padding: 0px;
 	margin: 0px;
 	border: none;
+	cursor: pointer;
 }
 
 footer {
@@ -134,7 +165,7 @@ footer {
 	font-family: var(--font-serious);
 	font-size: calc(var(--font-size) * 0.6);
 	font-weight: normal;
-	color: var(--color-player-four);
+	color: var(--color-four);
 }
 
 p {
@@ -143,17 +174,14 @@ p {
 }
 
 .rule-text {
-	/* margin: calc(var(--font-size) * 0.5) 0; */
 	font-size: calc(var(--font-size) * 1);
-	font-family: var(--font-fun);
-	/* font-weight: 400; */
-	color: var(--color-player-one);
+	color: var(--color-one);
 	padding: calc(var(--font-size) * 0.25) calc(var(--font-size) * 0.25) 0 0;
 }
 
 .game-play {
-	background-color: var(--color-player-one);
-	border: calc(var(--font-size) * 0.125) solid var(--color-player-three);
+	background-color: var(--color-one);
+	border: calc(var(--font-size) * 0.125) solid var(--color-three);
 	width: 100%;
 	margin: calc(var(--font-size) * 1) 0;
 	padding: calc(var(--font-size) * 1);
@@ -166,7 +194,7 @@ p {
 	justify-content: space-between;
 	align-items: flex-end;
 	gap: calc(var(--font-size) * 0.5);
-	color: var(--color-player-three);
+	color: var(--color-three);
 	width: 100%;
 }
 
@@ -183,30 +211,25 @@ p {
 .game-play-header-text::before {
 	content: 'Score:';
 	font-size: calc(var(--font-size) * 1.25);
-	font-family: var(--font-fun);
-	font-weight: 700;
-	color: var(--color-player-one);
+	color: var(--color-one);
 	padding: calc(var(--font-size) * 0.25) 0 0 calc(var(--font-size) * 0.25);
 }
 
 .game-play-header-text {
-	background-color: var(--color-player-two);
-	border: calc(var(--font-size) * 0.125) solid var(--color-player-three);
+	background-color: var(--color-two);
+	border: calc(var(--font-size) * 0.125) solid var(--color-three);
 	display: flex;
 	justify-content: space-around;
 	align-items: center;
 	gap: calc(var(--font-size) * 0.4);
 	font-size: calc(var(--font-size) * 1.25);
-	font-weight: 700;
-	color: var(--color-player-one);
+	color: var(--color-one);
 	padding: calc(var(--font-size) * 0.25);
 }
 
 .score-header-text {
 	font-size: calc(var(--font-size) * 1.25);
-	font-family: var(--font-fun);
-	font-weight: 700;
-	color: var(--color-player-one);
+	color: var(--color-one);
 	padding: calc(var(--font-size) * 0.25) 0 0 calc(var(--font-size) * 0.5);
 	margin: auto;
 }
@@ -225,16 +248,14 @@ p {
 	flex-wrap: nowrap;
 	padding: calc(var(--font-size) * 0.25) calc(var(--font-size) * 0.25) 0;
 	gap: calc(var(--font-size) * 0.25);
-	border: calc(var(--font-size) * 0.125) solid var(--color-player-two);
-	background-color: var(--color-player-three);
+	border: calc(var(--font-size) * 0.125) solid var(--color-two);
+	background-color: var(--color-three);
 }
 
 #playerScore,
 #computerScore {
 	font-size: calc(var(--font-size) * 1.5);
-	font-family: var(--font-fun);
-	font-weight: 700;
-	color: var(--color-player-one);
+	color: var(--color-one);
 	margin: auto;
 	padding: 0;
 	width: calc(var(--font-size) * 1.5);
@@ -245,14 +266,15 @@ p {
 	padding: calc(var(--font-size) * 0.75) calc(var(--font-size) * 1)
 		calc(var(--font-size) * 0.5);
 	font-size: calc(var(--font-size) * 0.75);
-	border: calc(var(--font-size) * 0.067) solid var(--color-player-three);
-	background-color: var(--color-player-one);
-	transition: all 0.5s ease;
+	border: calc(var(--font-size) * 0.067) solid var(--color-three);
+	background-color: var(--color-one);
+	transition: all 400ms ease-in-out;
 }
 
 .reset:hover {
-	background-color: var(--color-player-three);
-	color: var(--color-player-one);
+	background-color: var(--color-three);
+	color: var(--color-one);
+	transition: all 400ms ease-in-out;
 }
 
 .choice-player,
@@ -266,7 +288,7 @@ p {
 
 .player-section,
 .computer-section {
-	background-color: var(--color-player-three);
+	background-color: var(--color-three);
 	margin: calc(var(--font-size) * 1) 0;
 	padding: 0 calc(var(--font-size) * 1);
 	width: 100%;
@@ -284,16 +306,14 @@ p {
 }
 
 .player-header-text {
-	background-color: var(--color-player-two);
-	border: calc(var(--font-size) * 0.125) solid var(--color-player-three);
+	background-color: var(--color-two);
+	border: calc(var(--font-size) * 0.125) solid var(--color-three);
 	display: flex;
 	justify-content: flex-start;
 	align-items: center;
 	gap: calc(var(--font-size) * 0.5);
 	font-size: calc(var(--font-size) * 1);
-	font-family: var(--font-fun);
-	font-weight: 700;
-	color: var(--color-player-one);
+	color: var(--color-one);
 	padding: calc(var(--font-size) * 0.25) calc(var(--font-size) * 0.75);
 }
 
@@ -307,53 +327,53 @@ p {
 	justify-content: center;
 	align-items: center;
 	width: calc(var(--font-size) * 10);
-	/* width: 100%; */
-	/* height: calc(var(--font-size) * 10); */
 	flex: 1;
 	padding: calc(var(--font-size) * 0.5) 0 calc(var(--font-size) * 0.5);
-	/* border-radius: 50%; */
 }
 
 #computerRock,
 #computerRaper,
 #computerScissors {
-	background-color: var(--color-player-three);
-	fill: var(--color-player-three);
-	color: var(--color-player-three);
-	transition: all 0.25s ease-in-out;
+	background-color: var(--color-three);
+	fill: var(--color-three);
+	color: var(--color-three);
+	transition: all 400ms ease-in-out;
 }
 
 /* #player-rock:visited,
 #player-paper:visited,
 #player-scissors:visited {
-	background-color: var(--color-player-three);
-	border: calc(var(--font-size) * 0.2) solid var(--color-player-four);
+	background-color: var(--color-three);
+	border: calc(var(--font-size) * 0.2) solid var(--color-four);
 	box-shadow: var(--shadow-on);
 } */
 
 #playerPaper:hover,
 #playerScissors:hover,
 #playerRock:hover {
-	box-shadow: var(--shadow-off);
-	background-color: var(--color-player-two);
-	border: calc(var(--font-size) * 0.2) solid var(--color-player-two);
+	box-shadow: var(--shadow-off) !important;
+	background-color: var(--color-two) !important;
+	border: calc(var(--font-size) * 0.2) solid var(--color-two) !important;
+	transition: all 400ms ease-in-out !important;
 }
 
 #playerPaper:active,
 #playerScissors:active,
 #playerRock:active {
 	box-shadow: var(--shadow-off);
-	background-color: var(--color-player-four);
-	border: calc(var(--font-size) * 0.2) solid var(--color-player-four);
-	color: var(--color-player-three);
+	background-color: var(--color-four);
+	border: calc(var(--font-size) * 0.2) solid var(--color-four);
+	color: var(--color-three);
+	transition: all 200ms ease-in-out;
 }
 
 #playerRock,
 #playerPaper,
 #playerScissors {
-	background-color: var(--color-player-three);
-	border: calc(var(--font-size) * 0.2) solid var(--color-player-four);
+	background-color: var(--color-three);
+	border: calc(var(--font-size) * 0.2) solid var(--color-four);
 	box-shadow: var(--shadow-on);
+	transition: all 400ms ease-in-out;
 }
 
 svg {
@@ -362,14 +382,14 @@ svg {
 
 .svg-rock-computer,
 .svg-paper-computer {
-	fill: var(--color-player-three);
+	fill: var(--color-three);
 	width: var(--size-icon-reg);
 	height: var(--size-icon-reg);
 	transform: rotate(-90deg) rotateY(180deg);
 }
 
 .svg-scissors-computer {
-	fill: var(--color-player-three);
+	fill: var(--color-three);
 	width: var(--size-icon-reg);
 	height: var(--size-icon-reg);
 	transform: rotateY(180deg);
@@ -377,59 +397,109 @@ svg {
 
 .svg-rock-player,
 .svg-paper-player {
-	fill: var(--color-player-one);
+	fill: var(--color-one);
 	width: var(--size-icon-reg);
 	height: var(--size-icon-reg);
 	transform: rotate(90deg);
 }
 
 .svg-scissors-player {
-	fill: var(--color-player-one);
+	fill: var(--color-one);
 	width: var(--size-icon-reg);
 	height: var(--size-icon-reg);
 }
 
 .svg-bot-icon,
 .svg-user-icon {
-	fill: var(--color-player-one);
+	fill: var(--color-one);
 	width: var(--size-icon-score);
 	height: var(--size-icon-score);
 }
 
-.svg-mode-icon {
+.svg-dark-mode,
+.svg-light-mode {
 	width: var(--size-icon-reg);
 	height: var(--size-icon-reg);
-	fill: var(--color-player-three);
+	fill: var(--color-three);
+	background-color: var(--color-four);
+	border-radius: 50%;
 	padding: 0;
 	margin: 0;
 	transform: rotate(180deg);
 }
 
-.empty,
-.empty2 {
+/* .svg-dark-mode {
+	fill: var(--color-three);
+} */
+
+.color-mode__header {
+	width: var(--size-icon-reg);
+	height: var(--size-icon-reg);
+}
+
+button.light--hidden {
 	width: var(--size-icon-reg);
 	height: var(--size-icon-reg);
 	border-radius: 50%;
-	background-color: var(--color-player-four);
-}
-
-.empty {
-	transform: rotate(0deg);
-	transition: transform 500ms ease-in, background-color 500ms ease-in-out;
-	cursor: pointer;
-}
-
-.empty:hover {
-	background-color: var(--color-player-one);
+	background-color: var(--color-four);
 	transform: rotate(-180deg);
-	transition: transform 500ms ease-in, background-color 500ms ease-in-out;
+	transition: transform 500ms ease-in, background-color 500ms ease-in-out,
+		fill 500ms ease-in-out;
 }
 
-/* .rotate {
-	transform: rotate(180deg);
-	transition: transform 500ms ease-in-out;
-} */
+button.dark--hidden {
+	width: var(--size-icon-reg);
+	height: var(--size-icon-reg);
+	border-radius: 50%;
+	background-color: var(--color-four);
+	transform: rotate(-180deg);
+	transition: transform 500ms ease-in, background-color 500ms ease-in-out,
+		fill 500ms ease-in-out;
+}
 
+button.light--hidden:hover {
+	fill: var(--color-two);
+	background-color: var(--color-one);
+	/* transform: rotate(-360deg); */
+	transition: transform 500ms ease-in, background-color 500ms ease-in-out,
+		fill 500ms ease-in-out;
+}
+
+button.dark--hidden:hover {
+	fill: var(--color-two);
+	background-color: var(--color-one);
+	/* transform: rotate(360deg); */
+	transition: transform 500ms ease-in, background-color 500ms ease-in-out,
+		fill 500ms ease-in-out;
+}
+
+button.light--hidden:active {
+	fill: var(--color-two);
+	background-color: var(--color-one);
+	/* transform: rotate(180deg); */
+	transition: transform 500ms ease-in, background-color 500ms ease-in-out,
+		fill 500ms ease-in-out;
+}
+
+button.dark--hidden:active {
+	fill: var(--color-two);
+	background-color: var(--color-one);
+	/* transform: rotate(-180deg); */
+	transition: transform 500ms ease-in, background-color 500ms ease-in-out,
+		fill 500ms ease-in-out;
+}
+
+.empty2 {
+	width: var(--size-icon-reg);
+	height: var(--size-icon-reg);
+	margin: 0;
+	padding: 0;
+	border-radius: 50%;
+	background-color: var(--color-four);
+}
+
+/*********************/
+/** Code for Modal ***/
 .modal-reset-container {
 	opacity: 0;
 	pointer-events: none;
@@ -444,17 +514,18 @@ svg {
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	transition: all 0.3s ease-in;
+	transition: all 500ms ease-in;
 }
 
 .modal-reset-container.show {
 	opacity: 1;
 	pointer-events: auto;
+	transition: all 500ms ease-in;
 }
 
 .modal-reset {
-	background-color: var(--color-player-four);
-	/* border: calc(var(--font-size) * 0.25) solid var(--color-player-two); */
+	background-color: var(--color-four);
+	/* border: calc(var(--font-size) * 0.25) solid var(--color-two); */
 	box-shadow: var(--shadow-on);
 	padding: calc(var(--font-size) * 1.5);
 	width: calc(var(--font-size) * 25);
@@ -469,26 +540,26 @@ svg {
 
 .modal-reset-button-no,
 .modal-reset-button-yes {
-	background-color: var(--color-player-three);
-	border: calc(var(--font-size) * 0.125) solid var(--color-player-three);
+	background-color: var(--color-three);
+	border: calc(var(--font-size) * 0.125) solid var(--color-three);
 	box-shadow: var(--shadow-on);
 	padding: calc(var(--font-size) * 0.75) calc(var(--font-size) * 1)
 		calc(var(--font-size) * 0.5);
-	color: var(--color-player-one);
-	font-weight: 700;
+	color: var(--color-one);
 	width: calc(var(--font-size) * 10);
-	transition: all 0.25s ease-in;
+	transition: all 400ms ease-in-out;
 }
 
 .modal-reset-button-yes {
-	background-color: var(--color-player-four);
-	color: var(--color-player-three);
+	background-color: var(--color-four);
+	color: var(--color-three);
 }
 
 .modal-reset-button-no:hover,
 .modal-reset-button-yes:hover {
 	box-shadow: var(--shadow-off);
-	background-color: var(--color-player-two);
-	border: calc(var(--font-size) * 0.125) solid var(--color-player-two);
-	color: var(--color-player-one);
+	background-color: var(--color-two);
+	border: calc(var(--font-size) * 0.125) solid var(--color-two);
+	color: var(--color-one);
+	transition: all 400ms ease-in-out;
 }
