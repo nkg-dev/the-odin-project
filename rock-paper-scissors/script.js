@@ -14,33 +14,27 @@ const gameText = document.getElementById('gameText');
 const ruleText = document.getElementById('ruleText');
 const winnerText = document.getElementById('winnerText');
 
-//! c denotes Computer, p is for Player
+//* c denotes Computer, p is for Player
 const cScore = document.getElementById('computerScore');
 const pScore = document.getElementById('playerScore');
 
-const cRockDiv = document.getElementById('computer-rock');
-const cPaperDiv = document.getElementById('computer-paper');
-const cScissorsDiv = document.getElementById('computer-scissors');
+const cRockDiv = document.getElementById('computerRock');
+const cPaperDiv = document.getElementById('computerPaper');
+const cScissorsDiv = document.getElementById('computerScissors');
 
-const cDivColorOff = 'var(--color-player-three)';
-const cDivColorOn = 'var(--color-player-four)';
+const cDivColorOff = 'var(--color-three)';
+const cDivColorOn = 'var(--color-four)';
 
-const pRockDiv = document.getElementById('player-rock');
-const pPaperDiv = document.getElementById('player-paper');
-const pScissorsDiv = document.getElementById('player-scissors');
+const pRockDiv = document.getElementById('playerRock');
+const pPaperDiv = document.getElementById('playerPaper');
+const pScissorsDiv = document.getElementById('playerScissors');
 
-const pDivBorderColorOff = 'var(--color-player-four)';
-const pDivBorderColorOn = 'var(--color-player-two)';
-const pDivColorOff = 'var(--color-player-three)';
-const pDivColorOn = 'var(--color-player-two)';
+const pDivBorderColorOff = 'var(--color-four)';
+const pDivBorderColorOn = 'var(--color-two)';
+const pDivColorOff = 'var(--color-three)';
+const pDivColorOn = 'var(--color-two)';
 const pDivShadowOff = 'var(--shadow-off)';
 const pDivShadowOn = 'var(--shadow-on)';
-
-// const mediaQueryList = window.matchMedia('(orientation: portrait)');
-// gameText.textContent = 'Device is in Portrait mode? ' + mediaQueryList.matches;
-
-// const vWidth = window.visualViewport.width;
-// console.log(vWidth);
 
 //* Variables used to track score till someone wins
 let playerWins = 0,
@@ -264,3 +258,44 @@ resetYes.addEventListener('click', () => {
 });
 
 ruleText.textContent = ruleTextDefault;
+
+if (window.CSS && CSS.supports('color', 'var(--primary)')) {
+	let toggleColorMode = function toggleColorMode(e) {
+		//* Switch to Light Mode
+		if (e.currentTarget.classList.contains('light--hidden')) {
+			transition();
+			// Sets the custom html attribute
+			document.documentElement.setAttribute('color-mode', 'light');
+
+			// Sets the user's preference in local storage
+			localStorage.setItem('color-mode', 'light');
+			return;
+		}
+		//* Switch to Dark Mode
+		transition();
+		// Sets the custom html attribute
+		document.documentElement.setAttribute('color-mode', 'dark');
+
+		// Sets the user's preference in local storage
+		localStorage.setItem('color-mode', 'dark');
+	};
+
+	// Get the buttons in the DOM
+	let toggleColorButtons = document.querySelectorAll('.color-mode__btn');
+
+	// Set up event listeners
+	toggleColorButtons.forEach(function (btn) {
+		btn.addEventListener('click', toggleColorMode);
+	});
+} else {
+	// If the feature isn't supported, then we hide the toggle buttons
+	let btnContainer = document.querySelector('.color-mode__header');
+	btnContainer.style.display = 'none';
+}
+
+let transition = () => {
+	document.documentElement.classList.add('transition');
+	window.setTimeout(() => {
+		document.documentElement.classList.remove('transition');
+	}, 400);
+};
