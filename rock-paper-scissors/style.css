@@ -1,15 +1,15 @@
 @import url('https://fonts.googleapis.com/css2?family=Grandstander:wght@700&family=Outfit&display=swap');
 
 :root {
-	/*! Calculation for font size is used   */
-	/*! for icons, padding, and margins, too  */
-	/** Calculation courtesy of Michael Riethmuller                */
-	/** https://websemantics.uk/tools/responsive-font-calculator/  */
+	/*! Calculation for --font-size used to size *********************/
+	/*! text, icons, borders, padding, and margins via calc() ********/
+	/*** Calculation courtesy of Michael Riethmuller *****************/
+	/*** https://websemantics.uk/tools/responsive-font-calculator/ ***/
 	--font-size: calc(0.875rem + ((1vw - 0.01rem) * 0.5));
 
 	--font-serious: 'Outfit', Verdana, sans-serif;
 
-	/** this is a kid's game, so the font should be fun!  */
+	/*** this is a kid's game, font should be fun! ***/
 	--font-fun: 'Grandstander', Arial, sans-serif;
 
 	--size-icon-reg: calc(var(--font-size) * 2);
@@ -17,16 +17,26 @@
 
 	--shadow-on: 2px 2px 12px -6px var(--color-one);
 	--shadow-off: 0px 0px 0px 0px var(--color-one);
+
+	--transition-short: 200ms;
+	--transition-long: var(var(--transition-short) * 2);
+	--transition-xlong: var(var(--transition-short) * 3);
 }
 
-/** "light--hidden" elements will be hidden */
-/** when the site is set to Light Mode      */
+@media screen and (min-width: 76rem) {
+	:root {
+		--font-size: 1.25rem;
+	}
+}
+
+/*** "light--hidden" elements will be hidden **/
+/*** when the site is set to Light Mode *******/
 :root[color-mode='light'] .light--hidden {
 	display: none;
 }
 
-/** "dark--hidden" elements will be hidden */
-/** when the site is set to Dark Mode      */
+/*** "dark--hidden" elements will be hidden ***/
+/*** when the site is set to Dark Mode ********/
 :root[color-mode='dark'] .dark--hidden {
 	display: none;
 }
@@ -45,28 +55,20 @@ html[color-mode='light'] {
 	--color-four: hsl(283, 75%, 50%);
 }
 
-/** Rather than abrupt switch between Light */
-/** and Dark modes, soften with transiton  */
+/*** Rather than abruptly switch between Light ***/
+/*** and Dark modes, soften with transiton *******/
 html,
 html *,
 html *::before,
 html *::after {
-	--font-size: calc(0.875rem + ((1vw - 0.01rem) * 0.5));
-	transition: all 400ms linear;
+	transition: all var(--transition-xlong) linear;
 }
 
 html.transition,
 html.transition *,
 html.transition *::before,
 html.transition *::after {
-	--font-size: calc(0.875rem + ((1vw - 0.01rem) * 0.5));
-	transition: all 400ms linear;
-}
-
-@media screen and (min-width: 76rem) {
-	:root {
-		--font-size: 1.25rem;
-	}
+	transition: all var(--transition-xlong) linear;
 }
 
 *,
@@ -74,11 +76,12 @@ html.transition *::after {
 *::after {
 	box-sizing: border-box;
 	border-radius: calc(var(--font-size) * 0.5);
+	margin: 0;
+
 	color: var(--color-three);
 	font-family: var(--font-fun);
 	font-size: var(--font-size);
 	font-weight: 700;
-	margin: 0;
 	/* border: 1px dotted dodgerblue; */
 }
 
@@ -90,54 +93,88 @@ body {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
+
 	background-color: var(--color-three);
 }
 
+/*** Contents between header and footer ***/
 main {
 	display: flex;
 	flex-direction: column;
 	justify-content: flex-start;
 	align-items: center;
-	padding: calc(var(--font-size) * 0.75);
-	margin: calc(var(--font-size) * 0.5) calc(var(--font-size) * 0.15);
-	background-color: var(--color-four);
-	border-radius: calc(var(--font-size) * 0.75);
-	max-width: calc(var(--font-size) * 32);
-	/* box-shadow: var(--shadow-on); */
+
+	/* padding: calc(var(--font-size) * 0.75); */
+	/* margin: calc(var(--font-size) * 0.5) calc(var(--font-size) * 0.15); */
+	width: 100%;
+
+	/* background-color: var(--color-four); */
+	/* border-radius: calc(var(--font-size) * 0.75); */
+}
+
+@media screen and (max-width: 550px) {
+	main {
+		/*** on phone, move player's buttons ***/
+		/*** to bottom of screen ***************/
+		flex-direction: column-reverse;
+	}
 }
 
 header {
-	width: 100%;
 	display: flex;
 	justify-content: space-between;
-	align-items: baseline;
-	margin: calc(var(--font-size) * 0.5) 0;
-	/* border: 1px dotted white; */
+	align-items: center;
+
+	width: 100%;
+	margin: 0 0 calc(var(--font-size) * 0.5);
 }
 
 h1 {
-	font-size: calc(var(--font-size) * 2.2);
+	padding: calc(var(--font-size) * 0.75) 0 0;
 	text-align: center;
+
+	font-size: calc(var(--font-size) * 2.2);
 }
 
 h2 {
-	font-size: calc(var(--font-size) * 1.75);
 	margin: 0 0 calc(var(--font-size) * 1.25);
+
+	font-size: calc(var(--font-size) * 1.75);
 }
 
 h3 {
-	font-size: calc(var(--font-size) * 1.25);
-	/* margin: 0; */
 	padding: calc(var(--font-size) * 0.25) calc(var(--font-size) * 0.5) 0;
+
 	border: none;
 	color: var(--color-one);
+
+	font-size: calc(var(--font-size) * 1.25);
 }
 
-/** Hide the Computer's Rock, Paper, Scissors options  */
-/** by setting font color to background color  */
+@media screen and (max-width: 550px) {
+	h1 {
+		font-size: calc(var(--font-size) * 1.75);
+	}
+	h3 {
+		font-size: calc(var(--font-size) * 1.6);
+	}
+}
+
+/*** Hide the Computer's Rock, Paper, Scissors options ***/
+/*** by setting font color to background color ***********/
 h3.computer {
+	/* transition: none; */
+
 	color: var(--color-three);
-	transition: none;
+}
+
+button {
+	cursor: pointer;
+
+	padding: 0px;
+	margin: 0px;
+
+	border: none;
 }
 
 fieldset {
@@ -145,48 +182,65 @@ fieldset {
 }
 
 legend {
-	padding: 0;
 	margin: 0;
-}
-
-a {
-	text-decoration: none;
-}
-
-button {
-	padding: 0px;
-	margin: 0px;
-	border: none;
-	cursor: pointer;
+	padding: 0;
 }
 
 footer {
 	padding: 0 0 calc(var(--font-size) * 2);
+
+	color: var(--color-four);
+
 	font-family: var(--font-serious);
 	font-size: calc(var(--font-size) * 0.6);
 	font-weight: normal;
-	color: var(--color-four);
 }
 
 p {
-	/* line-height: 1.6; */
 	margin-bottom: calc(var(--font-size) * 0.75);
+
+	transition: all var(--transition-long) ease-in-out;
 }
 
+svg {
+	margin: 0;
+}
+
+.main-container {
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+	align-items: center;
+
+	padding: calc(var(--font-size) * 0.75);
+	margin: calc(var(--font-size) * 0.5) calc(var(--font-size) * 0.15);
+	max-width: calc(var(--font-size) * 32);
+
+	background-color: var(--color-four);
+	border-radius: calc(var(--font-size) * 0.75);
+}
+
+/*** Creates 'hole' on left of h1 *******/
+/*** to maintain symmetrical layout *****/
+/*** with color mode button on right ****/
 .rule-text {
-	font-size: calc(var(--font-size) * 1);
-	color: var(--color-one);
 	padding: calc(var(--font-size) * 0.25) calc(var(--font-size) * 0.25) 0 0;
+
+	color: var(--color-one);
+
+	font-size: calc(var(--font-size) * 1);
 }
 
 .game-play {
-	background-color: var(--color-one);
-	border: calc(var(--font-size) * 0.125) solid var(--color-three);
-	width: 100%;
-	margin: calc(var(--font-size) * 1) 0;
-	padding: calc(var(--font-size) * 1);
 	display: flex;
 	justify-content: space-between;
+	width: 100%;
+
+	margin: calc(var(--font-size) * 1) 0;
+	padding: calc(var(--font-size) * 1);
+
+	background-color: var(--color-one);
+	border: calc(var(--font-size) * 0.125) solid var(--color-three);
 }
 
 .game-play-text {
@@ -194,87 +248,130 @@ p {
 	justify-content: space-between;
 	align-items: flex-end;
 	gap: calc(var(--font-size) * 0.5);
-	color: var(--color-three);
 	width: 100%;
+
+	color: var(--color-three);
+
+	transition: all var(--transition-long) ease-in-out;
 }
 
 .game-text {
-	font-size: calc(var(--font-size) * 1);
+	padding: calc(var(--font-size) * 0.75) calc(var(--font-size) * 0.75)
+		calc(var(--font-size) * 0.5);
+
+	border: calc(var(--font-size) * 0.067) solid var(--color-one);
+	font-size: calc(var(--font-size) * 1.15);
 	line-height: 1.4;
+
+	transition: all var(--transition-long) ease-in-out;
+}
+
+.game-text.player {
+	background-color: var(--color-two);
+	color: var(--color-one);
+}
+
+.game-text.computer {
+	background-color: var(--color-four);
+	color: var(--color-three);
+}
+
+.game-text.reset {
+	background-color: var(--color-one);
+	color: var(--color-three);
 }
 
 #winnerText {
 	display: none;
-	padding: calc(var(--font-size) * 0.75) 0 0 0;
+	background-color: var(--color-four);
+
+	transition: all var(--transition-long) ease-in-out;
 }
 
 .game-play-header-text::before {
 	content: 'Score:';
-	font-size: calc(var(--font-size) * 1.25);
-	color: var(--color-one);
 	padding: calc(var(--font-size) * 0.25) 0 0 calc(var(--font-size) * 0.25);
+
+	color: var(--color-one);
+	font-size: calc(var(--font-size) * 1.1);
 }
 
 .game-play-header-text {
-	background-color: var(--color-two);
-	border: calc(var(--font-size) * 0.125) solid var(--color-three);
 	display: flex;
 	justify-content: space-around;
 	align-items: center;
 	gap: calc(var(--font-size) * 0.4);
-	font-size: calc(var(--font-size) * 1.25);
-	color: var(--color-one);
+
 	padding: calc(var(--font-size) * 0.25);
+
+	background-color: var(--color-two);
+	border: calc(var(--font-size) * 0.125) solid var(--color-three);
+	color: var(--color-one);
+	font-size: calc(var(--font-size) * 1.25);
 }
 
 .score-header-text {
+	margin: auto;
+	padding: calc(var(--font-size) * 0.25) 0 0 calc(var(--font-size) * 0.5);
+
 	font-size: calc(var(--font-size) * 1.25);
 	color: var(--color-one);
-	padding: calc(var(--font-size) * 0.25) 0 0 calc(var(--font-size) * 0.5);
-	margin: auto;
 }
 
 .game-score-text {
-	font-size: calc(var(--font-size) * 1.25);
-	padding: 0;
 	margin: 0;
+	padding: 0;
+
+	font-size: calc(var(--font-size) * 1.25);
+
+	transition: all var(--transition-long) ease-in-out;
 }
 
+/*** These are the flex containers holding ***/
+/*** the icon and the numeric score **********/
 .pScore,
 .cScore {
 	display: flex;
 	text-align: center;
 	justify-content: space-around;
 	flex-wrap: nowrap;
-	padding: calc(var(--font-size) * 0.25) calc(var(--font-size) * 0.25) 0;
 	gap: calc(var(--font-size) * 0.25);
-	border: calc(var(--font-size) * 0.125) solid var(--color-two);
+
+	padding: calc(var(--font-size) * 0.25) calc(var(--font-size) * 0.25) 0;
+
 	background-color: var(--color-three);
+	border: calc(var(--font-size) * 0.192) solid var(--color-three);
+
+	transition: all var(--transition-long) ease-in-out;
 }
 
+#pScore.win,
+#cScore.win {
+	background-color: var(--color-one);
+	border-color: var(--color-three);
+}
+
+#pScoreIcon.win,
+#cScoreIcon.win {
+	fill: var(--color-three);
+}
+
+/*** The acutal number score, updated via JavaScript ***/
 #playerScore,
 #computerScore {
-	font-size: calc(var(--font-size) * 1.5);
-	color: var(--color-one);
 	margin: auto;
 	padding: 0;
 	width: calc(var(--font-size) * 1.5);
-}
 
-.reset {
-	align-self: center;
-	padding: calc(var(--font-size) * 0.75) calc(var(--font-size) * 1)
-		calc(var(--font-size) * 0.5);
-	font-size: calc(var(--font-size) * 0.75);
-	border: calc(var(--font-size) * 0.067) solid var(--color-three);
-	background-color: var(--color-one);
-	transition: all 400ms ease-in-out;
-}
-
-.reset:hover {
-	background-color: var(--color-three);
 	color: var(--color-one);
-	transition: all 400ms ease-in-out;
+	font-size: calc(var(--font-size) * 1.5);
+
+	transition: all var(--transition-long) ease-in-out;
+}
+
+#playerScore.win,
+#computerScore.win {
+	color: var(--color-three);
 }
 
 .choice-player,
@@ -288,14 +385,27 @@ p {
 
 .player-section,
 .computer-section {
-	background-color: var(--color-three);
 	margin: calc(var(--font-size) * 1) 0;
 	padding: 0 calc(var(--font-size) * 1);
 	width: 100%;
+
+	background-color: var(--color-three);
 }
 
 .computer-section {
 	margin: calc(var(--font-size) * 1) 0 0;
+}
+
+/*** Desktop padding too spacious ***/
+/*** at mobile resolutions **********/
+@media screen and (max-width: 550px) {
+	.player-section {
+		margin: calc(var(--font-size) * 0.5) 0 0;
+	}
+
+	.computer-section {
+		margin: calc(var(--font-size) * 0.5) 0;
+	}
 }
 
 .player-header {
@@ -306,17 +416,19 @@ p {
 }
 
 .player-header-text {
-	background-color: var(--color-two);
-	border: calc(var(--font-size) * 0.125) solid var(--color-three);
 	display: flex;
 	justify-content: flex-start;
 	align-items: center;
 	gap: calc(var(--font-size) * 0.5);
-	font-size: calc(var(--font-size) * 1);
+
+	background-color: var(--color-two);
+	border: calc(var(--font-size) * 0.125) solid var(--color-three);
 	color: var(--color-one);
+	font-size: calc(var(--font-size) * 1);
 	padding: calc(var(--font-size) * 0.25) calc(var(--font-size) * 0.75);
 }
 
+/*! *** the acutal buttons used in game play ***/
 #computerRock,
 #computerPaper,
 #computerScissors,
@@ -326,45 +438,30 @@ p {
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	width: calc(var(--font-size) * 10);
-	flex: 1;
+	width: calc(var(--font-size) * 9);
+	flex: 1 0 calc(var(--font-size) * 9);
 	padding: calc(var(--font-size) * 0.5) 0 calc(var(--font-size) * 0.5);
 }
 
 #computerRock,
-#computerRaper,
+#computerPaper,
 #computerScissors {
-	background-color: var(--color-three);
+	opacity: 0;
+
+	background-color: var(--color-four);
+	border-color: var(--color-four);
 	fill: var(--color-three);
 	color: var(--color-three);
-	transition: all 400ms ease-in-out;
+
+	transition: all var(--transition-long) ease-out;
 }
 
-/* #player-rock:visited,
-#player-paper:visited,
-#player-scissors:visited {
-	background-color: var(--color-three);
-	border: calc(var(--font-size) * 0.2) solid var(--color-four);
-	box-shadow: var(--shadow-on);
-} */
+#computerRock.turnedOn,
+#computerPaper.turnedOn,
+#computerScissors.turnedOn {
+	opacity: 1;
 
-#playerPaper:hover,
-#playerScissors:hover,
-#playerRock:hover {
-	box-shadow: var(--shadow-off) !important;
-	background-color: var(--color-two) !important;
-	border: calc(var(--font-size) * 0.2) solid var(--color-two) !important;
-	transition: all 400ms ease-in-out !important;
-}
-
-#playerPaper:active,
-#playerScissors:active,
-#playerRock:active {
-	box-shadow: var(--shadow-off);
-	background-color: var(--color-four);
-	border: calc(var(--font-size) * 0.2) solid var(--color-four);
-	color: var(--color-three);
-	transition: all 200ms ease-in-out;
+	transition: all var(--transition-long) ease-in-out;
 }
 
 #playerRock,
@@ -373,193 +470,243 @@ p {
 	background-color: var(--color-three);
 	border: calc(var(--font-size) * 0.2) solid var(--color-four);
 	box-shadow: var(--shadow-on);
-	transition: all 400ms ease-in-out;
+
+	transition: all var(--transition-long) linear;
 }
 
-svg {
-	margin: 0;
+#playerPaper.active,
+#playerScissors.active,
+#playerRock.active {
+	background-color: var(--color-two);
+	border-color: var(--color-two);
+	box-shadow: var(--shadow-off);
+	color: var(--color-three);
+}
+
+/*** on mobile screen sizes, adjust buttons ***/
+/*** to be 3 in a column & increase gap to  ***/
+/*** help avoid accidental presses          ***/
+@media screen and (max-width: 550px) {
+	.choice-player,
+	.choice-computer {
+		gap: calc(var(--font-size) * 1);
+		padding: calc(var(--font-size) * 1) 0;
+	}
+	/*? setting flex-basis to 100% was  */
+	/*? only solution I could find to   */
+	/*? ensure buttons in single column */
+	#computerRock,
+	#computerPaper,
+	#computerScissors,
+	#playerRock,
+	#playerPaper,
+	#playerScissors {
+		flex-basis: 100%;
+		padding: calc(var(--font-size) * 0.5) 0 calc(var(--font-size) * 0.5);
+	}
 }
 
 .svg-rock-computer,
-.svg-paper-computer {
-	fill: var(--color-three);
+.svg-paper-computer,
+.svg-scissors-computer {
 	width: var(--size-icon-reg);
 	height: var(--size-icon-reg);
+
+	fill: var(--color-three);
+
 	transform: rotate(-90deg) rotateY(180deg);
 }
 
 .svg-scissors-computer {
-	fill: var(--color-three);
-	width: var(--size-icon-reg);
-	height: var(--size-icon-reg);
 	transform: rotateY(180deg);
 }
 
 .svg-rock-player,
-.svg-paper-player {
-	fill: var(--color-one);
+.svg-paper-player,
+.svg-scissors-player {
 	width: var(--size-icon-reg);
 	height: var(--size-icon-reg);
-	transform: rotate(90deg);
+
+	fill: var(--color-one);
 }
 
-.svg-scissors-player {
-	fill: var(--color-one);
-	width: var(--size-icon-reg);
-	height: var(--size-icon-reg);
+.svg-rock-player,
+.svg-paper-player {
+	transform: rotate(90deg);
 }
 
 .svg-bot-icon,
 .svg-user-icon {
-	fill: var(--color-one);
 	width: var(--size-icon-score);
 	height: var(--size-icon-score);
+
+	fill: var(--color-one);
 }
 
-.svg-dark-mode,
-.svg-light-mode {
-	width: var(--size-icon-reg);
-	height: var(--size-icon-reg);
-	fill: var(--color-three);
-	background-color: var(--color-four);
-	border-radius: 50%;
-	padding: 0;
-	margin: 0;
-	transform: rotate(180deg);
-}
+/******************* Reset Button *******************/
+.reset {
+	align-self: center;
+	padding: calc(var(--font-size) * 1) calc(var(--font-size) * 1)
+		calc(var(--font-size) * 0.75);
 
-/* .svg-dark-mode {
-	fill: var(--color-three);
-} */
-
-.color-mode__header {
-	width: var(--size-icon-reg);
-	height: var(--size-icon-reg);
-}
-
-button.light--hidden {
-	width: var(--size-icon-reg);
-	height: var(--size-icon-reg);
-	border-radius: 50%;
-	background-color: var(--color-four);
-	transform: rotate(-180deg);
-	transition: transform 500ms ease-in, background-color 500ms ease-in-out,
-		fill 500ms ease-in-out;
-}
-
-button.dark--hidden {
-	width: var(--size-icon-reg);
-	height: var(--size-icon-reg);
-	border-radius: 50%;
-	background-color: var(--color-four);
-	transform: rotate(-180deg);
-	transition: transform 500ms ease-in, background-color 500ms ease-in-out,
-		fill 500ms ease-in-out;
-}
-
-button.light--hidden:hover {
-	fill: var(--color-two);
+	border: calc(var(--font-size) * 0.067) solid var(--color-three);
 	background-color: var(--color-one);
-	/* transform: rotate(-360deg); */
-	transition: transform 500ms ease-in, background-color 500ms ease-in-out,
-		fill 500ms ease-in-out;
+
+	font-size: calc(var(--font-size) * 0.875);
+
+	transition: all var(--transition-long) ease-in-out;
 }
 
-button.dark--hidden:hover {
-	fill: var(--color-two);
-	background-color: var(--color-one);
-	/* transform: rotate(360deg); */
-	transition: transform 500ms ease-in, background-color 500ms ease-in-out,
-		fill 500ms ease-in-out;
+.reset:hover {
+	background-color: var(--color-three);
+	color: var(--color-one);
+
+	transition: all var(--transition-long) ease-in-out;
 }
 
-button.light--hidden:active {
-	fill: var(--color-two);
-	background-color: var(--color-one);
-	/* transform: rotate(180deg); */
-	transition: transform 500ms ease-in, background-color 500ms ease-in-out,
-		fill 500ms ease-in-out;
-}
-
-button.dark--hidden:active {
-	fill: var(--color-two);
-	background-color: var(--color-one);
-	/* transform: rotate(-180deg); */
-	transition: transform 500ms ease-in, background-color 500ms ease-in-out,
-		fill 500ms ease-in-out;
-}
-
-.empty2 {
-	width: var(--size-icon-reg);
-	height: var(--size-icon-reg);
-	margin: 0;
-	padding: 0;
-	border-radius: 50%;
-	background-color: var(--color-four);
-}
-
-/*********************/
-/** Code for Modal ***/
+/****************************************************/
+/****************** Code for Modal ******************/
+/****************************************************/
 .modal-reset-container {
 	opacity: 0;
+
 	pointer-events: none;
-	background-color: hsla(0, 0%, 0%, 0.6);
-	backdrop-filter: blur(calc(var(--font-size) * 0.25));
-	border-radius: 0;
+
+	display: flex;
+	justify-content: center;
+	align-items: center;
+
 	position: fixed;
 	top: 0;
 	left: 0;
 	height: 100vh;
 	width: 100vw;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	transition: all 500ms ease-in;
+
+	background-color: hsla(0, 0%, 0%, 0.6);
+	-webkit-backdrop-filter: blur(calc(var(--font-size) * 0.25));
+	backdrop-filter: blur(calc(var(--font-size) * 0.25));
+	border-radius: 0;
+
+	transition: all var(--transition-long) ease-in;
 }
 
 .modal-reset-container.show {
 	opacity: 1;
+
 	pointer-events: auto;
-	transition: all 500ms ease-in;
+
+	transition: all var(--transition-long) ease-in;
 }
 
 .modal-reset {
-	background-color: var(--color-four);
-	/* border: calc(var(--font-size) * 0.25) solid var(--color-two); */
-	box-shadow: var(--shadow-on);
 	padding: calc(var(--font-size) * 1.5);
-	width: calc(var(--font-size) * 25);
+	max-width: calc(var(--font-size) * 25);
+
+	background-color: var(--color-four);
+	box-shadow: var(--shadow-on);
 }
 
 .modal-reset-buttons {
-	margin-top: calc(var(--font-size) * 1.5);
 	display: flex;
-	flex-wrap: nowrap;
-	justify-content: space-between;
+	gap: calc(var(--font-size) * 1.25);
+
+	margin: calc(var(--font-size) * 1.5) 0 0;
 }
 
 .modal-reset-button-no,
 .modal-reset-button-yes {
+	padding: calc(var(--font-size) * 0.75) calc(var(--font-size) * 1)
+		calc(var(--font-size) * 0.5);
+	width: calc(var(--font-size) * 10);
+
 	background-color: var(--color-three);
 	border: calc(var(--font-size) * 0.125) solid var(--color-three);
 	box-shadow: var(--shadow-on);
-	padding: calc(var(--font-size) * 0.75) calc(var(--font-size) * 1)
-		calc(var(--font-size) * 0.5);
 	color: var(--color-one);
-	width: calc(var(--font-size) * 10);
-	transition: all 400ms ease-in-out;
+
+	transition: all var(--transition-long) ease-in-out;
 }
 
 .modal-reset-button-yes {
 	background-color: var(--color-four);
+	border: calc(var(--font-size) * 0.125) solid var(--color-three);
 	color: var(--color-three);
 }
 
 .modal-reset-button-no:hover,
 .modal-reset-button-yes:hover {
-	box-shadow: var(--shadow-off);
 	background-color: var(--color-two);
 	border: calc(var(--font-size) * 0.125) solid var(--color-two);
+	box-shadow: var(--shadow-off);
 	color: var(--color-one);
-	transition: all 400ms ease-in-out;
+
+	transition: all var(--transition-long) ease-in-out;
+}
+
+/********* Modal window too big on phones, *********/
+/********* so shrinking it *************************/
+@media screen and (max-width: 550px) {
+	.modal-reset {
+		max-width: calc(var(--font-size) * 20);
+	}
+	.modal-reset-buttons {
+		/** Set Cancel button below Confirm button ****/
+		/** so people who click reset by mistake ******/
+		/** can easily exit out of the process ********/
+		flex-direction: column-reverse;
+	}
+	.modal-reset-button-no,
+	.modal-reset-button-yes {
+		width: 100%;
+	}
+}
+
+/******************************************************/
+/********** Code related to color-mode swap ***********/
+/******************************************************/
+
+.hole {
+	background-color: var(--color-four);
+}
+
+.empty,
+.color-mode__header {
+	height: var(--size-icon-reg);
+	width: var(--size-icon-reg);
+}
+
+.svg-dark-mode,
+.svg-light-mode {
+	fill: var(--color-three);
+	transform: rotate(180deg);
+}
+
+button.dark--hidden,
+button.light--hidden {
+	height: var(--size-icon-reg);
+	width: var(--size-icon-reg);
+
+	background-color: var(--color-four);
+}
+
+button.dark--hidden:hover,
+button.light--hidden:hover {
+	background-color: var(--color-one);
+	fill: var(--color-two);
+}
+
+button.dark--hidden:active,
+button.light--hidden:active {
+	background-color: var(--color-one);
+	fill: var(--color-two);
+}
+
+@media screen and (max-width: 550px) {
+	.empty,
+	.color-mode__header,
+	button.dark--hidden,
+	button.light--hidden {
+		height: calc(var(--font-size) * 3);
+		width: calc(var(--font-size) * 3);
+	}
 }
