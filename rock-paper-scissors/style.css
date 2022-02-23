@@ -18,9 +18,9 @@
 	--shadow-on: 2px 2px 12px -6px var(--color-one);
 	--shadow-off: 0px 0px 0px 0px var(--color-one);
 
-	--transition-short: 200ms;
-	--transition-long: var(var(--transition-short) * 2);
-	--transition-xlong: var(var(--transition-short) * 3);
+	--transition-short: 300ms;
+	--transition-long: calc(var(--transition-short) * 2);
+	--transition-xlong: calc(var(--transition-short) * 3);
 }
 
 @media screen and (min-width: 76rem) {
@@ -61,14 +61,14 @@ html,
 html *,
 html *::before,
 html *::after {
-	transition: all var(--transition-xlong) linear;
+	transition: all var(--transition-xlong) ease-in-out;
 }
 
 html.transition,
 html.transition *,
 html.transition *::before,
 html.transition *::after {
-	transition: all var(--transition-xlong) linear;
+	transition: all var(--transition-xlong) ease-in-out;
 }
 
 *,
@@ -104,12 +104,7 @@ main {
 	justify-content: flex-start;
 	align-items: center;
 
-	/* padding: calc(var(--font-size) * 0.75); */
-	/* margin: calc(var(--font-size) * 0.5) calc(var(--font-size) * 0.15); */
 	width: 100%;
-
-	/* background-color: var(--color-four); */
-	/* border-radius: calc(var(--font-size) * 0.75); */
 }
 
 @media screen and (max-width: 550px) {
@@ -149,6 +144,8 @@ h3 {
 	color: var(--color-one);
 
 	font-size: calc(var(--font-size) * 1.25);
+
+	transition: all var(--transition-long) ease-in-out;
 }
 
 @media screen and (max-width: 550px) {
@@ -166,6 +163,8 @@ h3.computer {
 	/* transition: none; */
 
 	color: var(--color-three);
+
+	transition: all var(--transition-long) ease-in-out;
 }
 
 button {
@@ -218,6 +217,8 @@ svg {
 
 	background-color: var(--color-four);
 	border-radius: calc(var(--font-size) * 0.75);
+
+	transition: all var(--transition-long) ease-in-out;
 }
 
 /*** Creates 'hole' on left of h1 *******/
@@ -441,6 +442,8 @@ svg {
 	width: calc(var(--font-size) * 9);
 	flex: 1 0 calc(var(--font-size) * 9);
 	padding: calc(var(--font-size) * 0.5) 0 calc(var(--font-size) * 0.5);
+
+	transition: all var(--transition-long) ease-in-out;
 }
 
 #computerRock,
@@ -453,7 +456,7 @@ svg {
 	fill: var(--color-three);
 	color: var(--color-three);
 
-	transition: all var(--transition-long) ease-out;
+	transition: all var(--transition-long) ease-in-out;
 }
 
 #computerRock.turnedOn,
@@ -471,7 +474,7 @@ svg {
 	border: calc(var(--font-size) * 0.2) solid var(--color-four);
 	box-shadow: var(--shadow-on);
 
-	transition: all var(--transition-long) linear;
+	transition: all var(--transition-long) ease-in-out;
 }
 
 #playerPaper.active,
