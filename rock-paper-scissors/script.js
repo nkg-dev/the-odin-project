@@ -1,244 +1,412 @@
 'use strict';
 
-const gamesToWin = 2;
-// ms intervals for setTimeout call
-// when resetting after a single game
-const gameInterval = 2500;
-// when resetting after winner reaches ${gamesToWin}
-const winnerInterval = 4000;
+//************************************************************/
+//******************* EDITABLE VARIABLES *********************/
+//************************************************************/
 
+//? How many rounds needed to win?
+const roundsToWin = 5;
+
+//? ms interval for setTimeout reset call a single round
+const roundInterval = 2500;
+//? when resetting after winner reaches ${roundsToWin}
+const winnerInterval = 4500;
+
+//? Text prompt at page load and after round reset
 const gameTextDefault = `Let's Play!`;
-const ruleTextDefault = `Play to ${gamesToWin}!`;
+//? found to right of computer score; limited space so keep short
+const ruleTextDefault = `${roundsToWin} to win!`;
 
+//*********************** DO NOT EDIT ************************/
+let playerRounds = 0;
+let computerRounds = 0;
+let tieRounds = 0; //I thought I might track tie games at one point. Hah!
+
+//************************************************************/
+//****************** Retrieve DOM elements *******************/
+//************************************************************/
 const gameText = document.getElementById('gameText');
 const ruleText = document.getElementById('ruleText');
 const winnerText = document.getElementById('winnerText');
 
-//* c denotes Computer, p is for Player
-const cScore = document.getElementById('computerScore');
-const pScore = document.getElementById('playerScore');
+//? the actual numeric scores
+//* each round, score to be updated and colors manipulated
+const computerScore = document.getElementById('computerScore');
+const playerScore = document.getElementById('playerScore');
 
-const cRockDiv = document.getElementById('computerRock');
-const cPaperDiv = document.getElementById('computerPaper');
-const cScissorsDiv = document.getElementById('computerScissors');
+//? the flex DIV item containing both score and icon
+//* colors manipulated
+const computerScoreArea = document.getElementById('cScore');
+const playerScoreArea = document.getElementById('pScore');
 
-const cDivColorOff = 'var(--color-three)';
-const cDivColorOn = 'var(--color-four)';
+//? the icon to the left of the score
+//* colors manipulated
+const computerScoreIcon = document.getElementById('cScoreIcon');
+const playerScoreIcon = document.getElementById('pScoreIcon');
 
-const pRockDiv = document.getElementById('playerRock');
-const pPaperDiv = document.getElementById('playerPaper');
-const pScissorsDiv = document.getElementById('playerScissors');
+//************************************************************/
+//************ PLAYER buttons, states, and events ************/
+//************************************************************/
+const playerRock = document.getElementById('playerRock');
+const playerPaper = document.getElementById('playerPaper');
+const playerScissors = document.getElementById('playerScissors');
 
-const pDivBorderColorOff = 'var(--color-four)';
-const pDivBorderColorOn = 'var(--color-two)';
-const pDivColorOff = 'var(--color-three)';
-const pDivColorOn = 'var(--color-two)';
-const pDivShadowOff = 'var(--shadow-off)';
-const pDivShadowOn = 'var(--shadow-on)';
+//******************* Player button states *******************/
+function playerRockButtonOn() {
+	playerRock.classList.add('active');
+}
 
-//* Variables used to track score till someone wins
-let playerWins = 0,
-	computerWins = 0,
-	tieGames = 0;
+function playerRockButtonOff() {
+	playerRock.classList.remove('active');
+}
 
-const cRockDivOn = function () {
-	cRockDiv.style.backgroundColor = cDivColorOn;
-	cRockDiv.style.borderColor = cDivColorOn;
-};
+function playerPaperButtonOn() {
+	playerPaper.classList.add('active');
+}
 
-const cRockDivOff = function () {
-	cRockDiv.style.backgroundColor = cDivColorOff;
-	cRockDiv.style.borderColor = cDivColorOff;
-};
+function playerPaperButtonOff() {
+	playerPaper.classList.remove('active');
+}
 
-const cPaperDivOn = function () {
-	cPaperDiv.style.backgroundColor = cDivColorOn;
-	cPaperDiv.style.borderColor = cDivColorOn;
-};
+function playerScissorsButtonOn() {
+	playerScissors.classList.add('active');
+}
 
-const cPaperDivOff = function () {
-	cPaperDiv.style.backgroundColor = cDivColorOff;
-	cPaperDiv.style.borderColor = cDivColorOff;
-};
+function playerScissorsButtonOff() {
+	playerScissors.classList.remove('active');
+}
 
-const cScissorsDivOn = function () {
-	cScissorsDiv.style.backgroundColor = cDivColorOn;
-	cScissorsDiv.style.borderColor = cDivColorOn;
-};
+//************************************************************/
+//*********** click, mouseover, & mouseout events ************/
+//************************************************************/
 
-const cScissorsDivOff = function () {
-	cScissorsDiv.style.backgroundColor = cDivColorOff;
-	cScissorsDiv.style.borderColor = cDivColorOff;
-};
+//*********************** ROCK events ************************/
+function rockClickOn() {
+	playerRock.addEventListener('click', playerPicksRock);
+}
+function rockClickOff() {
+	playerRock.removeEventListener('click', playerPicksRock);
+}
+function rockMouseOverOn() {
+	playerRock.addEventListener('mouseover', playerRockButtonOn);
+}
+function rockMouseOverOff() {
+	playerRock.removeEventListener('mouseover', playerRockButtonOn);
+}
+function rockMouseOutOn() {
+	playerRock.addEventListener('mouseout', playerRockButtonOff);
+}
+function rockMouseOutOff() {
+	playerRock.removeEventListener('mouseout', playerRockButtonOff);
+}
 
-const cChoice = function () {
+//*********************** PAPER events ***********************/
+function paperClickOn() {
+	playerPaper.addEventListener('click', playerPicksPaper);
+}
+function paperClickOff() {
+	playerPaper.removeEventListener('click', playerPicksPaper);
+}
+function paperMouseOverOn() {
+	playerPaper.addEventListener('mouseover', playerPaperButtonOn);
+}
+function paperMouseOverOff() {
+	playerPaper.removeEventListener('mouseover', playerPaperButtonOn);
+}
+function paperMouseOutOn() {
+	playerPaper.addEventListener('mouseout', playerPaperButtonOff);
+}
+function paperMouseOutOff() {
+	playerPaper.removeEventListener('mouseout', playerPaperButtonOff);
+}
+
+//********************* SCISSORS events **********************/
+function scissorsMouseOverOn() {
+	playerScissors.addEventListener('mouseover', playerScissorsButtonOn);
+}
+function scissorsMouseOverOff() {
+	playerScissors.removeEventListener('mouseover', playerScissorsButtonOn);
+}
+function scissorsMouseOutOn() {
+	playerScissors.addEventListener('mouseout', playerScissorsButtonOff);
+}
+function scissorsMouseOutOff() {
+	playerScissors.removeEventListener('mouseout', playerScissorsButtonOff);
+}
+function scissorsClickOn() {
+	playerScissors.addEventListener('click', playerPicksScissors);
+}
+function scissorsClickOff() {
+	playerScissors.removeEventListener('click', playerPicksScissors);
+}
+
+//************************************************************/
+//************ COMPUTER buttons and button states ************/
+//************************************************************/
+const computerRock = document.getElementById('computerRock');
+const computerPaper = document.getElementById('computerPaper');
+const computerScissors = document.getElementById('computerScissors');
+
+function computerRockButtonOn() {
+	computerRock.classList.add('turnedOn');
+}
+
+function computerRockButtonOff() {
+	computerRock.classList.remove('turnedOn');
+}
+
+function computerPaperButtonOn() {
+	computerPaper.classList.add('turnedOn');
+}
+
+function computerPaperButtonOff() {
+	computerPaper.classList.remove('turnedOn');
+}
+
+function computerScissorsButtonOn() {
+	computerScissors.classList.add('turnedOn');
+}
+
+function computerScissorsButtonOff() {
+	computerScissors.classList.remove('turnedOn');
+}
+
+//**** swapping score colors according to who wins round *****/
+function playerScoreAreaHighlightOn() {
+	playerScoreIcon.classList.add('win');
+	playerScoreArea.classList.add('win');
+	playerScore.classList.add('win');
+}
+
+function playerScoreAreaHighlightOff() {
+	playerScoreIcon.classList.remove('win');
+	playerScoreArea.classList.remove('win');
+	playerScore.classList.remove('win');
+}
+
+function computerScoreAreaHighlightOn() {
+	computerScoreIcon.classList.add('win');
+	computerScoreArea.classList.add('win');
+	computerScore.classList.add('win');
+}
+
+function computerScoreAreaHighlightOff() {
+	computerScoreIcon.classList.remove('win');
+	computerScoreArea.classList.remove('win');
+	computerScore.classList.remove('win');
+}
+
+//** Game text style adjustments depending on who won round **/
+function computerWinsRoundStyleOn() {
+	gameText.classList.add('computer');
+}
+function computerWinsRoundStyleOff() {
+	gameText.classList.remove('computer');
+}
+function playerWinsRoundStyleOn() {
+	gameText.classList.add('player');
+}
+function playerWinsRoundStyleOff() {
+	gameText.classList.remove('player');
+}
+
+//****** Once a choice has been made, call this function *****/
+//****** beause we don't want users clicking more buttons ****/
+function disableMouseActions() {
+	rockClickOff();
+	paperClickOff();
+	scissorsClickOff();
+	rockMouseOverOff();
+	rockMouseOutOff();
+	paperMouseOverOff();
+	paperMouseOutOff();
+	scissorsMouseOverOff();
+	scissorsMouseOutOff();
+}
+
+//********** Called onLoad and after reseting round **********/
+function enableMouseActions() {
+	rockClickOn();
+	paperClickOn();
+	scissorsClickOn();
+	rockMouseOverOn();
+	rockMouseOutOn();
+	paperMouseOverOn();
+	paperMouseOutOn();
+	scissorsMouseOverOn();
+	scissorsMouseOutOn();
+}
+
+//! **** DO NOT DELETE ***************************************/
+enableMouseActions();
+
+//! **********************************************************/
+//! ****************** GAME PLAY BEGINS **********************/
+//! **********************************************************/
+
+// ***********************************************************/
+// ********* Player chooses and all buttons disabled ******** /
+// ********* clicked button remains 'ON' ******************** /
+// ***********************************************************/
+function playerPicksRock() {
+	disableMouseActions();
+	playerRockButtonOn();
+	afterPlayerPicks('Rock');
+}
+
+function playerPicksPaper() {
+	disableMouseActions();
+	playerPaperButtonOn();
+	afterPlayerPicks('Paper');
+}
+
+function playerPicksScissors() {
+	disableMouseActions();
+	playerScissorsButtonOn();
+	afterPlayerPicks('Scissors');
+}
+
+//************************************************************/
+//***************** How the computer 'picks' *****************/
+//************************************************************/
+function computerGetsToPick() {
 	//* hardcoding '* 3' (rather than '* max')
 	//* since it's 3 max (rock-paper-scissors)
-	//* 'num' should return 0, 1 or 2
+	//* 'num' will return 0, 1 or 2
 	let num = Math.floor(Math.random() * 3);
 	if (num === 0) {
-		cRockDivOn();
+		computerRockButtonOn();
 		return 'Rock';
 	} else if (num === 1) {
-		cPaperDivOn();
+		computerPaperButtonOn();
 		return 'Paper';
 	} else {
-		cScissorsDivOn();
+		computerScissorsButtonOn();
 		return 'Scissors';
 	}
-};
-
-// when player button is ON, shadow is OFF
-const pRockDivOn = function () {
-	pRockDiv.style.backgroundColor = pDivColorOn;
-	pRockDiv.style.borderColor = pDivBorderColorOn;
-	pRockDiv.style.boxShadow = pDivShadowOff;
-};
-
-const pRockDivOff = function () {
-	pRockDiv.style.backgroundColor = pDivColorOff;
-	pRockDiv.style.borderColor = pDivBorderColorOff;
-	pRockDiv.style.boxShadow = pDivShadowOn;
-};
-
-const pPaperDivOn = function () {
-	pPaperDiv.style.backgroundColor = pDivColorOn;
-	pPaperDiv.style.borderColor = pDivBorderColorOn;
-	pPaperDiv.style.boxShadow = pDivShadowOff;
-};
-
-const pPaperDivOff = function () {
-	pPaperDiv.style.backgroundColor = pDivColorOff;
-	pPaperDiv.style.borderColor = pDivBorderColorOff;
-	pPaperDiv.style.boxShadow = pDivShadowOn;
-};
-
-const pScissorsDivOn = function () {
-	pScissorsDiv.style.backgroundColor = pDivColorOn;
-	pScissorsDiv.style.borderColor = pDivBorderColorOn;
-	pScissorsDiv.style.boxShadow = pDivShadowOff;
-};
-
-const pScissorsDivOff = function () {
-	pScissorsDiv.style.backgroundColor = pDivColorOff;
-	pScissorsDiv.style.borderColor = pDivBorderColorOff;
-	pScissorsDiv.style.boxShadow = pDivShadowOn;
-};
-
-function userPlays(i) {
-	let input = i;
-	if (input === 'Rock') {
-		pScissorsDivOff();
-		pPaperDivOff();
-		pRockDivOn();
-		return letsPlay(input);
-	} else if (input === 'Paper') {
-		pScissorsDivOff();
-		pRockDivOff();
-		pPaperDivOn();
-		return letsPlay(input);
-	} else if (input === 'Scissors') {
-		pRockDivOff();
-		pPaperDivOff();
-		pScissorsDivOn();
-		return letsPlay(input);
-	} else {
-		resetGame();
-	}
 }
 
-function trackScore(result) {
-	switch (result) {
+//************************************************************/
+//************** Keep score and declare winner ***************/
+//************************************************************/
+function keepScore(roundResult) {
+	switch (roundResult) {
 		case 'Player':
-			playerWins++;
+			playerScoreAreaHighlightOn();
+			playerRounds++;
 			break;
 		case 'Computer':
-			computerWins++;
+			computerScoreAreaHighlightOn();
+			computerRounds++;
 			break;
 		case 'Tie':
-			tieGames++;
+			tieRounds++;
 			break;
 	}
 
-	pScore.textContent = playerWins;
-	cScore.textContent = computerWins;
+	// update score values
+	playerScore.textContent = playerRounds;
+	computerScore.textContent = computerRounds;
 
-	if (playerWins == gamesToWin) {
+	if (playerRounds == roundsToWin) {
 		winnerText.style.display = 'flex';
-		winnerText.textContent = "Yay! You're the winner! 😎";
+		winnerText.textContent = 'YAY! YOU ARE THE WINNER!';
 		setTimeout(resetAll, winnerInterval);
-	} else if (computerWins == gamesToWin) {
+	} else if (computerRounds == roundsToWin) {
 		winnerText.style.display = 'flex';
-		winnerText.textContent = 'Boo! The computer is the winner. 😕';
+		winnerText.textContent = 'Boo! The computer is the winner.';
 		setTimeout(resetAll, winnerInterval);
 	} else {
-		setTimeout(resetGame, gameInterval);
+		setTimeout(resetRound, roundInterval);
 	}
 }
 
-//* take the computer's choice and user's choice
-//* to determine a winnner;
-//* pass game number to track score
-function gamePlay(computer, player) {
-	let computerPlay = computer;
-	let playerChoice = player;
-	let winText = ' You win! 😀';
-	let lossText = ' You lose. 😕';
-	if (playerChoice === computerPlay) {
-		gameText.textContent = "It's a tie. 😐 Play again!";
-		return trackScore('Tie');
-	} else if (playerChoice === 'Rock' && computerPlay === 'Scissors') {
+//************************************************************/
+//******** Take the computer's pick and player's pick ********/
+//******** to determine a winnner; ***************************/
+//************************************************************/
+function whoWonRound(computer, player) {
+	let computerPick = computer;
+	let playerPick = player;
+	let winText = ' You win!';
+	let lossText = ' Computer wins.';
+	if (playerPick === computerPick) {
+		gameText.textContent = "It's a tie. Play another round!";
+		return keepScore('Tie');
+	} else if (playerPick === 'Rock' && computerPick === 'Scissors') {
+		playerWinsRoundStyleOn();
 		gameText.textContent = `Rock beats Scissors!${winText}`;
-		return trackScore('Player');
-	} else if (playerChoice === 'Scissors' && computerPlay === 'Paper') {
+		return keepScore('Player');
+	} else if (playerPick === 'Scissors' && computerPick === 'Paper') {
+		playerWinsRoundStyleOn();
 		gameText.textContent = `Scissors beats Paper!${winText}`;
-		return trackScore('Player');
-	} else if (playerChoice === 'Paper' && computerPlay === 'Rock') {
+		return keepScore('Player');
+	} else if (playerPick === 'Paper' && computerPick === 'Rock') {
+		playerWinsRoundStyleOn();
 		gameText.textContent = `Paper beats Rock!${winText}`;
-		return trackScore('Player');
-	} else if (playerChoice === 'Rock' && computerPlay === 'Paper') {
+		return keepScore('Player');
+	} else if (playerPick === 'Rock' && computerPick === 'Paper') {
+		computerWinsRoundStyleOn();
 		gameText.textContent = `Paper beats Rock!${lossText}`;
-		return trackScore('Computer');
-	} else if (playerChoice === 'Paper' && computerPlay === 'Scissors') {
+		return keepScore('Computer');
+	} else if (playerPick === 'Paper' && computerPick === 'Scissors') {
+		computerWinsRoundStyleOn();
 		gameText.textContent = `Scissors beats Paper.${lossText}`;
-		return trackScore('Computer');
-	} else if (playerChoice === 'Scissors' && computerPlay === 'Rock') {
+		return keepScore('Computer');
+	} else if (playerPick === 'Scissors' && computerPick === 'Rock') {
+		computerWinsRoundStyleOn();
 		gameText.textContent = `Rock beats Scissors.${lossText}`;
-		return trackScore('Computer');
+		return keepScore('Computer');
 	}
 }
 
-function letsPlay(player) {
-	let playerChoice = player;
-	let computerPick;
-	// if (playerChoice !== undefined) {
-	computerPick = cChoice();
-	// computerPick = setTimeout(computerPlays, interval * 8);
-	// }
-	return gamePlay(computerPick, playerChoice);
+//************************************************************/
+//******** Triggered only after player has made choice *******/
+//************************************************************/
+function afterPlayerPicks(pick) {
+	let playerPick = pick;
+	//* the idea is to let the user pick, *//
+	//* which triggers the round, *********//
+	//* then the computer 'picks' second  *//
+	let computerPick = computerGetsToPick();
+	return whoWonRound(computerPick, playerPick);
 }
 
-function resetGame() {
-	pRockDivOff();
-	pPaperDivOff();
-	pScissorsDivOff();
-	cRockDivOff();
-	cPaperDivOff();
-	cScissorsDivOff();
+function resetRound() {
+	playerWinsRoundStyleOff();
+	computerWinsRoundStyleOff();
+	playerScoreAreaHighlightOff();
+	computerScoreAreaHighlightOff();
+	playerRockButtonOff();
+	playerPaperButtonOff();
+	playerScissorsButtonOff();
+	computerRockButtonOff();
+	computerPaperButtonOff();
+	computerScissorsButtonOff();
+	enableMouseActions();
 	gameText.textContent = gameTextDefault;
 }
 
+//************************************************************/
+//* Called by user action in Modal or after winner declared **/
+//************************************************************/
 function resetAll() {
-	resetGame();
-	playerWins = 0;
-	computerWins = 0;
-	tieGames = 0;
-	pScore.textContent = playerWins;
-	cScore.textContent = computerWins;
+	resetRound();
+	playerRounds = 0;
+	computerRounds = 0;
+	tieRounds = 0;
+	playerScore.textContent = playerRounds;
+	computerScore.textContent = computerRounds;
 	winnerText.style.display = 'none';
 	winnerText.textContent = '';
 }
 
+//******* on (re)load, set rules text area to default ********/
+ruleText.textContent = ruleTextDefault;
+
+//************************************************************/
+//**************** Begin code for RESET modal ****************/
+//************************************************************/
 const resetButton = document.getElementById('resetButton');
 const modalResetContainer = document.getElementById('modalResetContainer');
 const resetYes = document.getElementById('resetYes');
@@ -257,45 +425,43 @@ resetYes.addEventListener('click', () => {
 	resetAll();
 });
 
-ruleText.textContent = ruleTextDefault;
-
+//************************************************************/
+//************** Begin code for COLOR-MODE swap **************/
+//************************************************************/
 if (window.CSS && CSS.supports('color', 'var(--primary)')) {
-	let toggleColorMode = function toggleColorMode(e) {
+	let toggleColorMode = function swapColorMode(e) {
 		//* Switch to Light Mode
 		if (e.currentTarget.classList.contains('light--hidden')) {
+			// transition is called to make swap more elegant
 			transition();
-			// Sets the custom html attribute
+			// Sets the custom HTML tag attribute
 			document.documentElement.setAttribute('color-mode', 'light');
-
 			// Sets the user's preference in local storage
 			localStorage.setItem('color-mode', 'light');
 			return;
 		}
 		//* Switch to Dark Mode
 		transition();
-		// Sets the custom html attribute
 		document.documentElement.setAttribute('color-mode', 'dark');
-
-		// Sets the user's preference in local storage
 		localStorage.setItem('color-mode', 'dark');
 	};
 
-	// Get the buttons in the DOM
+	// Get the two .color-mode__btn buttons in the DOM
 	let toggleColorButtons = document.querySelectorAll('.color-mode__btn');
 
-	// Set up event listeners
+	// Set up event listeners for each
 	toggleColorButtons.forEach(function (btn) {
 		btn.addEventListener('click', toggleColorMode);
 	});
 } else {
-	// If the feature isn't supported, then we hide the toggle buttons
+	// If the feature isn't supported, then hide the toggle buttons
 	let btnContainer = document.querySelector('.color-mode__header');
 	btnContainer.style.display = 'none';
 }
 
-let transition = () => {
+function transition() {
 	document.documentElement.classList.add('transition');
 	window.setTimeout(() => {
 		document.documentElement.classList.remove('transition');
-	}, 400);
-};
+	}, 600);
+}
