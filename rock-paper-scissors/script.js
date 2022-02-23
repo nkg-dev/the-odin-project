@@ -322,8 +322,7 @@ function keepScore(roundResult) {
 }
 
 //************************************************************/
-//******** Take the computer's pick and player's pick ********/
-//******** to determine a winnner; ***************************/
+//************* Take picks & determine a winner **************/
 //************************************************************/
 function whoWonRound(computer, player) {
 	let computerPick = computer;
@@ -388,7 +387,7 @@ function resetRound() {
 }
 
 //************************************************************/
-//* Called by user action in Modal or after winner declared **/
+//***** Called by user in Modal or after winner declared *****/
 //************************************************************/
 function resetAll() {
 	resetRound();
