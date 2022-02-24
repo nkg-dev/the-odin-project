@@ -41,18 +41,18 @@
 	display: none;
 }
 
-html[color-mode='dark'] {
-	--color-one: hsl(103, 20%, 90%);
-	--color-two: hsl(283, 75%, 50%);
-	--color-three: hsl(103, 20%, 10%);
-	--color-four: hsl(103, 75%, 50%);
-}
-
 html[color-mode='light'] {
 	--color-one: hsl(283, 20%, 10%);
 	--color-two: hsl(103, 75%, 50%);
 	--color-three: hsl(283, 20%, 90%);
 	--color-four: hsl(283, 75%, 50%);
+}
+
+html[color-mode='dark'] {
+	--color-one: hsl(103, 20%, 90%);
+	--color-two: hsl(283, 60%, 50%);
+	--color-three: hsl(103, 20%, 10%);
+	--color-four: hsl(103, 60%, 50%);
 }
 
 /*** Rather than abruptly switch between Light ***/
