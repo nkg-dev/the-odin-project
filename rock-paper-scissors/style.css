@@ -45,7 +45,7 @@ html[color-mode='light'] {
 	--color-one: hsl(283, 20%, 10%);
 	--color-two: hsl(103, 75%, 50%);
 	--color-three: hsl(283, 20%, 90%);
-	--color-four: hsl(283, 75%, 50%);
+	--color-four: #a920df;
 }
 
 html[color-mode='dark'] {
@@ -59,6 +59,7 @@ html[color-mode='dark'] {
 /*** and Dark modes, soften with transiton *******/
 html,
 html *,
+html *:hover,
 html *::before,
 html *::after {
 	transition: all var(--transition-xlong) ease-in-out;
@@ -66,6 +67,7 @@ html *::after {
 
 html.transition,
 html.transition *,
+html.transition *:hover,
 html.transition *::before,
 html.transition *::after {
 	transition: all var(--transition-xlong) ease-in-out;
@@ -187,19 +189,112 @@ legend {
 
 footer {
 	padding: 0 0 calc(var(--font-size) * 2);
+	height: calc(var(--font-size) * 10);
+	width: calc(var(--font-size) * 15);
 
 	color: var(--color-four);
 
 	font-family: var(--font-serious);
 	font-size: calc(var(--font-size) * 0.6);
 	font-weight: normal;
+	text-align: center;
 }
 
-p {
+details,
+summary,
+ul,
+li,
+a {
+	padding: 0 0 calc(var(--font-size) * 2);
+	padding: 0;
+
+	color: var(--color-three);
+
+	font-family: var(--font-serious);
+	font-size: calc(var(--font-size) * 0.6);
+	font-weight: normal;
+	text-align: left;
+}
+
+summary {
+	cursor: pointer;
+
+	padding: calc(var(--font-size) * 0.25) 0;
+
+	background-color: var(--color-three);
+	border: calc(var(--font-size) * 0.125) solid var(--color-four);
+	color: var(--color-four);
+	text-align: center;
+
+	transition: all var(--transition-long) linear;
+}
+
+/* summary:hover {
+	cursor: pointer;
+
+	background-color: var(--color-four);
+	color: var(--color-three);
+
+	transition: all var(--transition-long) linear;
+} */
+
+details {
+	margin: calc(var(--font-size) * 0.5);
+
+	background-color: var(--color-four);
+}
+
+ul {
+	padding: calc(var(--font-size) * 0.25) calc(var(--font-size) * 0.5)
+		calc(var(--font-size) * 0.5);
+
+	font-family: var(--font-serious);
+	font-size: calc(var(--font-size) * 0.6);
+	font-weight: normal;
+}
+
+li {
+	padding: 0 calc(var(--font-size) * 0.2) calc(var(--font-size) * 0.2);
+
+	font-family: var(--font-serious);
+	font-size: calc(var(--font-size) * 0.6);
+	font-weight: normal;
+	list-style-type: none;
+}
+
+li > hr {
+	height: calc(var(--font-size) * 0.067);
+	/* border: calc(var(--font-size) * 0.067) solid var(--color-four); */
+	border-top: calc(var(--font-size) * 0.067) solid var(--color-four);
+	font-family: var(--font-serious);
+	font-size: calc(var(--font-size) * 0.6);
+	font-weight: normal;
+}
+
+a {
+	padding: 0;
+
+	color: var(--color-two);
+
+	font-family: var(--font-serious);
+	font-size: calc(var(--font-size) * 0.6);
+	font-weight: normal;
+	text-decoration: none;
+
+	transition: all var(--transition-short) ease-in-out;
+}
+
+a:hover {
+	text-decoration: underline;
+
+	transition: all var(--transition-short) ease-in-out;
+}
+
+/* p {
 	margin-bottom: calc(var(--font-size) * 0.75);
 
 	transition: all var(--transition-long) ease-in-out;
-}
+} */
 
 svg {
 	margin: 0;
