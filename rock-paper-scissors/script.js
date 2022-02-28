@@ -7,6 +7,8 @@
 //? How many rounds needed to win?
 const roundsToWin = 2;
 
+//? ms interval for the 'Let's Go' sound
+const letsGoInterval = 1100;
 //? ms interval for each step during single round
 const stepInterval = 800;
 //? ms interval for setTimeout reset call a single round
@@ -45,6 +47,13 @@ const playerScoreArea = document.getElementById('pScore');
 //* colors manipulated
 const computerScoreIcon = document.getElementById('cScoreIcon');
 const playerScoreIcon = document.getElementById('pScoreIcon');
+
+//************************************************************/
+const letsGo = document.getElementById('letsGo');
+
+function playLetsGo() {
+	letsGo.play();
+}
 
 //************************************************************/
 //************ PLAYER buttons, states, and events ************/
@@ -251,21 +260,32 @@ enableMouseActions();
 // ********* clicked button remains 'ON' ******************** /
 // ***********************************************************/
 function playerPicksRock() {
+	window.setTimeout(() => {
+		afterPlayerPicks('Rock');
+	}, letsGoInterval);
+	playLetsGo();
 	disableMouseActions();
 	playerRockButtonOn();
-	afterPlayerPicks('Rock');
 }
 
 function playerPicksPaper() {
+	window.setTimeout(() => {
+		afterPlayerPicks('Paper');
+	}, letsGoInterval);
+	playLetsGo();
 	disableMouseActions();
 	playerPaperButtonOn();
-	afterPlayerPicks('Paper');
+	// afterPlayerPicks('Paper');
 }
 
 function playerPicksScissors() {
+	window.setTimeout(() => {
+		afterPlayerPicks('Scissors');
+	}, letsGoInterval);
+	playLetsGo();
 	disableMouseActions();
 	playerScissorsButtonOn();
-	afterPlayerPicks('Scissors');
+	// afterPlayerPicks('Scissors');
 }
 
 //************************************************************/
