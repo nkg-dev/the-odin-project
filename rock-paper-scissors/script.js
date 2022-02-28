@@ -5,16 +5,22 @@
 //************************************************************/
 
 //? How many rounds needed to win?
-const roundsToWin = 2;
+const roundsToWin = 5;
 
-//? ms interval for the 'Let's Go' sound
-const letsGoInterval = 1100;
+//? ms interval right after player clicks a button
+const startInterval = 1000;
 //? ms interval for each step during single round
 const stepInterval = 800;
-//? ms interval for setTimeout reset call a single round
-const roundInterval = 3200;
+//? ms for setTimeout reset after calling round w/ a winner
+const winInterval = 3200;
+//? ms for setTimeout reset after tie
+const tieInterval = 800;
 //? when resetting after winner reaches ${roundsToWin}
-const winnerInterval = 4200;
+const gameInterval = 4200;
+//? will be loaded with either winInterval or tieInterval
+//? depending on result of round
+//? (having it same as winInterval was too slow)
+let roundInterval;
 
 //? Text prompt at page load and after round reset
 const gameTextDefault = `Let's Play!`;
@@ -49,10 +55,28 @@ const computerScoreIcon = document.getElementById('cScoreIcon');
 const playerScoreIcon = document.getElementById('pScoreIcon');
 
 //************************************************************/
+//************** AUDIO clips *********************************/
+//************************************************************/
 const letsGo = document.getElementById('letsGo');
+const rollOver = document.getElementById('rollOver');
 
 function playLetsGo() {
 	letsGo.play();
+}
+
+function pauseLetsGo() {
+	letsGo.pause();
+	letsGo.currentTime = 0;
+}
+
+function playRollover() {
+	rollOver.play();
+	rollOver.currentTime = 0;
+}
+
+function pauseRollover() {
+	rollOver.pause();
+	rollOver.currentTime = 0;
 }
 
 //************************************************************/
@@ -224,6 +248,7 @@ function playerWinsRoundStyleOff() {
 //****** Once a choice has been made, call this function *****/
 //****** beause we don't want users clicking more buttons ****/
 function disableMouseActions() {
+	document.body.style.cursor = 'not-allowed';
 	rockClickOff();
 	paperClickOff();
 	scissorsClickOff();
@@ -237,6 +262,9 @@ function disableMouseActions() {
 
 //********** Called onLoad and after reseting round **********/
 function enableMouseActions() {
+	document.body.style.cursor = 'default';
+	pauseRollover();
+	pauseLetsGo();
 	rockClickOn();
 	paperClickOn();
 	scissorsClickOn();
@@ -257,35 +285,36 @@ enableMouseActions();
 
 // ***********************************************************/
 // ********* Player chooses and all buttons disabled ******** /
-// ********* clicked button remains 'ON' ******************** /
+// ********* but clicked button remains 'ON' **************** /
 // ***********************************************************/
 function playerPicksRock() {
+	playRollover();
 	window.setTimeout(() => {
 		afterPlayerPicks('Rock');
-	}, letsGoInterval);
-	playLetsGo();
+	}, startInterval);
+	// playLetsGo();
 	disableMouseActions();
 	playerRockButtonOn();
 }
 
 function playerPicksPaper() {
+	playRollover();
 	window.setTimeout(() => {
 		afterPlayerPicks('Paper');
-	}, letsGoInterval);
-	playLetsGo();
+	}, startInterval);
+	// playLetsGo();
 	disableMouseActions();
 	playerPaperButtonOn();
-	// afterPlayerPicks('Paper');
 }
 
 function playerPicksScissors() {
+	playRollover();
 	window.setTimeout(() => {
 		afterPlayerPicks('Scissors');
-	}, letsGoInterval);
-	playLetsGo();
+	}, startInterval);
+	// playLetsGo();
 	disableMouseActions();
 	playerScissorsButtonOn();
-	// afterPlayerPicks('Scissors');
 }
 
 //************************************************************/
@@ -326,6 +355,14 @@ function keepScore(roundResult) {
 			break;
 	}
 
+	// determines how long a player waits to play again
+	// needed to shorten the time after a tie
+	if (roundResult === 'Tie') {
+		roundInterval = tieInterval;
+	} else {
+		roundInterval = winInterval;
+	}
+
 	window.setTimeout(() => {
 		// update score values
 		playerScore.textContent = playerRounds;
@@ -334,11 +371,11 @@ function keepScore(roundResult) {
 		if (playerRounds == roundsToWin) {
 			winnerText.style.display = 'flex';
 			winnerText.textContent = 'YAY! YOU ARE THE WINNER!';
-			setTimeout(resetAll, winnerInterval);
+			setTimeout(resetAll, gameInterval);
 		} else if (computerRounds == roundsToWin) {
 			winnerText.style.display = 'flex';
 			winnerText.textContent = 'Boo! The computer is the winner.';
-			setTimeout(resetAll, winnerInterval);
+			setTimeout(resetAll, gameInterval);
 		} else {
 			setTimeout(resetRound, roundInterval);
 		}
@@ -357,6 +394,7 @@ function whoWonRound(computer, player) {
 	window.setTimeout(() => {
 		if (playerPick === computerPick) {
 			gameText.textContent = "It's a tie. Play another round!";
+			roundInterval = roundInterval - 1000;
 			return keepScore('Tie');
 		} else if (playerPick === 'Rock' && computerPick === 'Scissors') {
 			playerWinsRoundStyleOn();
