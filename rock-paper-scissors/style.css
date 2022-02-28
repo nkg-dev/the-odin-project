@@ -42,35 +42,23 @@
 }
 
 html[color-mode='light'] {
-	--color-one: hsl(283, 20%, 10%);
-	--color-two: hsl(103, 75%, 50%);
-	--color-three: hsl(283, 20%, 90%);
-	--color-four: #a920df;
+	--color-one: hsl(283, 75%, 50%);
+	--color-two: hsl(283, 20%, 90%);
+	--color-three: hsl(283, 20%, 10%);
+	--color-four: hsl(103, 75%, 50%);
 }
 
 html[color-mode='dark'] {
-	--color-one: hsl(103, 20%, 90%);
-	--color-two: hsl(283, 60%, 50%);
-	--color-three: hsl(103, 20%, 10%);
-	--color-four: hsl(103, 60%, 50%);
+	--color-one: hsl(103, 60%, 50%);
+	--color-two: hsl(103, 20%, 10%);
+	--color-three: hsl(103, 20%, 90%);
+	--color-four: hsl(283, 60%, 50%);
 }
 
 /*** Rather than abruptly switch between Light ***/
 /*** and Dark modes, soften with transiton *******/
-html,
-html *,
-html *:hover,
-html *::before,
-html *::after {
-	transition: all var(--transition-xlong) ease-in-out;
-}
-
-html.transition,
-html.transition *,
-html.transition *:hover,
-html.transition *::before,
-html.transition *::after {
-	transition: all var(--transition-xlong) ease-in-out;
+html {
+	scroll-behavior: smooth;
 }
 
 *,
@@ -80,15 +68,13 @@ html.transition *::after {
 	border-radius: calc(var(--font-size) * 0.5);
 	margin: 0;
 
-	color: var(--color-three);
+	color: var(--color-two);
 	font-family: var(--font-fun);
 	font-size: var(--font-size);
-	font-weight: 700;
-	/* border: 1px dotted dodgerblue; */
-}
+	/* TODO delete ⬇︎ before placing into prod */
+	/* border: 1px dotted blue; */
 
-html {
-	scroll-behavior: smooth;
+	transition: all var(--transition-long) ease-in;
 }
 
 body {
@@ -96,25 +82,7 @@ body {
 	flex-direction: column;
 	align-items: center;
 
-	background-color: var(--color-three);
-}
-
-/*** Contents between header and footer ***/
-main {
-	display: flex;
-	flex-direction: column;
-	justify-content: flex-start;
-	align-items: center;
-
-	width: 100%;
-}
-
-@media screen and (max-width: 550px) {
-	main {
-		/*** on phone, move player's buttons ***/
-		/*** to bottom of screen ***************/
-		flex-direction: column-reverse;
-	}
+	background-color: var(--color-two);
 }
 
 header {
@@ -139,126 +107,30 @@ h2 {
 	font-size: calc(var(--font-size) * 1.75);
 }
 
-h3 {
-	padding: calc(var(--font-size) * 0.25) calc(var(--font-size) * 0.5) 0;
-
-	border: none;
-	color: var(--color-one);
-
-	font-size: calc(var(--font-size) * 1.25);
-
-	transition: all var(--transition-long) ease-in-out;
-}
-
 @media screen and (max-width: 550px) {
 	h1 {
 		font-size: calc(var(--font-size) * 1.75);
 	}
-	h3 {
-		font-size: calc(var(--font-size) * 1.6);
+
+	h2 {
+		font-size: calc(var(--font-size) * 1.5);
 	}
-}
-
-/*** Hide the Computer's Rock, Paper, Scissors options ***/
-/*** by setting font color to background color ***********/
-h3.computer {
-	/* transition: none; */
-
-	color: var(--color-three);
-
-	transition: all var(--transition-long) ease-in-out;
 }
 
 button {
 	cursor: pointer;
 
+	/*** clearing padding, margin, & border ****/
+	/*** for when buttons are icons only *******/
 	padding: 0px;
 	margin: 0px;
 
 	border: none;
 }
 
-fieldset {
-	border: none;
-}
-
-legend {
-	margin: 0;
-	padding: 0;
-}
-
-footer,
-footer * {
-	font-family: var(--font-serious);
-	font-size: calc(var(--font-size) * 0.6);
-	font-weight: normal;
-}
-
-footer {
-	padding: calc(var(--font-size) * 0.5);
-	height: calc(var(--font-size) * 12);
-	width: calc(var(--font-size) * 15);
-
-	color: var(--color-four);
-	text-align: center;
-}
-
-details {
-	margin: calc(var(--font-size) * 0.75) 0 0;
-
-	color: var(--color-three);
-	background-color: var(--color-four);
-}
-
-details > summary {
-	cursor: pointer;
-
-	padding: calc(var(--font-size) * 0.25);
-
-	border: calc(var(--font-size) * 0.125) solid var(--color-four);
-	color: var(--color-three);
-	background-color: var(--color-four);
-}
-
-details[open] > summary {
-	color: var(--color-four);
-	background-color: var(--color-three);
-}
-
-ul {
-	padding: 0 calc(var(--font-size) * 1);
-}
-
-li {
-	padding: 0 calc(var(--font-size) * 0.25) calc(var(--font-size) * 0.25);
-	list-style-type: none;
-
-	text-align: left;
-}
-
-li > hr {
-	/* height: calc(var(--font-size) * 0.067); */
-	border-top: calc(var(--font-size) * 0.067) solid var(--color-four);
-}
-
-a {
-	color: var(--color-two);
-
-	text-decoration: none;
-
-	transition: all var(--transition-short) ease-in-out;
-}
-
-a:hover {
-	text-decoration: underline;
-
-	transition: all var(--transition-short) ease-in-out;
-}
-
-svg {
-	margin: 0;
-}
-
+/*** Wrapper for all contents on the page, needed  ***/
+/*** to prevent contents from stretching too far *****/
+/*** on wider screens ********************************/
 .main-container {
 	display: flex;
 	flex-direction: column;
@@ -269,191 +141,177 @@ svg {
 	margin: calc(var(--font-size) * 0.5) calc(var(--font-size) * 0.15);
 	max-width: calc(var(--font-size) * 32);
 
-	background-color: var(--color-four);
+	background-color: var(--color-one);
 	border-radius: calc(var(--font-size) * 0.75);
-
-	transition: all var(--transition-long) ease-in-out;
 }
 
-/*** Creates 'hole' on left of h1 *******/
-/*** to maintain symmetrical layout *****/
-/*** with color mode button on right ****/
-.rule-text {
-	padding: calc(var(--font-size) * 0.25) calc(var(--font-size) * 0.25) 0 0;
-
-	color: var(--color-one);
-
-	font-size: calc(var(--font-size) * 1);
-}
-
-.game-play {
+/*** Contents between header and footer ******************/
+/*** [game content] **************************************/
+main {
 	display: flex;
-	justify-content: space-between;
-	width: 100%;
-
-	margin: calc(var(--font-size) * 1) 0;
-	padding: calc(var(--font-size) * 1);
-
-	background-color: var(--color-one);
-	border: calc(var(--font-size) * 0.125) solid var(--color-three);
-}
-
-.game-play-text {
-	display: flex;
-	justify-content: space-between;
-	align-items: flex-end;
-	gap: calc(var(--font-size) * 0.5);
-	width: 100%;
-
-	color: var(--color-three);
-
-	transition: all var(--transition-long) ease-in-out;
-}
-
-.game-text {
-	padding: calc(var(--font-size) * 0.75) calc(var(--font-size) * 0.75)
-		calc(var(--font-size) * 0.5);
-
-	border: calc(var(--font-size) * 0.067) solid var(--color-one);
-	font-size: calc(var(--font-size) * 1.15);
-	line-height: 1.4;
-
-	transition: all var(--transition-long) ease-in-out;
-}
-
-.game-text.player {
-	background-color: var(--color-two);
-	color: var(--color-one);
-}
-
-.game-text.computer {
-	background-color: var(--color-four);
-	color: var(--color-three);
-}
-
-.game-text.reset {
-	background-color: var(--color-one);
-	color: var(--color-three);
-}
-
-#winnerText {
-	display: none;
-	background-color: var(--color-four);
-
-	transition: all var(--transition-long) ease-in-out;
-}
-
-.game-play-header-text::before {
-	content: 'Score:';
-	padding: calc(var(--font-size) * 0.25) 0 0 calc(var(--font-size) * 0.25);
-
-	color: var(--color-one);
-	font-size: calc(var(--font-size) * 1.1);
-}
-
-.game-play-header-text {
-	display: flex;
-	justify-content: space-around;
+	flex-direction: column;
+	justify-content: flex-start;
 	align-items: center;
-	gap: calc(var(--font-size) * 0.4);
 
-	padding: calc(var(--font-size) * 0.25);
-
-	background-color: var(--color-two);
-	border: calc(var(--font-size) * 0.125) solid var(--color-three);
-	color: var(--color-one);
-	font-size: calc(var(--font-size) * 1.25);
+	width: 100%;
 }
 
-.score-header-text {
-	margin: auto;
-	padding: calc(var(--font-size) * 0.25) 0 0 calc(var(--font-size) * 0.5);
-
-	font-size: calc(var(--font-size) * 1.25);
-	color: var(--color-one);
+@media screen and (max-width: 550px) {
+	main {
+		/*** on phone, move player's buttons ***/
+		/*** to bottom of screen ***************/
+		flex-direction: column-reverse;
+	}
 }
 
-.game-score-text {
-	margin: 0;
-	padding: 0;
-
-	font-size: calc(var(--font-size) * 1.25);
-
-	transition: all var(--transition-long) ease-in-out;
-}
-
-/*** These are the flex containers holding ***/
-/*** the icon and the numeric score **********/
-.pScore,
-.cScore {
-	display: flex;
-	text-align: center;
-	justify-content: space-around;
-	flex-wrap: nowrap;
-	gap: calc(var(--font-size) * 0.25);
-
-	padding: calc(var(--font-size) * 0.25) calc(var(--font-size) * 0.25) 0;
-
-	background-color: var(--color-three);
-	border: calc(var(--font-size) * 0.192) solid var(--color-three);
-
-	transition: all var(--transition-long) ease-in-out;
-}
-
-#pScore.win,
-#cScore.win {
-	background-color: var(--color-one);
-	border-color: var(--color-three);
-}
-
-#pScoreIcon.win,
-#cScoreIcon.win {
-	fill: var(--color-three);
-}
-
-/*** The acutal number score, updated via JavaScript ***/
-#playerScore,
-#computerScore {
-	margin: auto;
-	padding: 0;
-	width: calc(var(--font-size) * 1.5);
-
-	color: var(--color-one);
-	font-size: calc(var(--font-size) * 1.5);
-
-	transition: all var(--transition-long) ease-in-out;
-}
-
-#playerScore.win,
-#computerScore.win {
-	color: var(--color-three);
-}
-
-.choice-player,
-.choice-computer {
-	display: flex;
-	justify-content: space-between;
-	flex-wrap: wrap;
-	gap: calc(var(--font-size) * 0.5);
-	padding: calc(var(--font-size) * 1) 0;
-}
-
-.player-section,
-.computer-section {
+fieldset {
 	margin: calc(var(--font-size) * 1) 0;
-	padding: 0 calc(var(--font-size) * 1);
+	padding: 0 calc(var(--font-size) * 0.5);
 	width: 100%;
 
-	background-color: var(--color-three);
+	background-color: var(--color-two);
+	border: calc(var(--font-size) * 0.125) solid var(--color-two);
+}
+
+legend {
+	/*** Text-align places the legend box ****/
+	/*** in the center of the fieldset! 🤯 ***/
+	text-align: center;
+	padding: calc(var(--font-size) * 0.25) calc(var(--font-size) * 0.5);
+
+	background-color: var(--color-four);
+	border: calc(var(--font-size) * 0.125) solid var(--color-two);
 }
 
 .computer-section {
 	margin: calc(var(--font-size) * 1) 0 0;
 }
 
-/*** Desktop padding too spacious ***/
-/*** at mobile resolutions **********/
+/*** Webkit (Safari & iOS) browser issues forces ***/
+/*** need to place contents of LEGEND in DIVs ******/
+/*** in order to prevent wrapping & ****************/
+/*** better vertically align elements 🥴 ***********/
+.player-section__header,
+.computer-section__header {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	gap: calc(var(--font-size) * 0.5);
+	width: calc(var(--font-size) * 12);
+
+	color: var(--color-three);
+	font-size: calc(var(--font-size) * 1.125);
+}
+
+/*** icons used in LEGEND tag **********/
+/*** for player & computer FIELDSETs ***/
+/*** also used in Score boxes **********/
+.player-icon,
+.computer-icon {
+	width: var(--size-icon-score);
+	height: var(--size-icon-score);
+
+	fill: var(--color-three);
+}
+
+/*** player-choice contains player-clickable buttons; ***/
+/*** computer-choice contains 'buttons' in 'active' *****/
+/*** state with opacity toggled to 1 as needed by JS ****/
+.player-choice,
+.computer-choice {
+	display: flex;
+	justify-content: space-between;
+	flex-wrap: wrap;
+	width: 100%;
+	gap: calc(var(--font-size) * 0.6);
+	padding: calc(var(--font-size) * 1) 0;
+}
+
+.player-choice__button,
+.computer-choice__button {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	gap: calc(var(--font-size) * 0.25);
+	flex: 1 0 calc(var(--font-size) * 9);
+
+	width: calc(var(--font-size) * 9);
+	padding: calc(var(--font-size) * 0.25) 0;
+
+	border: calc(var(--font-size) * 0.2) solid var(--color-one);
+}
+
+.player-choice__button {
+	background-color: var(--color-two);
+	box-shadow: var(--shadow-on);
+	color: var(--color-one);
+}
+
+.computer-choice__button {
+	opacity: 0;
+
+	background-color: var(--color-one);
+	box-shadow: var(--shadow-off);
+	color: var(--color-two);
+}
+
+/*** icons for buttons ***/
+.player-choice__button > svg,
+.computer-choice__button > svg {
+	width: var(--size-icon-reg);
+	height: var(--size-icon-reg);
+}
+
+.player-choice__button > svg {
+	fill: var(--color-three);
+}
+
+.computer-choice__button > svg {
+	fill: var(--color-two);
+}
+
+.player-choice__button > div {
+	color: var(--color-three);
+}
+
+/*** text label for buttons ***/
+.player-choice__button > div,
+.computer-choice__button > div {
+	padding: calc(var(--font-size) * 0.25) 0 0;
+
+	font-size: calc(var(--font-size) * 1.25);
+}
+
+/*** used by JavaScript ***/
+.turnedOn {
+	opacity: 1;
+}
+
+/*** Toggled on by JavaScript ***/
+.active {
+	background-color: var(--color-four);
+	border-color: var(--color-four);
+	box-shadow: var(--shadow-off);
+	color: var(--color-three);
+	fill: var(--color-three);
+}
+
+/*** Desktop padding too spacious *****/
+/*** at mobile resolutions ************/
+/*** Also adjusting margin values *****/
+/*** since we are flipping player & ***/
+/*** computer positions on mobile *****/
 @media screen and (max-width: 550px) {
+	.player-section {
+		margin: calc(var(--font-size) * 0.5) 0 0;
+	}
+}
+
+/*** on mobile screens, adjust buttons ****/
+/*** to be in column & increase gap to ****/
+/*** help avoid accidental presses ********/
+@media screen and (max-width: 550px) {
+	/*** .player-section undefined outside of mobile ***/
 	.player-section {
 		margin: calc(var(--font-size) * 0.5) 0 0;
 	}
@@ -461,143 +319,178 @@ svg {
 	.computer-section {
 		margin: calc(var(--font-size) * 0.5) 0;
 	}
-}
 
-.player-header {
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
-	padding: calc(var(--font-size) * 1) 0 0;
-}
-
-.player-header-text {
-	display: flex;
-	justify-content: flex-start;
-	align-items: center;
-	gap: calc(var(--font-size) * 0.5);
-
-	background-color: var(--color-two);
-	border: calc(var(--font-size) * 0.125) solid var(--color-three);
-	color: var(--color-one);
-	font-size: calc(var(--font-size) * 1);
-	padding: calc(var(--font-size) * 0.25) calc(var(--font-size) * 0.75);
-}
-
-/*! *** the acutal buttons used in game play ***/
-#computerRock,
-#computerPaper,
-#computerScissors,
-#playerRock,
-#playerPaper,
-#playerScissors {
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	width: calc(var(--font-size) * 9);
-	flex: 1 0 calc(var(--font-size) * 9);
-	padding: calc(var(--font-size) * 0.5) 0 calc(var(--font-size) * 0.5);
-
-	transition: all var(--transition-long) ease-in-out;
-}
-
-#computerRock,
-#computerPaper,
-#computerScissors {
-	opacity: 0;
-
-	background-color: var(--color-four);
-	border-color: var(--color-four);
-	fill: var(--color-three);
-	color: var(--color-three);
-
-	transition: all var(--transition-long) ease-in-out;
-}
-
-#computerRock.turnedOn,
-#computerPaper.turnedOn,
-#computerScissors.turnedOn {
-	opacity: 1;
-
-	transition: all var(--transition-long) ease-in-out;
-}
-
-#playerRock,
-#playerPaper,
-#playerScissors {
-	background-color: var(--color-three);
-	border: calc(var(--font-size) * 0.2) solid var(--color-four);
-	box-shadow: var(--shadow-on);
-
-	transition: all var(--transition-long) ease-in-out;
-}
-
-#playerPaper.active,
-#playerScissors.active,
-#playerRock.active {
-	background-color: var(--color-two);
-	border-color: var(--color-two);
-	box-shadow: var(--shadow-off);
-	color: var(--color-three);
-}
-
-/*** on mobile screen sizes, adjust buttons ***/
-/*** to be 3 in a column & increase gap to  ***/
-/*** help avoid accidental presses          ***/
-@media screen and (max-width: 550px) {
-	.choice-player,
-	.choice-computer {
+	.player-choice,
+	.computer-choice {
 		gap: calc(var(--font-size) * 1);
 		padding: calc(var(--font-size) * 1) 0;
 	}
+	.computer-choice {
+		margin: calc(var(--font-size) * 0.5) 0;
+		height: calc(var(--font-size) * 3.5);
+	}
+
 	/*? setting flex-basis to 100% was  */
 	/*? only solution I could find to   */
 	/*? ensure buttons in single column */
-	#computerRock,
-	#computerPaper,
-	#computerScissors,
-	#playerRock,
-	#playerPaper,
-	#playerScissors {
+	.player-choice__button,
+	.computer-choice__button {
 		flex-basis: 100%;
 		padding: calc(var(--font-size) * 0.5) 0 calc(var(--font-size) * 0.5);
 	}
+
+	.player-choice__button > div,
+	.computer-choice__button > div {
+		font-size: calc(var(--font-size) * 1.5);
+	}
+
+	/*! if you alter button size/gap in mobile, ***/
+	/*! update calc values for top also ***********/
+	#computerRock,
+	#computerPaper,
+	#computerScissors {
+		position: relative;
+		top: calc(var(--font-size) * -1);
+	}
+
+	#computerPaper {
+		top: calc(calc(var(--font-size) * -3.4) - var(--size-icon-reg));
+	}
+	#computerScissors {
+		top: calc(calc(var(--font-size) * -7.8) - var(--size-icon-reg));
+	}
 }
 
-.svg-rock-computer,
-.svg-paper-computer,
-.svg-scissors-computer {
-	width: var(--size-icon-reg);
-	height: var(--size-icon-reg);
+/***********************************************************/
+/*** Begin Game Play Section *******************************/
+/***********************************************************/
 
-	fill: var(--color-three);
+.game-section {
+	display: flex;
+	justify-content: space-between;
+	width: 100%;
 
-	transform: rotate(-90deg) rotateY(180deg);
+	margin: calc(var(--font-size) * 1) 0;
+	padding: calc(var(--font-size) * 0.6);
+
+	background-color: var(--color-three);
+	border: calc(var(--font-size) * 0.125) solid var(--color-two);
 }
 
-.svg-scissors-computer {
-	transform: rotateY(180deg);
+.game-section__header {
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
+	gap: calc(var(--font-size) * 0.4);
+	padding: calc(var(--font-size) * 0.125) 0;
 }
 
-.svg-rock-player,
-.svg-paper-player,
-.svg-scissors-player {
-	width: var(--size-icon-reg);
-	height: var(--size-icon-reg);
+.game-section__header--label-score,
+.game-section__header--label-rounds {
+	padding: calc(var(--font-size) * 0.25) calc(var(--font-size) * 0.325) 0;
 
-	fill: var(--color-one);
+	color: var(--color-three);
+	font-size: calc(var(--font-size) * 1.25);
 }
 
-.svg-rock-player,
-.svg-paper-player {
-	transform: rotate(90deg);
+.game-section__header--label-rounds {
+	font-size: calc(var(--font-size) * 1.1);
 }
 
-.svg-bot-icon,
-.svg-user-icon {
+/*** icons used in LEGEND tag **********/
+/*** for player & computer FIELDSETs ***/
+.game-section__header--icon {
 	width: var(--size-icon-score);
 	height: var(--size-icon-score);
 
-	fill: var(--color-one);
+	fill: var(--color-three);
+}
+
+/*** These are the flex containers holding ***/
+/*** the icon and the numeric score **********/
+.game-section__header--score-box {
+	display: flex;
+	text-align: center;
+	justify-content: space-around;
+	flex-wrap: nowrap;
+	gap: calc(var(--font-size) * 0.25);
+
+	padding: calc(var(--font-size) * 0.125);
+
+	background-color: var(--color-two);
+	border: calc(var(--font-size) * 0.125) solid var(--color-four);
+}
+
+/*** Score Area colors, toggled via JavaScript ***/
+/*** including ID value to avoid confusion *******/
+/*** between score DIV wrapper vs Icon ***********/
+#pScore.win,
+#cScore.win {
+	background-color: var(--color-three);
+	border-color: var(--color-two);
+}
+
+#pScoreIcon.win,
+#cScoreIcon.win {
+	fill: var(--color-two);
+}
+
+/*** Acutal numeric score, updated via JavaScript ***/
+#playerScore,
+#computerScore {
+	margin: auto;
+	height: var(--size-icon-score);
+	width: calc(var(--font-size) * 1.5);
+
+	padding: calc(var(--font-size) * 0.1) calc(var(--font-size) * 0.25) 0;
+
+	color: var(--color-three);
+	font-size: calc(var(--font-size) * 1.6);
+}
+
+#playerScore.win,
+#computerScore.win {
+	color: var(--color-two);
+}
+
+.game-section__game-area {
+	display: flex;
+	justify-content: space-between;
+	align-items: flex-end;
+	gap: calc(var(--font-size) * 0.5);
+	width: 100%;
+
+	color: var(--color-three);
+}
+
+.game-section__game-text {
+	padding: calc(var(--font-size) * 0.75) calc(var(--font-size) * 0.75)
+		calc(var(--font-size) * 0.5);
+
+	border: calc(var(--font-size) * 0.067) solid var(--color-three);
+	font-size: calc(var(--font-size) * 1.15);
+	line-height: 1.4;
+}
+
+.game-section__game-text.player {
+	background-color: var(--color-four);
+	color: var(--color-three);
+}
+
+.game-section__game-text.computer {
+	background-color: var(--color-one);
+	color: var(--color-two);
+}
+
+.game-section__game-text.reset {
+	background-color: var(--color-three);
+	color: var(--color-two);
+}
+
+#winnerText {
+	display: none;
+	background-color: var(--color-two);
+	color: var(--color-three);
 }
 
 /******************* Reset Button *******************/
@@ -606,32 +499,22 @@ svg {
 	padding: calc(var(--font-size) * 1) calc(var(--font-size) * 1)
 		calc(var(--font-size) * 0.75);
 
-	border: calc(var(--font-size) * 0.067) solid var(--color-three);
-	background-color: var(--color-one);
+	border: calc(var(--font-size) * 0.067) solid var(--color-two);
+	background-color: var(--color-three);
 
 	font-size: calc(var(--font-size) * 0.875);
-
-	transition: all var(--transition-long) ease-in-out;
 }
 
 .reset:hover {
-	background-color: var(--color-three);
-	color: var(--color-one);
-
-	transition: all var(--transition-long) ease-in-out;
+	background-color: var(--color-two);
+	color: var(--color-three);
 }
 
 /****************************************************/
 /****************** Code for Modal ******************/
 /****************************************************/
-.modal-reset-container {
+.modal-reset__container {
 	opacity: 0;
-
-	pointer-events: none;
-
-	display: flex;
-	justify-content: center;
-	align-items: center;
 
 	position: fixed;
 	top: 0;
@@ -639,65 +522,63 @@ svg {
 	height: 100vh;
 	width: 100vw;
 
+	pointer-events: none;
+
+	display: flex;
+	justify-content: center;
+	align-items: center;
+
 	background-color: hsla(0, 0%, 0%, 0.6);
 	-webkit-backdrop-filter: blur(calc(var(--font-size) * 0.25));
 	backdrop-filter: blur(calc(var(--font-size) * 0.25));
 	border-radius: 0;
-
-	transition: all var(--transition-long) ease-in;
 }
 
-.modal-reset-container.show {
+.modal-reset__container.show {
 	opacity: 1;
 
 	pointer-events: auto;
-
-	transition: all var(--transition-long) ease-in;
 }
 
 .modal-reset {
 	padding: calc(var(--font-size) * 1.5);
 	max-width: calc(var(--font-size) * 25);
 
-	background-color: var(--color-four);
+	background-color: var(--color-one);
 	box-shadow: var(--shadow-on);
 }
 
-.modal-reset-buttons {
+.modal-reset__buttons {
 	display: flex;
 	gap: calc(var(--font-size) * 1.25);
 
 	margin: calc(var(--font-size) * 1.5) 0 0;
 }
 
-.modal-reset-button-no,
-.modal-reset-button-yes {
+.modal-reset__buttons--no,
+.modal-reset__buttons--yes {
 	padding: calc(var(--font-size) * 0.75) calc(var(--font-size) * 1)
 		calc(var(--font-size) * 0.5);
 	width: calc(var(--font-size) * 10);
 
-	background-color: var(--color-three);
-	border: calc(var(--font-size) * 0.125) solid var(--color-three);
+	background-color: var(--color-one);
+	border: calc(var(--font-size) * 0.125) solid var(--color-one);
 	box-shadow: var(--shadow-on);
-	color: var(--color-one);
-
-	transition: all var(--transition-long) ease-in-out;
+	color: var(--color-two);
 }
 
-.modal-reset-button-yes {
-	background-color: var(--color-four);
-	border: calc(var(--font-size) * 0.125) solid var(--color-three);
-	color: var(--color-three);
+.modal-reset__buttons--yes {
+	background-color: var(--color-one);
+	border: calc(var(--font-size) * 0.125) solid var(--color-two);
+	color: var(--color-two);
 }
 
-.modal-reset-button-no:hover,
-.modal-reset-button-yes:hover {
+.modal-reset__buttons--no:hover,
+.modal-reset__buttons--yes:hover {
 	background-color: var(--color-two);
 	border: calc(var(--font-size) * 0.125) solid var(--color-two);
 	box-shadow: var(--shadow-off);
 	color: var(--color-one);
-
-	transition: all var(--transition-long) ease-in-out;
 }
 
 /********* Modal window too big on phones, *********/
@@ -706,14 +587,15 @@ svg {
 	.modal-reset {
 		max-width: calc(var(--font-size) * 20);
 	}
-	.modal-reset-buttons {
+	.modal-reset__buttons {
 		/** Set Cancel button below Confirm button ****/
 		/** so people who click reset by mistake ******/
 		/** can easily exit out of the process ********/
 		flex-direction: column-reverse;
+		gap: calc(var(--font-size) * 2);
 	}
-	.modal-reset-button-no,
-	.modal-reset-button-yes {
+	.modal-reset__buttons--no,
+	.modal-reset__buttons--yes {
 		width: 100%;
 	}
 }
@@ -722,38 +604,37 @@ svg {
 /********** Code related to color-mode swap ***********/
 /******************************************************/
 
+/*** Applied to SVG 'hole' on left of h1 *******/
+/*** to maintain symmetrical layout*************/
+/*** with color mode button on right ***********/
 .hole {
-	background-color: var(--color-four);
+	background-color: var(--color-one);
 }
 
 .empty,
 .color-mode__header {
-	height: var(--size-icon-reg);
-	width: var(--size-icon-reg);
+	height: calc(var(--size-icon-reg) + calc(var(--font-size) * 0.25));
+	width: calc(var(--size-icon-reg) + calc(var(--font-size) * 0.25));
 }
 
-.svg-dark-mode,
-.svg-light-mode {
-	fill: var(--color-three);
-	transform: rotate(180deg);
+.dark--hidden,
+.light--hidden {
+	height: calc(var(--size-icon-reg) + calc(var(--font-size) * 0.25));
+	width: calc(var(--size-icon-reg) + calc(var(--font-size) * 0.25));
+
+	background-color: var(--color-two);
+	border: calc(var(--font-size) * 0.125) solid var(--color-two);
+	fill: var(--color-one);
 }
 
-button.dark--hidden,
-button.light--hidden {
-	height: var(--size-icon-reg);
-	width: var(--size-icon-reg);
-
-	background-color: var(--color-four);
+.dark--hidden:hover,
+.light--hidden:hover {
+	background-color: var(--color-three);
+	fill: var(--color-four);
 }
 
-button.dark--hidden:hover,
-button.light--hidden:hover {
-	background-color: var(--color-one);
-	fill: var(--color-two);
-}
-
-button.dark--hidden:active,
-button.light--hidden:active {
+.dark--hidden:active,
+.light--hidden:active {
 	background-color: var(--color-one);
 	fill: var(--color-two);
 }
@@ -761,9 +642,83 @@ button.light--hidden:active {
 @media screen and (max-width: 550px) {
 	.empty,
 	.color-mode__header,
-	button.dark--hidden,
-	button.light--hidden {
+	.dark--hidden,
+	.light--hidden {
 		height: calc(var(--font-size) * 3);
 		width: calc(var(--font-size) * 3);
+	}
+}
+
+/*** everything in the <footer> area including <details> element ***/
+/*** used to link to people who have inspired me *******************/
+
+footer,
+footer * {
+	font-family: var(--font-serious);
+	font-size: calc(var(--font-size) * 0.6);
+}
+
+footer {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	max-width: calc(var(--font-size) * 32);
+	padding: calc(var(--font-size) * 0.5);
+
+	color: var(--color-one);
+	text-align: center;
+}
+
+details {
+	width: calc(var(--font-size) * 15);
+	margin: calc(var(--font-size) * 0.75) 0 calc(var(--font-size) * 0.75);
+
+	color: var(--color-two);
+	background-color: var(--color-one);
+}
+
+details > summary {
+	cursor: pointer;
+
+	padding: calc(var(--font-size) * 0.25);
+
+	border: calc(var(--font-size) * 0.125) solid var(--color-one);
+	color: var(--color-two);
+	background-color: var(--color-one);
+}
+
+details[open] > summary {
+	color: var(--color-one);
+	background-color: var(--color-two);
+}
+
+ul {
+	padding: 0 calc(var(--font-size) * 1);
+	list-style-type: none;
+}
+
+li {
+	padding: 0 calc(var(--font-size) * 0.25) calc(var(--font-size) * 0.3);
+
+	text-align: left;
+}
+
+li > hr {
+	border-top: 1px solid var(--color-one);
+}
+
+a {
+	color: var(--color-four);
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+@media screen and (max-width: 550px) {
+	footer,
+	footer * {
+		font-size: calc(var(--font-size) * 0.8);
 	}
 }
