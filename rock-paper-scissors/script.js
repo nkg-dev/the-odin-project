@@ -5,12 +5,14 @@
 //************************************************************/
 
 //? How many rounds needed to win?
-const roundsToWin = 5;
+const roundsToWin = 2;
 
+//? ms interval for each step during single round
+const stepInterval = 800;
 //? ms interval for setTimeout reset call a single round
-const roundInterval = 2500;
+const roundInterval = 3200;
 //? when resetting after winner reaches ${roundsToWin}
-const winnerInterval = 4500;
+const winnerInterval = 4200;
 
 //? Text prompt at page load and after round reset
 const gameTextDefault = `Let's Play!`;
@@ -26,7 +28,7 @@ let tieRounds = 0; //I thought I might track tie games at one point. Hah!
 //****************** Retrieve DOM elements *******************/
 //************************************************************/
 const gameText = document.getElementById('gameText');
-const ruleText = document.getElementById('ruleText');
+const roundsText = document.getElementById('roundsText');
 const winnerText = document.getElementById('winnerText');
 
 //? the actual numeric scores
@@ -304,21 +306,23 @@ function keepScore(roundResult) {
 			break;
 	}
 
-	// update score values
-	playerScore.textContent = playerRounds;
-	computerScore.textContent = computerRounds;
+	window.setTimeout(() => {
+		// update score values
+		playerScore.textContent = playerRounds;
+		computerScore.textContent = computerRounds;
 
-	if (playerRounds == roundsToWin) {
-		winnerText.style.display = 'flex';
-		winnerText.textContent = 'YAY! YOU ARE THE WINNER!';
-		setTimeout(resetAll, winnerInterval);
-	} else if (computerRounds == roundsToWin) {
-		winnerText.style.display = 'flex';
-		winnerText.textContent = 'Boo! The computer is the winner.';
-		setTimeout(resetAll, winnerInterval);
-	} else {
-		setTimeout(resetRound, roundInterval);
-	}
+		if (playerRounds == roundsToWin) {
+			winnerText.style.display = 'flex';
+			winnerText.textContent = 'YAY! YOU ARE THE WINNER!';
+			setTimeout(resetAll, winnerInterval);
+		} else if (computerRounds == roundsToWin) {
+			winnerText.style.display = 'flex';
+			winnerText.textContent = 'Boo! The computer is the winner.';
+			setTimeout(resetAll, winnerInterval);
+		} else {
+			setTimeout(resetRound, roundInterval);
+		}
+	}, stepInterval);
 }
 
 //************************************************************/
@@ -329,34 +333,37 @@ function whoWonRound(computer, player) {
 	let playerPick = player;
 	let winText = ' You win!';
 	let lossText = ' Computer wins.';
-	if (playerPick === computerPick) {
-		gameText.textContent = "It's a tie. Play another round!";
-		return keepScore('Tie');
-	} else if (playerPick === 'Rock' && computerPick === 'Scissors') {
-		playerWinsRoundStyleOn();
-		gameText.textContent = `Rock beats Scissors!${winText}`;
-		return keepScore('Player');
-	} else if (playerPick === 'Scissors' && computerPick === 'Paper') {
-		playerWinsRoundStyleOn();
-		gameText.textContent = `Scissors beats Paper!${winText}`;
-		return keepScore('Player');
-	} else if (playerPick === 'Paper' && computerPick === 'Rock') {
-		playerWinsRoundStyleOn();
-		gameText.textContent = `Paper beats Rock!${winText}`;
-		return keepScore('Player');
-	} else if (playerPick === 'Rock' && computerPick === 'Paper') {
-		computerWinsRoundStyleOn();
-		gameText.textContent = `Paper beats Rock!${lossText}`;
-		return keepScore('Computer');
-	} else if (playerPick === 'Paper' && computerPick === 'Scissors') {
-		computerWinsRoundStyleOn();
-		gameText.textContent = `Scissors beats Paper.${lossText}`;
-		return keepScore('Computer');
-	} else if (playerPick === 'Scissors' && computerPick === 'Rock') {
-		computerWinsRoundStyleOn();
-		gameText.textContent = `Rock beats Scissors.${lossText}`;
-		return keepScore('Computer');
-	}
+
+	window.setTimeout(() => {
+		if (playerPick === computerPick) {
+			gameText.textContent = "It's a tie. Play another round!";
+			return keepScore('Tie');
+		} else if (playerPick === 'Rock' && computerPick === 'Scissors') {
+			playerWinsRoundStyleOn();
+			gameText.textContent = `Rock beats Scissors!${winText}`;
+			return keepScore('Player');
+		} else if (playerPick === 'Scissors' && computerPick === 'Paper') {
+			playerWinsRoundStyleOn();
+			gameText.textContent = `Scissors beats Paper!${winText}`;
+			return keepScore('Player');
+		} else if (playerPick === 'Paper' && computerPick === 'Rock') {
+			playerWinsRoundStyleOn();
+			gameText.textContent = `Paper beats Rock!${winText}`;
+			return keepScore('Player');
+		} else if (playerPick === 'Rock' && computerPick === 'Paper') {
+			computerWinsRoundStyleOn();
+			gameText.textContent = `Paper beats Rock!${lossText}`;
+			return keepScore('Computer');
+		} else if (playerPick === 'Paper' && computerPick === 'Scissors') {
+			computerWinsRoundStyleOn();
+			gameText.textContent = `Scissors beats Paper.${lossText}`;
+			return keepScore('Computer');
+		} else if (playerPick === 'Scissors' && computerPick === 'Rock') {
+			computerWinsRoundStyleOn();
+			gameText.textContent = `Rock beats Scissors.${lossText}`;
+			return keepScore('Computer');
+		}
+	}, stepInterval);
 }
 
 //************************************************************/
@@ -368,6 +375,9 @@ function afterPlayerPicks(pick) {
 	//* which triggers the round, *********//
 	//* then the computer 'picks' second  *//
 	let computerPick = computerGetsToPick();
+
+	gameText.textContent = '';
+
 	return whoWonRound(computerPick, playerPick);
 }
 
@@ -401,7 +411,7 @@ function resetAll() {
 }
 
 //******* on (re)load, set rules text area to default ********/
-ruleText.textContent = ruleTextDefault;
+roundsText.textContent = ruleTextDefault;
 
 //************************************************************/
 //**************** Begin code for RESET modal ****************/
@@ -454,8 +464,8 @@ if (window.CSS && CSS.supports('color', 'var(--primary)')) {
 	});
 } else {
 	// If the feature isn't supported, then hide the toggle buttons
-	let btnContainer = document.querySelector('.color-mode__header');
-	btnContainer.style.display = 'none';
+	let divContainer = document.querySelector('.color-mode__header');
+	divContainer.style.display = 'none';
 }
 
 function transition() {
