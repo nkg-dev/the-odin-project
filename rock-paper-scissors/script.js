@@ -12,7 +12,7 @@ const startInterval = 1000;
 //? ms interval for each step during single round
 const stepInterval = 800;
 //? ms for setTimeout reset after calling round w/ a winner
-const winInterval = 3200;
+const winInterval = 2800;
 //? ms for setTimeout reset after tie
 const tieInterval = 800;
 //? when resetting after winner reaches ${roundsToWin}
@@ -23,7 +23,7 @@ const gameInterval = 4200;
 let roundInterval;
 
 //? Text prompt at page load and after round reset
-const gameTextDefault = `Let's Play!`;
+const gameTextDefault = `You pick...`;
 //? found to right of computer score; limited space so keep short
 const ruleTextDefault = `${roundsToWin} to win!`;
 
@@ -460,6 +460,7 @@ function resetAll() {
 }
 
 //******* on (re)load, set rules text area to default ********/
+gameText.textContent = gameTextDefault;
 roundsText.textContent = ruleTextDefault;
 
 //************************************************************/
