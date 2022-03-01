@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" color-mode="light" class="">
+<html lang="en" color-mode="light" sound-mode="on" class="">
 	<head>
 		<meta charset="UTF-8" />
 		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -9,7 +9,7 @@
 		<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
 		<link rel="manifest" href="/site.webmanifest" />
 		<script>
-			// sets/retrieves color-mode preference from localStorage
+			// retrieves color-mode preference from localStorage
 			if (
 				localStorage.getItem('color-mode') === 'dark' ||
 				(window.matchMedia('(prefers-color-scheme: dark)').matches &&
@@ -17,28 +17,74 @@
 			) {
 				document.documentElement.setAttribute('color-mode', 'dark');
 			}
+			
+			// retrieves sound OFF preference from localStorage
+			if (localStorage.getItem('sound-mode') === 'off') {
+				document.documentElement.setAttribute('sound-mode', 'off');
+			}
+
 		</script>
 		<script src="script.js" defer></script>
 		<link rel="stylesheet" href="style.css" />
 		<title>Rock! Paper! Scissors!</title>
 	</head>
-	<body>
+		<!--**** holds all contents of page except FOOTER ****-->
 		<div class="main-container">
 			<header>
-				<div class="empty">
-					<svg
-						xmlns="http://www.w3.org/2000/svg"
-						aria-hidden="true"
-						role="img"
-						class="hole"
-						preserveAspectRatio="xMidYMid meet"
-						viewBox="0 0 32 32"
+				<!--************ buttons for VOLUME swap ********************-->
+				<div class="sound-mode__header">
+					<!-- ************ visibility controlled by JavaScript ************ -->
+					<button
+						title="Turn Sound Off"
+						class="sound-mode__btn sound--is-on"
+						aria-label="Turn Sound Off"
 					>
-						<path
-							fill="none"
-							d="M16 4C9.383 4 4 9.383 4 16s5.383 12 12 12s12-5.383 12-12S22.617 4 16 4zm0 2v20c-5.535 0-10-4.465-10-10S10.465 6 16 6z"
-						/>
-					</svg>
+						<svg
+							xmlns="http://www.w3.org/2000/svg"
+							aria-hidden="true"
+							role="img"
+							preserveAspectRatio="xMidYMid meet"
+							viewBox="0 0 32 32"
+						>
+							<title>Turn Sound Off</title>
+							<path
+							class="volume-on"
+							fill=""
+								d="M 14.997354,4.594 14.281752,5.2817316 8.562,11.001738 H 4 v 10.000001 h 4.563 l 5.726758,5.719 0.706053,0.688498 z m 7.815647,3.5957315 -1.407,1.406 c 3.519,3.4969575 3.519,9.1900585 0,12.6870075 l 1.407,1.438 c 4.28,-4.282 4.28,-11.25 0,-15.5320075 z M 12.99643,9.438614 v 13.125995 l -3.2774291,-3.28087 -0.313,-0.282 H 6 v -6 h 3.4060009 l 0.313,-0.281 z m 6.909571,1.657125 -1.406,1.406 c 1.91,1.91 1.902,5.074 -0.031,7.094 l 1.468,1.406 c 2.665,-2.781 2.657,-7.219 -0.03,-9.906 z"
+							/>
+							<path
+								class="volume-off"
+								fill=""
+								d="M15 4.594L13.281 6.28L8.562 11H4v10h4.563l4.718 4.719L15 27.406zm-2 4.843v13.126L9.719 19.28L9.406 19H6v-6h3.406l.313-.281zm7.219 2.344L18.78 13.22L21.563 16l-2.782 2.781l1.438 1.438L23 17.437l2.781 2.782l1.438-1.438L24.437 16l2.782-2.781l-1.438-1.438L23 14.562z"
+							/>
+						</svg>
+					</button>
+					<!-- ************ visibility controlled by JavaScript ************ -->
+					<button
+						title="Turn Sound On"
+						class="sound-mode__btn sound--is-off"
+						aria-label="Turn Sound On"
+					>
+						<svg
+							xmlns="http://www.w3.org/2000/svg"
+							aria-hidden="true"
+							role="img"
+							preserveAspectRatio="xMidYMid meet"
+							viewBox="0 0 32 32"
+						>
+							<title>Turn Sound On</title>
+							<path
+							class="volume-off"
+								fill=""
+								d="M15 4.594L13.281 6.28L8.562 11H4v10h4.563l4.718 4.719L15 27.406zm-2 4.843v13.126L9.719 19.28L9.406 19H6v-6h3.406l.313-.281zm7.219 2.344L18.78 13.22L21.563 16l-2.782 2.781l1.438 1.438L23 17.437l2.781 2.782l1.438-1.438L24.437 16l2.782-2.781l-1.438-1.438L23 14.562z"
+							/>
+							<path
+								class="volume-on"
+								fill=""
+								d="M 14.997354,4.594 14.281752,5.2817316 8.562,11.001738 H 4 v 10.000001 h 4.563 l 5.726758,5.719 0.706053,0.688498 z m 7.815647,3.5957315 -1.407,1.406 c 3.519,3.4969575 3.519,9.1900585 0,12.6870075 l 1.407,1.438 c 4.28,-4.282 4.28,-11.25 0,-15.5320075 z M 12.99643,9.438614 v 13.125995 l -3.2774291,-3.28087 -0.313,-0.282 H 6 v -6 h 3.4060009 l 0.313,-0.281 z m 6.909571,1.657125 -1.406,1.406 c 1.91,1.91 1.902,5.074 -0.031,7.094 l 1.468,1.406 c 2.665,-2.781 2.657,-7.219 -0.03,-9.906 z"
+							/>
+						</svg>
+					</button>
 				</div>
 				<div>
 					<h1>Rock! Paper! Scissors!</h1>
@@ -50,13 +96,13 @@
 						title="Switch Dark Mode"
 						class="color-mode__btn dark--hidden"
 						aria-label="Toggle dark mode"
-					>
+						>
 						<svg
-							xmlns="http://www.w3.org/2000/svg"
-							aria-hidden="true"
-							role="img"
-							preserveAspectRatio="xMidYMid meet"
-							viewBox="0 0 32 32"
+						xmlns="http://www.w3.org/2000/svg"
+						aria-hidden="true"
+						role="img"
+						preserveAspectRatio="xMidYMid meet"
+						viewBox="0 0 32 32"
 						>
 							<title>Switch to Dark Mode</title>
 							<path
@@ -66,7 +112,7 @@
 							/>
 						</svg>
 					</button>
-					<!-- ************ visibility controlled by JavaScript ************ -->
+					<!--************ visibility controlled by JavaScript ************-->
 					<button
 						title="Switch Light Mode"
 						class="color-mode__btn light--hidden"
@@ -89,9 +135,8 @@
 					</button>
 				</div>
 			</header>
-			<!--************ Flexbox order for <MAIN> items **********************-->
-			<!--************ reversed on mobile devices **************************-->
-			<!--************ User clickable buttons will be at the bottom ********-->
+			<!--**** Flexbox order for <MAIN> items reversed on mobile devices ****-->
+			<!--**** User clickable buttons will be at the bottom *****************-->
 			<main>
 				<!--**************** PLAYER ****************-->
 				<fieldset class="player-section" role="presentation">
@@ -184,6 +229,7 @@
 						</button>
 					</form>
 				</fieldset>
+				<!--**************** GAME PLAY ****************-->
 				<fieldset class="game-section" role="presentation">
 					<legend class="game-section__header" role="presentation">
 						<section class="game-section__header">
@@ -252,7 +298,7 @@
 						>
 					</section>
 				</fieldset>
-				<!--*********** COMPUTER ***********-->
+				<!--**************** COMPUTER ****************-->
 				<fieldset class="computer-section" role="presentation">
 					<legend role="presentation">
 						<div class="computer-section__header">
@@ -332,8 +378,30 @@
 				</fieldset>
 			</main>
 		</div>
-		<!--*********** Code for RESET modal **************************-->
-		<!--*********** visibility controlled by JavaScript ***********-->
+		<!--******* Code for FOOTER with credits in DETAILS tag *****-->
+		<footer>
+			<p>Designed and coded by Neil Ghoshal &nbsp;&nbsp;|&nbsp;&nbsp; 2022 &nbsp;&nbsp;|&nbsp;<a href="https://www.theodinproject.com/" target="_blank">The Odin Project</a></p>
+			<details>
+				<summary>Credits</summary>
+				<ul role="list">
+					<li>Icons from
+						<a href="https://icons8.com/line-awesome" target="_blank">Line Awesome</a></li>
+					<li>'Click' audio file from <a target="_blank" href="https://kenney.nl/">Kenney.nl</a></li>
+					<li>Fluid typography from
+						<a target="_blank" href="https://websemantics.uk/tools/responsive-font-calculator/"
+						>Michael Riethmuller</a></li>
+					<li>Color concepts from <a target="_blank"
+						href="https://designerup.co/blog/practical-guide-to-perfect-ui-color-palettes/"
+						>DesignerUp</a></li>
+					<li>Dark mode toggle from
+						<a target="_blank" href="https://ryanfeigenbaum.com/dark-mode/">Ryan Feigenbaum</a></li>
+					<li><hr /></li>
+					<li>I hated CSS until I found <a target="_blank" href="https://www.kevinpowell.co/">
+						Kevin Powell</a></li>
+				</ul>
+			</details>
+		</footer>
+		<!--******* Code for RESET modal; visibility controlled by JavaScript **********-->
 		<div class="modal-reset__container" id="modalResetContainer">
 			<div class="modal-reset">
 				<h2>Reset?!?</h2>
@@ -341,64 +409,21 @@
 				<p>You can't undo a reset.</p>
 				<div class="modal-reset__buttons">
 					<button id="resetNo" class="modal-reset__buttons--no"
-						>No, don't reset!</button
+					>No, don't reset!</button
 					>
 					<button id="resetYes" class="modal-reset__buttons--yes"
-						>OK, reset!</button
+					>OK, reset!</button
 					>
 				</div>
 			</div>
 		</div>
-		<!--********* Code for FOOTER with credits in DETAILS tag *****-->
-		<footer
-			>Designed and coded by Neil Ghoshal in 2022 for The Odin Project
-			<details>
-				<summary>Credits</summary>
-				<ul role="list">
-					<li
-						>Icons from
-						<a
-							href="https://icons8.com/line-awesome"
-							target="_blacnk"
-							rel="noreferrer"
-							>Line Awesome</a
-						></li
-					>
-					<li
-						>"Let's Go" audio from
-						<a href="https://freesound.org/people/KendraYoder/sounds/203337/"
-							>KendraYoder on FreeSound.org</a
-						></li
-					>
-					<li>Sounds from <a href="https://freesound.org/">FreeSound</a></li>
-					<li
-						>Fluid typography from
-						<a href="https://websemantics.uk/tools/responsive-font-calculator/"
-							>Michael Riethmuller</a
-						></li
-					>
-					<li
-						>Color concepts from
-						<a
-							href="https://designerup.co/blog/practical-guide-to-perfect-ui-color-palettes/"
-							>DesignerUp</a
-						></li
-					>
-					<li
-						>Dark mode toggle from
-						<a href="https://ryanfeigenbaum.com/dark-mode/"
-							>Ryan Feigenbaum</a
-						></li
-					>
-					<li><hr /></li>
-					<li
-						>I hated CSS until I found
-						<a href="https://www.kevinpowell.co/">Kevin Powell</a></li
-					></ul
-				>
-			</details>
-		</footer>
-		<audio id="letsGo" src="./sounds/letsGo.wav"></audio>
+		<!--**** audio clip for mouse click on player buttons ****-->
 		<audio id="rollOver" src="./sounds/rollover.wav"></audio>
+		<script>
+			// sets/retrieves volume preference from localStorage
+			if (localStorage.getItem('sound-mode') === 'off') {
+				document.getElementById('rollOver').muted = true;
+			}
+		</script>
 	</body>
 </html>

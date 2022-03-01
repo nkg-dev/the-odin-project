@@ -29,6 +29,18 @@
 	}
 }
 
+/*** "sound--is-off" elements will be hidden **/
+/*** when user wants sound on  ***************/
+:root[sound-mode='on'] .sound--is-off {
+	display: none;
+}
+
+/*** "sound--is-on" elements will be hidden **/
+/*** when user wants sound off **************/
+:root[sound-mode='off'] .sound--is-on {
+	display: none;
+}
+
 /*** "light--hidden" elements will be hidden **/
 /*** when the site is set to Light Mode *******/
 :root[color-mode='light'] .light--hidden {
@@ -43,7 +55,7 @@
 
 html[color-mode='light'] {
 	--color-one: hsl(283, 75%, 50%);
-	--color-two: hsl(283, 20%, 90%);
+	--color-two: hsl(283, 10%, 90%);
 	--color-three: hsl(283, 20%, 10%);
 	--color-four: hsl(103, 75%, 50%);
 }
@@ -51,12 +63,10 @@ html[color-mode='light'] {
 html[color-mode='dark'] {
 	--color-one: hsl(103, 60%, 50%);
 	--color-two: hsl(103, 20%, 10%);
-	--color-three: hsl(103, 20%, 90%);
+	--color-three: hsl(103, 10%, 90%);
 	--color-four: hsl(283, 60%, 50%);
 }
 
-/*** Rather than abruptly switch between Light ***/
-/*** and Dark modes, soften with transiton *******/
 html {
 	scroll-behavior: smooth;
 }
@@ -71,9 +81,11 @@ html {
 	color: var(--color-two);
 	font-family: var(--font-fun);
 	font-size: var(--font-size);
-	/* TODO delete ⬇︎ before placing into prod */
+	/*! TODO delete ⬇︎ before placing into prod */
 	/* border: 1px dotted blue; */
 
+	/*** Rather than abruptly switch between Light ***/
+	/*** and Dark modes, soften with transiton *******/
 	transition: all var(--transition-long) ease-in;
 }
 
@@ -95,7 +107,7 @@ header {
 }
 
 h1 {
-	padding: calc(var(--font-size) * 0.75) 0 0;
+	padding: calc(var(--font-size) * 0.6) 0 0;
 	text-align: center;
 
 	font-size: calc(var(--font-size) * 2.2);
@@ -296,17 +308,6 @@ legend {
 	fill: var(--color-three);
 }
 
-/*** Desktop padding too spacious *****/
-/*** at mobile resolutions ************/
-/*** Also adjusting margin values *****/
-/*** since we are flipping player & ***/
-/*** computer positions on mobile *****/
-@media screen and (max-width: 550px) {
-	.player-section {
-		margin: calc(var(--font-size) * 0.5) 0 0;
-	}
-}
-
 /*** on mobile screens, adjust buttons ****/
 /*** to be in column & increase gap to ****/
 /*** help avoid accidental presses ********/
@@ -496,8 +497,8 @@ legend {
 /******************* Reset Button *******************/
 .reset {
 	align-self: center;
-	padding: calc(var(--font-size) * 1) calc(var(--font-size) * 1)
-		calc(var(--font-size) * 0.75);
+	padding: calc(var(--font-size) * 0.5) calc(var(--font-size) * 1)
+		calc(var(--font-size) * 0.35);
 
 	border: calc(var(--font-size) * 0.067) solid var(--color-two);
 	background-color: var(--color-three);
@@ -508,6 +509,13 @@ legend {
 .reset:hover {
 	background-color: var(--color-two);
 	color: var(--color-three);
+}
+
+@media screen and (max-width: 550px) {
+	.reset {
+		padding: calc(var(--font-size) * 1) calc(var(--font-size) * 1)
+			calc(var(--font-size) * 0.75);
+	}
 }
 
 /****************************************************/
@@ -601,20 +609,60 @@ legend {
 }
 
 /******************************************************/
+/********** Code related to VOLUME toggle *************/
+/******************************************************/
+
+.sound-mode__header {
+	height: calc(var(--size-icon-reg) + calc(var(--font-size) * 0.25));
+	width: calc(var(--size-icon-reg) + calc(var(--font-size) * 0.25));
+}
+
+.sound--is-off,
+.sound--is-on {
+	height: calc(var(--size-icon-reg) + calc(var(--font-size) * 0.25));
+	width: calc(var(--size-icon-reg) + calc(var(--font-size) * 0.25));
+
+	background-color: var(--color-two);
+	border: calc(var(--font-size) * 0.125) solid var(--color-two);
+	fill: var(--color-one);
+}
+
+.sound--is-on:active .volume-on,
+.sound--is-on:hover .volume-off,
+.sound--is-on .volume-on,
+.sound--is-off:active .volume-off,
+.sound--is-off:hover .volume-on,
+.sound--is-off .volume-off {
+	display: block;
+}
+
+.sound--is-on:hover .volume-on,
+.sound--is-on:active .volume-on,
+.sound--is-on .volume-off,
+.sound--is-off:hover .volume-off,
+.sound--is-off:active .volume-off,
+.sound--is-off .volume-on {
+	display: none;
+}
+
+@media screen and (max-width: 550px) {
+	.sound-mode__header,
+	.sound--is-off,
+	.sound--is-on {
+		height: calc(var(--font-size) * 3);
+		width: calc(var(--font-size) * 3);
+	}
+}
+
+/******************************************************/
 /********** Code related to color-mode swap ***********/
 /******************************************************/
 
-/*** Applied to SVG 'hole' on left of h1 *******/
-/*** to maintain symmetrical layout*************/
-/*** with color mode button on right ***********/
-.hole {
-	background-color: var(--color-one);
-}
-
-.empty,
 .color-mode__header {
 	height: calc(var(--size-icon-reg) + calc(var(--font-size) * 0.25));
 	width: calc(var(--size-icon-reg) + calc(var(--font-size) * 0.25));
+
+	transition: none;
 }
 
 .dark--hidden,
@@ -625,22 +673,27 @@ legend {
 	background-color: var(--color-two);
 	border: calc(var(--font-size) * 0.125) solid var(--color-two);
 	fill: var(--color-one);
+
+	transition: none;
 }
 
 .dark--hidden:hover,
 .light--hidden:hover {
 	background-color: var(--color-three);
 	fill: var(--color-four);
+
+	transition: none;
 }
 
 .dark--hidden:active,
 .light--hidden:active {
 	background-color: var(--color-one);
 	fill: var(--color-two);
+
+	transition: none;
 }
 
 @media screen and (max-width: 550px) {
-	.empty,
 	.color-mode__header,
 	.dark--hidden,
 	.light--hidden {
@@ -669,9 +722,15 @@ footer {
 	text-align: center;
 }
 
+footer > p {
+	color: var(--color-one);
+	text-align: center;
+}
+
 details {
 	width: calc(var(--font-size) * 15);
 	margin: calc(var(--font-size) * 0.75) 0 calc(var(--font-size) * 0.75);
+	width: 40ch;
 
 	color: var(--color-two);
 	background-color: var(--color-one);
@@ -690,6 +749,8 @@ details > summary {
 details[open] > summary {
 	color: var(--color-one);
 	background-color: var(--color-two);
+	border-bottom-left-radius: calc(var(--font-size) * 0.192);
+	border-bottom-right-radius: calc(var(--font-size) * 0.192);
 }
 
 ul {
@@ -698,22 +759,49 @@ ul {
 }
 
 li {
-	padding: 0 calc(var(--font-size) * 0.25) calc(var(--font-size) * 0.3);
+	padding: calc(var(--font-size) * 0.125) calc(var(--font-size) * 0.25)
+		calc(var(--font-size) * 0.2);
 
 	text-align: left;
+}
+
+li:first-of-type {
+	padding-top: calc(var(--font-size) * 0.33);
+}
+
+li:last-of-type {
+	padding-bottom: calc(var(--font-size) * 0.5);
 }
 
 li > hr {
 	border-top: 1px solid var(--color-one);
 }
 
-a {
-	color: var(--color-four);
+a,
+a:visited {
+	color: var(--color-two);
 	text-decoration: none;
+	border-radius: calc(var(--font-size) * 0.125);
+	padding: calc(var(--font-size) * 0.067) calc(var(--font-size) * 0.2)
+		calc(var(--font-size) * 0.12);
 }
 
+a:active,
 a:hover {
-	text-decoration: underline;
+	color: var(--color-one);
+	background-color: var(--color-two);
+}
+
+p > a,
+p > a:visited {
+	color: var(--color-one);
+	background-color: none;
+}
+
+p > a:active,
+p > a:hover {
+	color: var(--color-two);
+	background-color: var(--color-one);
 }
 
 @media screen and (max-width: 550px) {
@@ -721,4 +809,8 @@ a:hover {
 	footer * {
 		font-size: calc(var(--font-size) * 0.8);
 	}
+}
+
+svg {
+	transition: none;
 }

@@ -30,7 +30,8 @@ const ruleTextDefault = `${roundsToWin} to win!`;
 //*********************** DO NOT EDIT ************************/
 let playerRounds = 0;
 let computerRounds = 0;
-let tieRounds = 0; //I thought I might track tie games at one point. Hah!
+//I thought I might track tie games at one point. Hah!
+let tieRounds = 0;
 
 //************************************************************/
 //****************** Retrieve DOM elements *******************/
@@ -57,21 +58,15 @@ const playerScoreIcon = document.getElementById('pScoreIcon');
 //************************************************************/
 //************** AUDIO clips *********************************/
 //************************************************************/
-const letsGo = document.getElementById('letsGo');
 const rollOver = document.getElementById('rollOver');
 
-function playLetsGo() {
-	letsGo.play();
-}
-
-function pauseLetsGo() {
-	letsGo.pause();
-	letsGo.currentTime = 0;
-}
-
 function playRollover() {
-	rollOver.play();
-	rollOver.currentTime = 0;
+	if (rollOver.muted === false) {
+		rollOver.play();
+		rollOver.currentTime = 0;
+	} else {
+		pauseRollover();
+	}
 }
 
 function pauseRollover() {
@@ -264,7 +259,6 @@ function disableMouseActions() {
 function enableMouseActions() {
 	document.body.style.cursor = 'default';
 	pauseRollover();
-	pauseLetsGo();
 	rockClickOn();
 	paperClickOn();
 	scissorsClickOn();
@@ -292,7 +286,6 @@ function playerPicksRock() {
 	window.setTimeout(() => {
 		afterPlayerPicks('Rock');
 	}, startInterval);
-	// playLetsGo();
 	disableMouseActions();
 	playerRockButtonOn();
 }
@@ -302,7 +295,6 @@ function playerPicksPaper() {
 	window.setTimeout(() => {
 		afterPlayerPicks('Paper');
 	}, startInterval);
-	// playLetsGo();
 	disableMouseActions();
 	playerPaperButtonOn();
 }
@@ -312,7 +304,6 @@ function playerPicksScissors() {
 	window.setTimeout(() => {
 		afterPlayerPicks('Scissors');
 	}, startInterval);
-	// playLetsGo();
 	disableMouseActions();
 	playerScissorsButtonOn();
 }
@@ -355,8 +346,8 @@ function keepScore(roundResult) {
 			break;
 	}
 
-	// determines how long a player waits to play again
-	// needed to shorten the time after a tie
+	//*** determines how long a player waits to play again ***/
+	//*** I needed to shorten the time after a tie ***********/
 	if (roundResult === 'Tie') {
 		roundInterval = tieInterval;
 	} else {
@@ -398,27 +389,27 @@ function whoWonRound(computer, player) {
 			return keepScore('Tie');
 		} else if (playerPick === 'Rock' && computerPick === 'Scissors') {
 			playerWinsRoundStyleOn();
-			gameText.textContent = `Rock beats Scissors!${winText}`;
+			gameText.textContent = `Rock smashes Scissors!${winText}`;
 			return keepScore('Player');
 		} else if (playerPick === 'Scissors' && computerPick === 'Paper') {
 			playerWinsRoundStyleOn();
-			gameText.textContent = `Scissors beats Paper!${winText}`;
+			gameText.textContent = `Scissors cut Paper!${winText}`;
 			return keepScore('Player');
 		} else if (playerPick === 'Paper' && computerPick === 'Rock') {
 			playerWinsRoundStyleOn();
-			gameText.textContent = `Paper beats Rock!${winText}`;
+			gameText.textContent = `Paper covers Rock!${winText}`;
 			return keepScore('Player');
 		} else if (playerPick === 'Rock' && computerPick === 'Paper') {
 			computerWinsRoundStyleOn();
-			gameText.textContent = `Paper beats Rock!${lossText}`;
+			gameText.textContent = `Paper covers Rock.${lossText}`;
 			return keepScore('Computer');
 		} else if (playerPick === 'Paper' && computerPick === 'Scissors') {
 			computerWinsRoundStyleOn();
-			gameText.textContent = `Scissors beats Paper.${lossText}`;
+			gameText.textContent = `Scissors cut Paper.${lossText}`;
 			return keepScore('Computer');
 		} else if (playerPick === 'Scissors' && computerPick === 'Rock') {
 			computerWinsRoundStyleOn();
-			gameText.textContent = `Rock beats Scissors.${lossText}`;
+			gameText.textContent = `Rock smashes Scissors.${lossText}`;
 			return keepScore('Computer');
 		}
 	}, stepInterval);
@@ -495,36 +486,31 @@ resetYes.addEventListener('click', () => {
 //************************************************************/
 //************** Begin code for COLOR-MODE swap **************/
 //************************************************************/
-if (window.CSS && CSS.supports('color', 'var(--primary)')) {
-	let toggleColorMode = function swapColorMode(e) {
-		//* Switch to Light Mode
-		if (e.currentTarget.classList.contains('light--hidden')) {
-			// transition is called to make swap more elegant
-			transition();
-			// Sets the custom HTML tag attribute
-			document.documentElement.setAttribute('color-mode', 'light');
-			// Sets the user's preference in local storage
-			localStorage.setItem('color-mode', 'light');
-			return;
-		}
-		//* Switch to Dark Mode
+let toggleColorMode = function swapColorMode(e) {
+	console.log(e.currentTarget.classList.value);
+	//* Switch to Light Mode
+	if (e.currentTarget.classList.contains('light--hidden')) {
+		// transition is called to make swap more elegant
 		transition();
-		document.documentElement.setAttribute('color-mode', 'dark');
-		localStorage.setItem('color-mode', 'dark');
-	};
+		// Sets the custom HTML tag attribute
+		document.documentElement.setAttribute('color-mode', 'light');
+		// Sets the user's preference in local storage
+		localStorage.setItem('color-mode', 'light');
+		return;
+	}
+	//* Switch to Dark Mode
+	transition();
+	document.documentElement.setAttribute('color-mode', 'dark');
+	localStorage.setItem('color-mode', 'dark');
+};
 
-	// Get the two .color-mode__btn buttons in the DOM
-	let toggleColorButtons = document.querySelectorAll('.color-mode__btn');
+// Get the two .color-mode__btn buttons in the DOM
+let toggleColorButtons = document.querySelectorAll('.color-mode__btn');
 
-	// Set up event listeners for each
-	toggleColorButtons.forEach(function (btn) {
-		btn.addEventListener('click', toggleColorMode);
-	});
-} else {
-	// If the feature isn't supported, then hide the toggle buttons
-	let divContainer = document.querySelector('.color-mode__header');
-	divContainer.style.display = 'none';
-}
+// Set up event listeners for each
+toggleColorButtons.forEach(function (btn) {
+	btn.addEventListener('click', toggleColorMode);
+});
 
 function transition() {
 	document.documentElement.classList.add('transition');
@@ -532,3 +518,30 @@ function transition() {
 		document.documentElement.classList.remove('transition');
 	}, 600);
 }
+
+//************************************************************/
+//************** Begin code for SOUND swap *******************/
+//************************************************************/
+let toggleSoundMode = function swapSoundMode(e) {
+	//* If sound is off, turn it on
+	if (e.currentTarget.classList.contains('sound--is-off')) {
+		// Sets the custom HTML tag attribute
+		document.documentElement.setAttribute('sound-mode', 'on');
+		document.getElementById('rollOver').muted = false;
+		// Sets the user's preference in local storage
+		localStorage.setItem('sound-mode', 'on');
+		return;
+	}
+	//* Turn Volume Off
+	document.documentElement.setAttribute('sound-mode', 'off');
+	document.getElementById('rollOver').muted = true;
+	localStorage.setItem('sound-mode', 'off');
+};
+
+// Get the two .sound-mode__btn buttons in the DOM
+let toggleSoundButtons = document.querySelectorAll('.sound-mode__btn');
+
+// Set up event listeners for each
+toggleSoundButtons.forEach(function (btnSound) {
+	btnSound.addEventListener('click', toggleSoundMode);
+});
