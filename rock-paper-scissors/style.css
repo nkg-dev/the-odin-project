@@ -12,6 +12,17 @@
 	/*** this is a kid's game, font should be fun! ***/
 	--font-fun: 'Grandstander', Arial, sans-serif;
 
+	/*** ~2px ***/
+	--xxxsmall: calc(var(--font-size) * 0.125);
+	/*** ~3px ***/
+	--xxsmall: calc(var(--font-size) * 0.192);
+	/*** ~4px ***/
+	--xsmall: calc(var(--font-size) * 0.25);
+	--medium: calc(var(--font-size) * 0.5);
+	--large: calc(var(--font-size) * 0.75);
+	--xlarge: calc(var(--font-size) * 1);
+	--xxlarge: calc(var(--font-size) * 1.25);
+
 	--size-icon-reg: calc(var(--font-size) * 2);
 	--size-icon-score: calc(var(--font-size) * 1.6);
 
@@ -67,15 +78,12 @@ html[color-mode='dark'] {
 	--color-four: hsl(283, 60%, 50%);
 }
 
-html {
-	scroll-behavior: smooth;
-}
-
 *,
 *::before,
 *::after {
 	box-sizing: border-box;
 	border-radius: calc(var(--font-size) * 0.5);
+	border-radius: var(--medium);
 	margin: 0;
 
 	color: var(--color-two);
@@ -87,6 +95,10 @@ html {
 	/*** Rather than abruptly switch between Light ***/
 	/*** and Dark modes, soften with transiton *******/
 	transition: all var(--transition-long) ease-in;
+}
+
+html {
+	scroll-behavior: smooth;
 }
 
 body {
@@ -104,6 +116,12 @@ header {
 
 	width: 100%;
 	margin: 0 0 calc(var(--font-size) * 0.5);
+}
+
+path,
+svg:hover,
+svg {
+	transition: all var(--transition-short) linear;
 }
 
 h1 {
@@ -154,7 +172,7 @@ button {
 	max-width: calc(var(--font-size) * 32);
 
 	background-color: var(--color-one);
-	border-radius: calc(var(--font-size) * 0.75);
+	border-radius: var(--large);
 }
 
 /*** Contents between header and footer ******************/
@@ -182,7 +200,7 @@ fieldset {
 	width: 100%;
 
 	background-color: var(--color-two);
-	border: calc(var(--font-size) * 0.125) solid var(--color-two);
+	border: none;
 }
 
 legend {
@@ -192,11 +210,11 @@ legend {
 	padding: calc(var(--font-size) * 0.25) calc(var(--font-size) * 0.5);
 
 	background-color: var(--color-four);
-	border: calc(var(--font-size) * 0.125) solid var(--color-two);
+	border: none;
 }
 
 .computer-section {
-	margin: calc(var(--font-size) * 1) 0 0;
+	margin: calc(var(--font-size) * 1) 0 calc(var(--font-size) * 0.25);
 }
 
 /*** Webkit (Safari & iOS) browser issues forces ***/
@@ -250,7 +268,7 @@ legend {
 	width: calc(var(--font-size) * 9);
 	padding: calc(var(--font-size) * 0.25) 0;
 
-	border: calc(var(--font-size) * 0.2) solid var(--color-one);
+	border: var(--xsmall) solid var(--color-one);
 }
 
 .player-choice__button {
@@ -304,8 +322,8 @@ legend {
 	background-color: var(--color-four);
 	border-color: var(--color-four);
 	box-shadow: var(--shadow-off);
-	color: var(--color-three);
-	fill: var(--color-three);
+	/* color: var(--color-three); */
+	/* fill: var(--color-three); */
 }
 
 /*** on mobile screens, adjust buttons ****/
@@ -375,7 +393,7 @@ legend {
 	padding: calc(var(--font-size) * 0.6);
 
 	background-color: var(--color-three);
-	border: calc(var(--font-size) * 0.125) solid var(--color-two);
+	border: var(--xxsmall) solid var(--color-three);
 }
 
 .game-section__header {
@@ -419,7 +437,7 @@ legend {
 	padding: calc(var(--font-size) * 0.125);
 
 	background-color: var(--color-two);
-	border: calc(var(--font-size) * 0.125) solid var(--color-four);
+	border: var(--xxsmall) solid var(--color-four);
 }
 
 /*** Score Area colors, toggled via JavaScript ***/
@@ -428,7 +446,6 @@ legend {
 #pScore.win,
 #cScore.win {
 	background-color: var(--color-three);
-	border-color: var(--color-two);
 }
 
 #pScoreIcon.win,
@@ -469,6 +486,8 @@ legend {
 		calc(var(--font-size) * 0.5);
 
 	border: calc(var(--font-size) * 0.067) solid var(--color-three);
+	/*! change this color back to color-four  */
+	border: var(--xxsmall) solid var(--color-three);
 	font-size: calc(var(--font-size) * 1.15);
 	line-height: 1.4;
 }
@@ -500,7 +519,8 @@ legend {
 	padding: calc(var(--font-size) * 0.5) calc(var(--font-size) * 1)
 		calc(var(--font-size) * 0.35);
 
-	border: calc(var(--font-size) * 0.067) solid var(--color-two);
+	border: var(--xxxsmall) solid var(--color-two);
+	border-radius: var(--xsmall);
 	background-color: var(--color-three);
 
 	font-size: calc(var(--font-size) * 0.875);
@@ -570,22 +590,20 @@ legend {
 	width: calc(var(--font-size) * 10);
 
 	background-color: var(--color-one);
-	border: calc(var(--font-size) * 0.125) solid var(--color-one);
-	box-shadow: var(--shadow-on);
+	border: var(--xxsmall) solid var(--color-one);
 	color: var(--color-two);
 }
 
 .modal-reset__buttons--yes {
 	background-color: var(--color-one);
-	border: calc(var(--font-size) * 0.125) solid var(--color-two);
+	border-color: var(--color-two);
 	color: var(--color-two);
 }
 
 .modal-reset__buttons--no:hover,
 .modal-reset__buttons--yes:hover {
 	background-color: var(--color-two);
-	border: calc(var(--font-size) * 0.125) solid var(--color-two);
-	box-shadow: var(--shadow-off);
+	border-color: var(--color-two);
 	color: var(--color-one);
 }
 
@@ -613,17 +631,24 @@ legend {
 /******************************************************/
 
 .sound-mode__header {
-	height: calc(var(--size-icon-reg) + calc(var(--font-size) * 0.25));
-	width: calc(var(--size-icon-reg) + calc(var(--font-size) * 0.25));
+	height: var(--size-icon-reg);
+	width: var(--size-icon-reg);
 }
 
 .sound--is-off,
 .sound--is-on {
-	height: calc(var(--size-icon-reg) + calc(var(--font-size) * 0.25));
-	width: calc(var(--size-icon-reg) + calc(var(--font-size) * 0.25));
+	height: var(--size-icon-reg);
+	width: var(--size-icon-reg);
 
+	background-color: var(--color-one);
+	fill: var(--color-two);
+}
+
+.sound--is-on:active,
+.sound--is-off:active,
+.sound--is-on:hover,
+.sound--is-off:hover {
 	background-color: var(--color-two);
-	border: calc(var(--font-size) * 0.125) solid var(--color-two);
 	fill: var(--color-one);
 }
 
@@ -634,6 +659,8 @@ legend {
 .sound--is-off:hover .volume-on,
 .sound--is-off .volume-off {
 	display: block;
+
+	transition: all var(--transition-long) linear;
 }
 
 .sound--is-on:hover .volume-on,
@@ -659,22 +686,21 @@ legend {
 /******************************************************/
 
 .color-mode__header {
-	height: calc(var(--size-icon-reg) + calc(var(--font-size) * 0.25));
-	width: calc(var(--size-icon-reg) + calc(var(--font-size) * 0.25));
+	height: var(--size-icon-reg);
+	width: var(--size-icon-reg);
 
 	transition: none;
 }
 
 .dark--hidden,
 .light--hidden {
-	height: calc(var(--size-icon-reg) + calc(var(--font-size) * 0.25));
-	width: calc(var(--size-icon-reg) + calc(var(--font-size) * 0.25));
+	height: var(--size-icon-reg);
+	width: var(--size-icon-reg);
 
-	background-color: var(--color-two);
-	border: calc(var(--font-size) * 0.125) solid var(--color-two);
-	fill: var(--color-one);
+	background-color: var(--color-one);
+	fill: var(--color-two);
 
-	transition: none;
+	transition: all var(--transition-long) linear;
 }
 
 .dark--hidden:hover,
@@ -682,7 +708,7 @@ legend {
 	background-color: var(--color-three);
 	fill: var(--color-four);
 
-	transition: none;
+	transition: all var(--transition-long) linear;
 }
 
 .dark--hidden:active,
@@ -690,7 +716,7 @@ legend {
 	background-color: var(--color-one);
 	fill: var(--color-two);
 
-	transition: none;
+	transition: all var(--transition-long) linear;
 }
 
 @media screen and (max-width: 550px) {
@@ -703,7 +729,7 @@ legend {
 }
 
 /*** everything in the <footer> area including <details> element ***/
-/*** used to link to people who have inspired me *******************/
+/*** used to link to people who have educated or inspired me *******/
 
 footer,
 footer * {
@@ -733,6 +759,7 @@ details {
 	margin: calc(var(--font-size) * 0.75) 0 calc(var(--font-size) * 0.75);
 	max-width: 40ch;
 
+	border-radius: var(--xsmall);
 	color: var(--color-two);
 	background-color: var(--color-one);
 }
@@ -742,7 +769,7 @@ details > summary {
 
 	padding: calc(var(--font-size) * 0.25);
 
-	border: calc(var(--font-size) * 0.125) solid var(--color-one);
+	border: var(--xxsmall) solid var(--color-one);
 	color: var(--color-two);
 	background-color: var(--color-one);
 }
@@ -750,8 +777,8 @@ details > summary {
 details[open] > summary {
 	color: var(--color-one);
 	background-color: var(--color-two);
-	border-bottom-left-radius: calc(var(--font-size) * 0.192);
-	border-bottom-right-radius: calc(var(--font-size) * 0.192);
+	border-bottom-left-radius: var(--xxsmall);
+	border-bottom-right-radius: var(--xxsmall);
 }
 
 ul {
@@ -782,7 +809,7 @@ a,
 a:visited {
 	color: var(--color-two);
 	text-decoration: none;
-	border-radius: calc(var(--font-size) * 0.125);
+	border-radius: var(--xxxsmall);
 	padding: calc(var(--font-size) * 0.067) calc(var(--font-size) * 0.2)
 		calc(var(--font-size) * 0.12);
 }
@@ -810,8 +837,4 @@ p > a:hover {
 	footer * {
 		font-size: calc(var(--font-size) * 0.8);
 	}
-}
-
-svg {
-	transition: none;
 }
