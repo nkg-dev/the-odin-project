@@ -5,7 +5,7 @@
 //************************************************************/
 
 //? How many rounds needed to win?
-const roundsToWin = 2;
+const roundsToWin = 5;
 
 //? ms interval right after player clicks a button
 const startInterval = 1000;
