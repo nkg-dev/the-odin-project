@@ -89,7 +89,7 @@ html[color-mode='dark'] {
 	color: var(--color-two);
 	font-family: var(--font-fun);
 	font-size: var(--font-size);
-	/*! TODO delete ⬇︎ before placing into prod */
+	/*! TODO comment out ⬇︎ before going live */
 	/* border: 1px dotted blue; */
 
 	/*** Rather than abruptly switch between Light ***/
@@ -322,8 +322,6 @@ legend {
 	background-color: var(--color-four);
 	border-color: var(--color-four);
 	box-shadow: var(--shadow-off);
-	/* color: var(--color-three); */
-	/* fill: var(--color-three); */
 }
 
 /*** on mobile screens, adjust buttons ****/
@@ -346,7 +344,7 @@ legend {
 	}
 	.computer-choice {
 		margin: calc(var(--font-size) * 0.5) 0;
-		height: calc(var(--font-size) * 3.5);
+		height: calc(var(--font-size) * 3.9);
 	}
 
 	/*? setting flex-basis to 100% was  */
@@ -474,7 +472,7 @@ legend {
 .game-section__game-area {
 	display: flex;
 	justify-content: space-between;
-	align-items: flex-end;
+	align-items: flex-start;
 	gap: calc(var(--font-size) * 0.5);
 	width: 100%;
 
@@ -482,11 +480,9 @@ legend {
 }
 
 .game-section__game-text {
-	padding: calc(var(--font-size) * 0.75) calc(var(--font-size) * 0.75)
-		calc(var(--font-size) * 0.5);
+	padding: calc(var(--font-size) * 0.5) calc(var(--font-size) * 0.5)
+		calc(var(--font-size) * 0.25);
 
-	border: calc(var(--font-size) * 0.067) solid var(--color-three);
-	/*! change this color back to color-four  */
 	border: var(--xxsmall) solid var(--color-three);
 	font-size: calc(var(--font-size) * 1.15);
 	line-height: 1.4;
@@ -511,11 +507,14 @@ legend {
 	display: none;
 	background-color: var(--color-two);
 	color: var(--color-three);
+
+	transition: all var(--transition-short) linear;
+	transition: none;
 }
 
 /******************* Reset Button *******************/
 .reset {
-	align-self: center;
+	align-self: flex-start;
 	padding: calc(var(--font-size) * 0.5) calc(var(--font-size) * 1)
 		calc(var(--font-size) * 0.35);
 
