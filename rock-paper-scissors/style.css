@@ -725,12 +725,13 @@ footer {
 footer > p {
 	color: var(--color-one);
 	text-align: center;
+	line-height: 1.6;
 }
 
 details {
 	width: calc(var(--font-size) * 15);
 	margin: calc(var(--font-size) * 0.75) 0 calc(var(--font-size) * 0.75);
-	width: 40ch;
+	max-width: 40ch;
 
 	color: var(--color-two);
 	background-color: var(--color-one);
