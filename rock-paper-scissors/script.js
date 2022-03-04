@@ -488,7 +488,6 @@ resetYes.addEventListener('click', () => {
 //************** Begin code for COLOR-MODE swap **************/
 //************************************************************/
 let toggleColorMode = function swapColorMode(e) {
-	console.log(e.currentTarget.classList.value);
 	//* Switch to Light Mode
 	if (e.currentTarget.classList.contains('light--hidden')) {
 		// transition is called to make swap more elegant
