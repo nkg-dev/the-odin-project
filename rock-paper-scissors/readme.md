@@ -8,11 +8,11 @@ Per the instructions, it was supposed to be simple GUI -- focus was to be the Ja
 
 ### The site in both light and dark mode:
 
-![Light and Dark Modes](/img/Light_and_Dark_modes.png)
+![Light and Dark Modes](/rock-paper-scissors/img/Light_and_Dark_modes.png)
 
 ---
 
-![Mobile Layout](/img/Mobile_layout.png)
+![Mobile Layout](/rock-paper-scissors/img/Mobile_layout.png)
 
 ### Responsve design, including...
 
@@ -24,7 +24,7 @@ Per the instructions, it was supposed to be simple GUI -- focus was to be the Ja
 5.  Built a toggle between light and dark mode (upper right corner), using [a blog post by Ryan Feigenbaum](https://ryanfeigenbaum.com/dark-mode/) as my North Star.
 6.  I added (what I think is) a subtle click sound to when the user chooses rock, paper, or scissors. And, as anyone who's ever been busted at work with the sound on knows, you need to have a button to toggle the sound off (it's on the upper left).
 7.  Finally, from a UX perspective, I made sure the reset button -- who doesn't want to reset if they're losing? -- triggers a modal to confirm that the user does indeed want to reset and didn't just click the button by mistake.
-    ![Modal window](/img/Modal.png)
+    ![Modal window](/rock-paper-scissors/img/Modal.png)
 8.  Since this is a kid's game, I wanted a 'fun' font, and went with [Grandstander](https://fonts.google.com/specimen/Grandstander?query=grandstan) from Google Fonts. Not a font that I would consider using in any other type of project (I'm a geometic Sans Serif person) but I think it turned out well here.
 9.  Being a kid's game, I wanted the colors to have 'pop' hence the almost flurescent quality to the light mode colors (something I learned from [Elizabeth of DesignerUp](https://designerup.co/blog/practical-guide-to-perfect-ui-color-palettes/)). Trying to get Dark Mode correct -- and I'm a _huge_ Dark Mode person (I avoid sites that don't have a dark mode) -- was **really** hard. I learned a lot about how to desaturate colors and adjust lightness.
 10. I am now, to paraphrase one of [Kevin Powell's](https://www.kevinpowell.co/) sayings, "madly, deeply in love with CSS" variables. My girlfriend would be jealous, so I haven't told her...
