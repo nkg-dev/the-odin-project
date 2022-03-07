@@ -8,7 +8,7 @@ Per the instructions, it was supposed to be simple GUI -- focus was to be the Ja
 
 ### The site in both light and dark mode:
 
-![Light and Dark Modes](/rock-paper-scissors/img/Light_and_Dark_modes.png)
+![Light and Dark Modes](../../rock-paper-scissors/img/Light_and_Dark_modes.png)
 
 ---
 
