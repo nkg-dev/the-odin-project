@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link rel="stylesheet" href="style.css" />
+		<title>Etch-A-Sketch</title>
+	</head>
+	<body>
+		<header>
+			<div class="btn_holder">&nbsp;</div>
+			<h1>Etch-A-Sketch</h1>
+			<div class="btn_holder"><button type="reset">Reset</button></div>
+		</header>
+		<div class="main_container">
+			<div class="square_container"> </div>
+		</div>
+		<!--**** begin MODAL code  ****-->
+		<div class="modal-reset__container" id="modalResetContainer">
+			<div class="modal-reset">
+				<h2>Reset</h2>
+				<p
+					>Reset will clear your drawing.
+					<em>You will not be able to undo this.</em></p
+				>
+				<p>You sure you want to reset?</p>
+				<div class="modal-reset__btn-container">
+					<button class="reset-yes" id="resetYes">Yes, reset</button>
+					<button class="reset-no" id="resetNo">No, don't reset</button>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>
