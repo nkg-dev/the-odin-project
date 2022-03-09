@@ -1,7 +1,8 @@
-@import url('https://fonts.googleapis.com/css2?family=Sansita+Swashed:wght@700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@100..900&family=Sansita+Swashed:wght@700&display=swap');
 
 :root {
 	--font-cursive: 'Sansita Swashed', cursive, serif;
+	--font-reg: 'Fredoka', system-ui, -apple-system, Arial, Helvetica, sans-serif;
 }
 
 *,
@@ -11,10 +12,11 @@
 	margin: 0px;
 	padding: 0px;
 
-	font-family: system-ui, -apple-system, Arial, Helvetica, sans-serif;
+	font-family: var(--font-reg);
+	font-weight: 400;
 	font-size: 20px;
 
-	border: 1px dotted #e9ecef;
+	/* border: 1px dotted #e9ecef; */
 }
 
 body {
@@ -30,12 +32,11 @@ body {
 
 header {
 	width: 992px;
-	padding: 0 1rem;
+	padding: 0;
+	margin: 0;
 
 	display: flex;
-	/* flex-basis: 8rem; */
 	justify-content: space-around;
-	justify-content: space-evenly;
 	align-items: center;
 }
 
@@ -45,63 +46,34 @@ h1 {
 
 	color: #ffec99;
 
-	padding: 1.5rem 3rem;
-	filter: drop-shadow(2px 4px 2px #22262a);
+	padding: 1rem;
+	filter: drop-shadow(3px 3px 1px #22262a);
 }
 
 h2 {
-	font-size: 1.5rem;
+	padding: 1rem;
+
+	font-size: 2rem;
 	font-weight: 700;
 	letter-spacing: 1px;
 
 	color: #ffec99;
-
-	padding: 1rem;
 }
 
 p {
+	padding: 0.75rem 1rem;
+
 	font-size: 1rem;
-
-	padding: 1rem;
-}
-
-.btn_holder {
-	width: 100px;
-}
-
-.main_container {
-	width: 992px;
-	height: 992px;
-
-	display: flex;
-	flex-direction: column;
-	/* place-content: center; */
-	justify-content: center;
-	align-items: center;
-
-	background-color: #adb5bd;
-	border-radius: 30px;
-	/* border: 2px solid #dee2e6; */
-
-	box-shadow: inset 2px 2px 6px 4px hsla(210, 11%, 15%, 0.4),
-		inset -2px -2px 6px 4px hsla(210, 11%, 15%, 0.4),
-		-4px -4px 4px 4px hsla(210, 11%, 15%, 0.4),
-		4px 4px 4px 4px hsla(210, 11%, 15%, 0.4);
-	/* box-shadow: 2px 2px 4px 6px hsla(210, 11%, 15%, 0.4); */
-}
-
-.square_container {
-	width: 960px;
-	height: 960px;
-
-	background-color: #adb5bd;
-	/* border: 1px solid #e9ecef; */
 }
 
 button {
-	padding: 0.8rem 1.6rem;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	padding: 0.75rem 1rem;
+	width: 100%;
 
-	font-size: 1.25rem;
+	font-size: 1.15rem;
 	font-weight: 700;
 
 	background-color: #ffec99;
@@ -120,12 +92,79 @@ button:active {
 	color: #212529;
 }
 
+svg {
+	height: 1.5rem;
+	width: 1.5rem;
+	margin: 0rem 0.5rem 0 0;
+}
+
+/* This is to keep the HEADER balanced */
+.btn_holder {
+	width: 150px;
+}
+
+.main_container {
+	width: 992px;
+	height: 992px;
+
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+
+	background-color: #adb5bd;
+	border-radius: 30px;
+
+	box-shadow: inset 2px 2px 6px 4px hsla(210, 11%, 15%, 0.4),
+		inset -2px -2px 6px 4px hsla(210, 11%, 15%, 0.4),
+		-2px -2px 4px 4px hsla(210, 11%, 15%, 0.4),
+		2px 2px 4px 4px hsla(210, 11%, 15%, 0.4);
+}
+
+.square_container {
+	width: 960px;
+	height: 960px;
+
+	background-color: #adb5bd;
+	/* border: 1px solid #e9ecef; */
+}
+
+/************************************************************************/
+/**************************** code for MODAL ****************************/
+/************************************************************************/
+.modal-reset__container {
+	opacity: 0;
+
+	position: fixed;
+	top: 0;
+	left: 0;
+	height: 100vh;
+	width: 100vw;
+
+	pointer-events: none;
+
+	display: flex;
+	justify-content: center;
+	align-items: center;
+
+	background-color: hsla(0, 0%, 0%, 0.6);
+	-webkit-backdrop-filter: blur(20px);
+	backdrop-filter: blur(20px);
+	border-radius: 0;
+}
+
+.modal-reset__container.show {
+	opacity: 1;
+
+	pointer-events: auto;
+}
+
 .modal-reset {
-	padding: 2rem;
+	padding: 1rem 1.5rem;
 	width: 700px;
 
 	background-color: #8a1d1d;
-	border-radius: 8px;
+	border-radius: 16px;
 	box-shadow: 4px 4px 16px 8px hsla(210, 11%, 15%, 0.4);
 }
 
@@ -138,7 +177,7 @@ button:active {
 
 .reset-yes,
 .reset-no {
-	width: 240px;
+	width: 280px;
 }
 
 .reset-no {
