@@ -98,6 +98,38 @@ svg {
 	margin: 0rem 0.5rem 0 0;
 }
 
+footer {
+	/* width: 992px; */
+	/* padding: 0; */
+	/* margin: 0; */
+
+	/* display: flex; */
+	/* justify-content: center; */
+	/* align-items: center; */
+	text-align: center;
+}
+
+footer p,
+footer a {
+	font-size: 0.75rem;
+	line-height: 1.5;
+}
+
+a,
+a:visited {
+	padding: 2px 4px;
+
+	border-radius: 4px;
+	color: #66d9e8;
+	text-decoration: none;
+}
+
+a:hover,
+a:active {
+	background-color: #66d9e8;
+	color: #8a1d1d;
+}
+
 /* This is to keep the HEADER balanced */
 .btn_holder {
 	width: 150px;
