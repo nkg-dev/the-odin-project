@@ -3,6 +3,11 @@
 :root {
 	--font-cursive: 'Sansita Swashed', cursive, serif;
 	--font-reg: 'Fredoka', system-ui, -apple-system, Arial, Helvetica, sans-serif;
+	--color-main: #8b1d1d;
+	--color-accent: #ffec99;
+	--color-gray-light: #adb5bd;
+	--color-gray-dark: #212529;
+	--color-link: #8cf2f2;
 }
 
 *,
@@ -26,7 +31,7 @@ body {
 
 	margin-bottom: 4rem;
 
-	background-color: #8a1d1d;
+	background-color: var(--color-main);
 	color: #f8f9fa;
 }
 
@@ -44,7 +49,7 @@ h1 {
 	font-family: var(--font-cursive);
 	font-size: 3.5rem;
 
-	color: #ffec99;
+	color: var(--color-accent);
 
 	padding: 1rem;
 	filter: drop-shadow(3px 3px 1px #22262a);
@@ -57,7 +62,7 @@ h2 {
 	font-weight: 700;
 	letter-spacing: 1px;
 
-	color: #ffec99;
+	color: var(--color-accent);
 }
 
 p {
@@ -76,20 +81,20 @@ button {
 	font-size: 1.15rem;
 	font-weight: 700;
 
-	background-color: #ffec99;
+	background-color: var(--color-accent);
 	border: none;
 	border-radius: 8px;
 	/* box-shadow: 2px 2px 4px 2px hsla(210, 11%, 15%, 0.4); */
-	color: #8a1d1d;
+	color: var(--color-main);
 
 	cursor: pointer;
 }
 
 button:hover,
 button:active {
-	background-color: #adb5bd;
+	background-color: var(--color-gray-light);
 	box-shadow: inset 1px 1px 2px 2px hsla(210, 11%, 15%, 0.4);
-	color: #212529;
+	color: var(--color-gray-dark);
 }
 
 svg {
@@ -119,15 +124,33 @@ a,
 a:visited {
 	padding: 2px 4px;
 
-	border-radius: 4px;
-	color: #66d9e8;
+	border-radius: 2px;
+	color: var(--color-link);
 	text-decoration: none;
 }
 
 a:hover,
 a:active {
-	background-color: #66d9e8;
-	color: #8a1d1d;
+	background-color: var(--color-link);
+	color: var(--color-main);
+}
+
+details {
+	border: 2px solid var(--color-gray-light);
+	border-radius: 4px;
+	padding: 0.5rem 1rem;
+	width: 360px;
+}
+
+summary {
+	font-size: 0.75rem;
+}
+
+details li {
+	font-size: 0.75rem;
+	text-align: left;
+	list-style: none;
+	line-height: 1.75;
 }
 
 /* This is to keep the HEADER balanced */
@@ -144,7 +167,7 @@ a:active {
 	justify-content: center;
 	align-items: center;
 
-	background-color: #adb5bd;
+	background-color: var(--color-gray-light);
 	border-radius: 30px;
 
 	box-shadow: inset 2px 2px 6px 4px hsla(210, 11%, 15%, 0.4),
@@ -157,7 +180,7 @@ a:active {
 	width: 960px;
 	height: 960px;
 
-	background-color: #adb5bd;
+	background-color: var(--color-gray-light);
 	/* border: 1px solid #e9ecef; */
 }
 
@@ -195,7 +218,7 @@ a:active {
 	padding: 1rem 1.5rem;
 	width: 700px;
 
-	background-color: #8a1d1d;
+	background-color: var(--color-main);
 	border-radius: 16px;
 	box-shadow: 4px 4px 16px 8px hsla(210, 11%, 15%, 0.4);
 }
@@ -214,5 +237,5 @@ a:active {
 
 .reset-no {
 	background-color: transparent;
-	color: #ffec99;
+	color: var(--color-accent);
 }
