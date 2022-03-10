@@ -177,11 +177,21 @@ details li {
 }
 
 .square_container {
+	display: grid;
+	grid-template-columns: repeat(60, 16px);
+	grid-template-rows: repeat(60, 16px);
+
 	width: 960px;
 	height: 960px;
 
 	background-color: var(--color-gray-light);
 	/* border: 1px solid #e9ecef; */
+}
+
+.sketch-div {
+	font-size: 6px;
+	font-weight: 700;
+	/* border: 1px solid dodgerblue; */
 }
 
 /************************************************************************/
