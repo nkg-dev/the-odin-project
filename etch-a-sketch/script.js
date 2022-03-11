@@ -7,29 +7,32 @@
 // let divsPerSide = Math.floor(divCount ** (1 / 2));
 let divsPerSide = 60;
 let divCount = divsPerSide ** 2;
-// let divWidth = Math.floor(60 / divsPerSide);
 let divWidth = 60 / divsPerSide;
+// let divWidth = Math.floor(60 / divsPerSide);
+// sketchArea.style.gridTemplateColumns = `repeat(${divsPerSide}, ${divWidth}px)`;
+// sketchArea.style.gridTemplateRows = `repeat(${divsPerSide}, ${divWidth}px)`;
+
 console.log(`DIVs per Side = ${divsPerSide}`);
 console.log(`DIV Width = ${divWidth}rem`);
 
 const sketchArea = document.getElementById('sketchArea');
 
-// sketchArea.style.gridTemplateColumns = `repeat(${divsPerSide}, ${divWidth}px)`;
-// sketchArea.style.gridTemplateRows = `repeat(${divsPerSide}, ${divWidth}px)`;
 sketchArea.style.gridTemplateColumns = `repeat(${divsPerSide}, ${divWidth}rem)`;
 sketchArea.style.gridTemplateRows = `repeat(${divsPerSide}, ${divWidth}rem)`;
 
 function buildGrid() {
+	sketchArea.innerText = '';
 	for (let i = 0; i < divCount; i++) {
-		const sketchDiv = document.createElement('div');
-		sketchDiv.classList.add('sketch-div');
-		let hue = Math.floor(Math.random() * 361);
+		const sketchDiv = document.createElement('div.sketch-div');
+		// sketchDiv.classList.add('sketch-div');
+		// let hue = Math.floor(Math.random() * 361);
 		// sketchDiv.textContent = i + '–' + hue;
-		// sketchDiv.textContent = hue;
+		// sketchDiv.textContent = i;
 		// sketchDiv.style.color = `hsl(${hue - 180}, 75%, 50%)`;
-		sketchDiv.style.backgroundColor = `hsl(${hue}, 75%, 50%)`;
-		// sketchDiv.style.backgroundColor = 'black';
-		// sketchDiv.style.opacity = 0;
+		// sketchDiv.style.backgroundColor = `hsl(${hue}, 75%, 50%)`;
+		sketchDiv.addEventListener('mouseover', letsDraw);
+		sketchDiv.style.backgroundColor = 'black';
+		sketchDiv.style.opacity = 0;
 		sketchArea.appendChild(sketchDiv);
 	}
 }
@@ -40,7 +43,6 @@ buildGrid();
 //****************** Begin code for DRAWING ******************/
 //************************************************************/
 function letsDraw() {
-	// this.style.backgroundColor = 'black';
 	//*** As in color theory, shade adds black to the color ****/
 	let shade = Number(this.style.getPropertyValue('opacity'));
 	//*** toFixed() returns a string, so needs Number() ********/
@@ -50,16 +52,6 @@ function letsDraw() {
 	}
 	this.style.opacity = shade;
 }
-
-const sketchDivs = document.querySelectorAll('div.sketch-div');
-function drawingMode() {
-	for (let i = 0; i < divCount; i++) {
-		sketchDivs[i].addEventListener('mouseover', letsDraw);
-		// sketchDivs[i].removeEventListener('mouseover', getDarker);
-	}
-}
-
-drawingMode();
 
 //************************************************************/
 //**************** Begin code for RESET modal ****************/
@@ -78,12 +70,6 @@ resetNo.addEventListener('click', () => {
 });
 
 resetYes.addEventListener('click', () => {
-	resetAll();
+	buildGrid();
 	modalResetContainer.classList.remove('show');
 });
-
-function resetAll() {
-	sketchArea.innerText = '';
-	buildGrid();
-	drawingMode();
-}

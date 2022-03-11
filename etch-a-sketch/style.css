@@ -67,8 +67,6 @@ h2 {
 
 p {
 	padding: 0.75rem 1rem;
-
-	/* font-size: 1rem; */
 }
 
 button {
@@ -83,7 +81,7 @@ button {
 
 	background-color: var(--color-accent);
 	border: none;
-	border-radius: 8px;
+	border-radius: 0.5rem;
 	/* box-shadow: 2px 2px 4px 2px hsla(210, 11%, 15%, 0.4); */
 	color: var(--color-main);
 
@@ -93,7 +91,7 @@ button {
 button:hover,
 button:active {
 	background-color: var(--color-gray-light);
-	box-shadow: inset 1px 1px 2px 2px hsla(210, 11%, 15%, 0.4);
+	box-shadow: inset 1px 1px 2px 2px hsla(210, 11%, 15%, 0.3);
 	color: var(--color-gray-dark);
 }
 
@@ -153,9 +151,9 @@ details li {
 	line-height: 1.75;
 }
 
-/* This is to keep the HEADER balanced */
+/*** This is to keep the HEADER balanced ***/
 .btn_holder {
-	width: 150px;
+	width: 10rem;
 }
 
 .main_container {
@@ -177,18 +175,14 @@ details li {
 }
 
 .square_container {
-	/* opacity: 0; */
 	display: grid;
-	/* grid-template-columns: repeat(60, 16px); */
-	/* grid-template-rows: repeat(60, 16px); */
 	place-content: center;
 
 	width: 60rem;
 	height: 60rem;
 
 	background-color: var(--color-gray-light);
-	background-color: var(--color-main);
-	/* border: 1px solid #e9ecef; */
+	cursor: pointer;
 }
 
 .sketch-div {
@@ -198,12 +192,6 @@ details li {
 
 	font-size: 0.3rem;
 	font-weight: 700;
-	/* color: var(--color-gray-light); */
-
-	cursor: pointer;
-	/* border-radius: 50%; */
-	/* border: 1px solid black; */
-	/* border: 1px solid var(--color-gray-light); */
 }
 
 /************************************************************************/
