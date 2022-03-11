@@ -181,11 +181,13 @@ details li {
 	display: grid;
 	/* grid-template-columns: repeat(60, 16px); */
 	/* grid-template-rows: repeat(60, 16px); */
+	place-content: center;
 
 	width: 960px;
 	height: 960px;
 
 	background-color: var(--color-gray-light);
+	/* background-color: var(--color-main); */
 	/* border: 1px solid #e9ecef; */
 }
 
@@ -194,7 +196,7 @@ details li {
 	justify-content: center;
 	align-items: center;
 
-	font-size: 0.5rem;
+	font-size: 0.3rem;
 	font-weight: 700;
 	/* color: var(--color-gray-light); */
 
