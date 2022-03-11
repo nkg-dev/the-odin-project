@@ -5,28 +5,31 @@
 // let divCount = 256;
 
 // let divsPerSide = Math.floor(divCount ** (1 / 2));
-let divsPerSide = 80;
+let divsPerSide = 60;
 let divCount = divsPerSide ** 2;
-let divWidth = Math.floor(960 / divsPerSide);
+// let divWidth = Math.floor(60 / divsPerSide);
+let divWidth = 60 / divsPerSide;
 console.log(`DIVs per Side = ${divsPerSide}`);
-console.log(`DIV Width = ${divWidth}px`);
+console.log(`DIV Width = ${divWidth}rem`);
 
 const sketchArea = document.getElementById('sketchArea');
 
-sketchArea.style.gridTemplateColumns = `repeat(${divsPerSide}, ${divWidth}px)`;
-sketchArea.style.gridTemplateRows = `repeat(${divsPerSide}, ${divWidth}px)`;
+// sketchArea.style.gridTemplateColumns = `repeat(${divsPerSide}, ${divWidth}px)`;
+// sketchArea.style.gridTemplateRows = `repeat(${divsPerSide}, ${divWidth}px)`;
+sketchArea.style.gridTemplateColumns = `repeat(${divsPerSide}, ${divWidth}rem)`;
+sketchArea.style.gridTemplateRows = `repeat(${divsPerSide}, ${divWidth}rem)`;
 
 function buildGrid() {
 	for (let i = 0; i < divCount; i++) {
 		const sketchDiv = document.createElement('div');
 		sketchDiv.classList.add('sketch-div');
-		// let hue = Math.floor(Math.random() * 361);
+		let hue = Math.floor(Math.random() * 361);
 		// sketchDiv.textContent = i + '–' + hue;
 		// sketchDiv.textContent = hue;
 		// sketchDiv.style.color = `hsl(${hue - 180}, 75%, 50%)`;
-		// sketchDiv.style.backgroundColor = `hsl(${hue}, 75%, 50%)`;
-		sketchDiv.style.backgroundColor = 'black';
-		sketchDiv.style.opacity = 0;
+		sketchDiv.style.backgroundColor = `hsl(${hue}, 75%, 50%)`;
+		// sketchDiv.style.backgroundColor = 'black';
+		// sketchDiv.style.opacity = 0;
 		sketchArea.appendChild(sketchDiv);
 	}
 }
