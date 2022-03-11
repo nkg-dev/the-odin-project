@@ -17,10 +17,6 @@
 	margin: 0px;
 	padding: 0px;
 
-	font-family: var(--font-reg);
-	font-weight: 400;
-	font-size: 20px;
-
 	/* border: 1px dotted #e9ecef; */
 }
 
@@ -31,12 +27,16 @@ body {
 
 	margin-bottom: 4rem;
 
+	font-family: var(--font-reg);
+	font-weight: 400;
+	font-size: 1.25rem;
+
 	background-color: var(--color-main);
 	color: #f8f9fa;
 }
 
 header {
-	width: 992px;
+	width: 62rem;
 	padding: 0;
 	margin: 0;
 
@@ -68,7 +68,7 @@ h2 {
 p {
 	padding: 0.75rem 1rem;
 
-	font-size: 1rem;
+	/* font-size: 1rem; */
 }
 
 button {
@@ -159,8 +159,8 @@ details li {
 }
 
 .main_container {
-	width: 992px;
-	height: 992px;
+	width: 62rem;
+	height: 62rem;
 
 	display: flex;
 	flex-direction: column;
@@ -168,7 +168,7 @@ details li {
 	align-items: center;
 
 	background-color: var(--color-gray-light);
-	border-radius: 30px;
+	border-radius: 2rem;
 
 	box-shadow: inset 2px 2px 6px 2px hsla(210, 11%, 15%, 0.4),
 		inset -2px -2px 6px 2px hsla(210, 11%, 15%, 0.4),
@@ -183,11 +183,11 @@ details li {
 	/* grid-template-rows: repeat(60, 16px); */
 	place-content: center;
 
-	width: 960px;
-	height: 960px;
+	width: 60rem;
+	height: 60rem;
 
 	background-color: var(--color-gray-light);
-	/* background-color: var(--color-main); */
+	background-color: var(--color-main);
 	/* border: 1px solid #e9ecef; */
 }
 
@@ -238,10 +238,10 @@ details li {
 
 .modal-reset {
 	padding: 1rem 1.5rem;
-	width: 700px;
+	width: 35rem;
 
 	background-color: var(--color-main);
-	border-radius: 16px;
+	border-radius: 1rem;
 	box-shadow: 4px 4px 16px 8px hsla(210, 11%, 15%, 0.4);
 }
 
@@ -254,7 +254,7 @@ details li {
 
 .reset-yes,
 .reset-no {
-	width: 280px;
+	width: 14rem;
 }
 
 .reset-no {
