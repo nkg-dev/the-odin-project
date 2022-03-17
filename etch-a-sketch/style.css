@@ -1,0 +1,380 @@
+@import url('https://fonts.googleapis.com/css2?family=Sansita+Swashed:wght@700&display=swap');
+
+:root {
+	--font-size: calc(0.875rem + ((1vw - 0.01rem) * 0.5));
+	min-height: 0vw;
+
+	--font-cursive: 'Sansita Swashed', cursive, serif;
+	--font-reg: system-ui, -apple-system, Arial, Helvetica, sans-serif;
+	--color-main: #8b1d1d;
+	--color-accent: #ffec99;
+	--color-gray-light: #adb5bd;
+	--color-gray-dark: #212529;
+	--color-link: #8cf2f2;
+	--color-base-text: #f8f9fa;
+	--color-shadow: hsla(210, 11%, 15%, 0.3);
+
+	--block-size: calc(0.75rem + ((1vw - 0.1rem) * 0.5));
+}
+
+@media screen and (min-width: 1440px) {
+	:root {
+		--block-size: calc(0.9rem + ((1vw - 0.1rem) * 0.5));
+		--font-size: 1.25rem;
+	}
+}
+
+@media screen and (max-width: 1040px) {
+	:root {
+		--block-size: calc(0.5rem + ((1vw - 0.1rem) * 0.5));
+	}
+}
+
+@media screen and (max-width: 688px) {
+	:root {
+		--block-size: calc(0.3rem + ((1vw - 0.1rem) * 0.5));
+	}
+}
+
+*,
+*::after,
+*::before {
+	box-sizing: border-box;
+	margin: 0px;
+	padding: 0px;
+}
+
+body {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+
+	font-family: var(--font-reg);
+	font-weight: 400;
+	font-size: calc(var(--font-size) * 1.15);
+
+	background-color: var(--color-main);
+	color: var(--color-base-text);
+}
+
+header {
+	width: calc(var(--block-size) * 62);
+	padding: 0;
+	margin: 0;
+
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+h1 {
+	padding: calc(var(--font-size) * 1);
+
+	font-family: var(--font-cursive);
+	/*** use block-size here to be more responsive when adjusting viewport ***/
+	font-size: calc(var(--block-size) * 5.5);
+
+	color: var(--color-accent);
+	filter: drop-shadow(3px 3px 1px #22262a);
+}
+
+h2 {
+	padding: calc(var(--font-size) * 1);
+
+	font-size: calc(var(--font-size) * 2);
+	font-weight: 700;
+	letter-spacing: 1px;
+
+	color: var(--color-accent);
+}
+
+p {
+	padding: calc(var(--font-size) * 0.75) calc(var(--font-size) * 1);
+}
+
+input {
+	padding: calc(var(--font-size) * 0.5) calc(var(--font-size) * 0.75);
+	/*** width value should match the SVG space in the reset modal ***/
+	width: calc(var(--font-size) * 5);
+
+	background-color: var(--color-main);
+	border: none;
+	border-top-right-radius: calc(var(--font-size) * 0.5);
+	border-bottom-right-radius: calc(var(--font-size) * 0.5);
+	color: var(--color-accent);
+	text-align: right;
+
+	font-size: calc(var(--font-size) * 1.25);
+	font-weight: 700;
+}
+
+label {
+	margin: 0 calc(var(--font-size) * 0.5);
+	font-size: calc(var(--font-size) * 1);
+	font-weight: 600;
+	text-align: right;
+
+	color: var(--color-main);
+}
+
+button {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	padding: calc(var(--font-size) * 0.5) calc(var(--font-size) * 0.5);
+	width: 100%;
+
+	font-size: calc(var(--block-size) * 1.5);
+	font-weight: 700;
+
+	background-color: var(--color-accent);
+	border: none;
+	border-radius: calc(var(--font-size) * 0.5);
+	color: var(--color-main);
+
+	cursor: pointer;
+}
+
+button:hover,
+button:active {
+	background-color: var(--color-gray-light);
+	box-shadow: inset 1px 1px 2px 2px var(--color-shadow);
+	color: var(--color-gray-dark);
+}
+
+svg {
+	height: calc(var(--block-size) * 2);
+	width: calc(var(--block-size) * 2);
+	margin: 0 calc(var(--font-size) * 0.5) 0 0;
+}
+
+footer {
+	text-align: center;
+	height: calc(var(--font-size) * 13);
+}
+
+footer p,
+footer a {
+	font-size: calc(var(--font-size) * 0.75);
+	line-height: 1.5;
+}
+
+a,
+a:visited {
+	padding: calc(var(--font-size) * 0.125) calc(var(--font-size) * 0.25);
+
+	border-radius: calc(var(--font-size) * 0.125);
+	color: var(--color-link);
+	text-decoration: none;
+}
+
+a:hover,
+a:active {
+	background-color: var(--color-link);
+	color: var(--color-main);
+}
+
+details {
+	border: calc(var(--font-size) * 0.125) solid var(--color-gray-light);
+	border-radius: calc(var(--font-size) * 0.5);
+	width: calc(var(--font-size) * 22.5);
+}
+
+details > summary {
+	border-bottom: calc(var(--font-size) * 0.125) solid transparent;
+	border-radius: calc(var(--font-size) * 0.5);
+	width: 100%;
+	padding: calc(var(--font-size) * 0.5) calc(var(--font-size) * 1);
+	font-size: calc(var(--font-size) * 0.75);
+	font-weight: 700;
+	background-color: var(--color-main);
+	color: var(--color-gray-light);
+}
+
+details[open] > summary {
+	color: var(--color-accent);
+	border-bottom: calc(var(--font-size) * 0.125) solid var(--color-gray-light);
+	border-bottom-left-radius: 0;
+	border-bottom-right-radius: 0;
+}
+
+details li {
+	margin: calc(var(--font-size) * 0.33) calc(var(--font-size) * 1);
+	font-size: calc(var(--font-size) * 0.75);
+	text-align: left;
+	list-style: none;
+	line-height: 1.75;
+}
+
+hr {
+	margin: calc(var(--font-size) * 0.25) 0;
+}
+
+.btn_holder {
+	/*** use block-size here to be more responsive when adjusting viewport ***/
+	width: calc(var(--block-size) * 10);
+}
+
+.main-container {
+	/*** Width and height should be 3 units greater than ***/
+	/*** .square-container to account for shadow ***********/
+	width: calc(var(--block-size) * 63);
+	height: calc(var(--block-size) * 63);
+
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+
+	background-color: var(--color-gray-light);
+	border-radius: calc(var(--block-size) * 3);
+
+	box-shadow: inset 2px 2px 4px 2px var(--color-shadow),
+		inset -3px -3px 4px 2px var(--color-shadow),
+		-3px -3px 4px 4px var(--color-shadow), 2px 2px 4px 4px var(--color-shadow);
+}
+
+.square-container {
+	display: -ms-grid;
+	display: grid;
+	place-content: center;
+
+	/*** Set to approximate 960px wide ********/
+	width: calc(var(--block-size) * 60);
+	height: calc(var(--block-size) * 60);
+
+	background-color: var(--color-gray-light);
+	cursor: pointer;
+}
+
+.sketch-div {
+	user-select: none;
+	cursor: pointer;
+
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.sketch-div:active,
+.sketch-div::selection,
+.sketch-div:hover {
+	cursor: pointer;
+}
+
+/************************************************************************/
+/**************************** code for MODAL ****************************/
+/************************************************************************/
+.modal-reset__container {
+	opacity: 0;
+
+	position: fixed;
+	top: 0;
+	left: 0;
+	height: 100vh;
+	width: 100vw;
+
+	pointer-events: none;
+
+	display: flex;
+	justify-content: center;
+	align-items: center;
+
+	background-color: hsla(0, 0%, 0%, 0.6);
+	-webkit-backdrop-filter: blur(20px);
+	backdrop-filter: blur(20px);
+	border-radius: 0;
+}
+
+.modal-reset__container.show {
+	opacity: 1;
+
+	pointer-events: auto;
+}
+
+.modal-reset {
+	padding: calc(var(--font-size) * 1) calc(var(--font-size) * 1.5);
+	width: calc(var(--font-size) * 38);
+
+	background-color: var(--color-main);
+	border-radius: calc(var(--font-size) * 1);
+	box-shadow: 2px 2px 8px 4px var(--color-shadow);
+}
+
+.modal-reset__btn-container {
+	display: flex;
+	justify-content: space-between;
+
+	padding: calc(var(--font-size) * 1.5) calc(var(--font-size) * 1);
+}
+
+.reset-yes,
+.reset-no {
+	width: calc(var(--font-size) * 15);
+	border: calc(var(--font-size) * 0.125) solid var(--color-accent);
+
+	font-size: calc(var(--font-size) * 1.15);
+}
+
+.reset-yes > svg,
+.reset-no > svg {
+	width: calc(var(--font-size) * 1.5);
+	height: calc(var(--font-size) * 1.5);
+}
+
+.reset-no {
+	background-color: transparent;
+	color: var(--color-accent);
+}
+
+.reset-no:active,
+.reset-yes:active,
+.reset-no:hover,
+.reset-yes:hover {
+	border: calc(var(--font-size) * 0.125) solid transparent;
+}
+
+.modal-reset__input-container {
+	max-width: -moz-fit-content;
+	max-width: fit-content;
+	margin: calc(var(--font-size) * 1.5) calc(var(--font-size) * 1);
+
+	align-self: center;
+
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	border: calc(var(--font-size) * 0.125) solid var(--color-accent);
+
+	background-color: var(--color-accent);
+	border-radius: calc(var(--font-size) * 0.5);
+}
+
+.input-corner {
+	height: calc(var(--font-size) * 2.5);
+	width: calc(var(--font-size) * 5);
+	padding: calc(var(--font-size) * 0.25);
+
+	border-top-left-radius: calc(var(--font-size) * 0.5);
+	border-bottom-left-radius: calc(var(--font-size) * 0.5);
+	border: calc(var(--font-size) * 0.125) solid var(--color-main);
+	background-color: var(--color-main);
+	fill: var(--color-accent);
+}
+
+@media screen and (max-width: 832px) {
+	.modal-reset {
+		width: 80%;
+	}
+	.reset-yes,
+	.reset-no {
+		margin: calc(var(--font-size) * 1.5) 0;
+	}
+	.modal-reset__btn-container {
+		flex-direction: column-reverse;
+		padding: calc(var(--font-size) * 1) calc(var(--font-size) * 0.5);
+	}
+	.modal-reset__input-container {
+		margin: calc(var(--font-size) * 1) calc(var(--font-size) * 0.5);
+	}
+}

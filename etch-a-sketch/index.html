@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<meta name="twitter:title" content="Etch-A-Sketch" />
+		<meta name="twitter:description" content="A JavaScript Project" />
+		<meta
+			name="twitter:image"
+			content="https://nkg-dev.github.io/img/EAS.png"
+		/>
+		<meta name="twitter:card" content="summary_large_image" />
+		<meta property="og:title" content="Etch-A-Sketch"">
+		<meta property="og:type" content="website" />
+		<meta property="og:description" content="A JavaScript Project" />
+		<meta property="og:image" content="https://nkg-dev.github.io/img/EAS.png" />
+		<meta
+			property="og:url"
+			content="https://nkg-dev.github.io/projects/etch-a-sketch/"
+		/>
+		<link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png" />
+		<link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png" />
+		<link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png" />
+		<link rel="manifest" href="site.webmanifest" />
+		<link rel="stylesheet" href="style.css" />
+		<script src="script.js" defer></script>
+		<title>Etch-A-Sketch</title>
+	</head>
+	<body>
+		<header>
+			<div class="btn_holder">&nbsp;</div>
+			<h1>Etch-A-Sketch</h1>
+			<div class="btn_holder"
+				><button type="reset" id="resetButton">
+					<svg
+						xmlns="http://www.w3.org/2000/svg"
+						aria-hidden="true"
+						role="img"
+						preserveAspectRatio="xMidYMid meet"
+						viewBox="0 0 24 24"
+					>
+						<path
+							fill="currentColor"
+							d="M12 2C6.47 2 2 6.47 2 12s4.47 10 10 10s10-4.47 10-10S17.53 2 12 2zm4.3 14.3a.996.996 0 0 1-1.41 0L12 13.41L9.11 16.3a.996.996 0 1 1-1.41-1.41L10.59 12L7.7 9.11A.996.996 0 1 1 9.11 7.7L12 10.59l2.89-2.89a.996.996 0 1 1 1.41 1.41L13.41 12l2.89 2.89c.38.38.38 1.02 0 1.41z"
+						/></svg
+					>Reset</button
+				></div
+			>
+		</header>
+		<div class="main-container">
+			<!--******* Square Container DIV will be populated via JavaScript *****-->
+			<div class="square-container" id="sketchArea"> </div>
+		</div>
+		<!--******* Code for FOOTER with credits in DETAILS tag *****-->
+		<footer>
+			<p
+				>Designed and coded by Neil Ghoshal<br />2022 &nbsp;|
+				<a
+					href="https://www.theodinproject.com/"
+					target="_blank"
+					rel="noopener noreferrer"
+					>The Odin Project</a
+				></p
+			>
+			<details>
+				<summary>Credits</summary>
+				<ul role="list">
+					<!--**** no space between A tag and preceding text because A tag as CSS padding ****-->
+					<li
+						>Icons from<a
+							href="https://icons.getbootstrap.com/"
+							target="_blank"
+							rel="noopener noreferrer"
+							>Bootstrap</a
+						></li
+					>
+					<li
+						>Fluid typography from<a
+							target="_blank"
+							rel="noopener noreferrer"
+							href="https://websemantics.uk/tools/responsive-font-calculator/"
+							>Michael Riethmuller</a
+						></li
+					>
+					<li><hr /></li>
+					<li
+						>I hated CSS until I found<a
+							target="_blank"
+							rel="noopener noreferrer"
+							href="https://www.kevinpowell.co/"
+							>Kevin Powell</a
+						></li
+					>
+				</ul>
+			</details>
+		</footer>
+		<!--**** begin MODAL code  ****-->
+		<div class="modal-reset__container" id="modalResetContainer">
+			<div class="modal-reset">
+				<h2>Reset</h2>
+				<p>Reset will clear your drawing. <em>You cannot undo this.</em></p>
+				<p>Do you want to reset?</p>
+				<div class="modal-reset__btn-container">
+					<button id="resetYes" class="reset-yes"
+						><svg
+							xmlns="http://www.w3.org/2000/svg"
+							aria-hidden="true"
+							role="img"
+							preserveAspectRatio="xMidYMid meet"
+							viewBox="0 0 24 24"
+						>
+							<path
+								fill="currentColor"
+								d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10s10-4.48 10-10S17.52 2 12 2zM9.29 16.29L5.7 12.7a.996.996 0 1 1 1.41-1.41L10 14.17l6.88-6.88a.996.996 0 1 1 1.41 1.41l-7.59 7.59a.996.996 0 0 1-1.41 0z"
+							/></svg
+						>Yes, reset</button
+					>
+					<button class="reset-no" id="resetNo">
+						<svg
+							xmlns="http://www.w3.org/2000/svg"
+							aria-hidden="true"
+							role="img"
+							preserveAspectRatio="xMidYMid meet"
+							viewBox="0 0 24 24"
+						>
+							<path
+								fill="currentColor"
+								d="M12 2C6.47 2 2 6.47 2 12s4.47 10 10 10s10-4.47 10-10S17.53 2 12 2zm4.3 14.3a.996.996 0 0 1-1.41 0L12 13.41L9.11 16.3a.996.996 0 1 1-1.41-1.41L10.59 12L7.7 9.11A.996.996 0 1 1 9.11 7.7L12 10.59l2.89-2.89a.996.996 0 1 1 1.41 1.41L13.41 12l2.89 2.89c.38.38.38 1.02 0 1.41z"
+							/></svg
+						>No, don't reset</button
+					>
+				</div>
+				<div class="modal-reset__input-container">
+					<svg
+						xmlns="http://www.w3.org/2000/svg"
+						aria-hidden="true"
+						role="img"
+						preserveAspectRatio="xMidYMid meet"
+						viewBox="0 0 16 16"
+						class="input-corner"
+					>
+						<g fill="">
+							<path
+								d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456l-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"
+							/>
+							<path
+								fill-rule="evenodd"
+								d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"
+							/>
+						</g>
+					</svg>
+					<label for="divsPerSide">Blocks per side (16-100):</label>
+					<input
+						type="number"
+						name="divsPerSide"
+						id="divsPerSide"
+						min="16"
+						max="100"
+						step="4"
+						value="60"
+						inputmode="numeric"
+					/>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>
