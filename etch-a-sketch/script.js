@@ -1,25 +1,29 @@
 'use strict';
 
+//*** User should click/press down before drawing **************/
+//*** so we need to capture click/press state ******************/
+let pointerDown = false;
+document.body.onpointerdown = () => (pointerDown = true);
+document.body.onpointerup = () => (pointerDown = false);
+
 function buildGrid() {
 	const sketchArea = document.getElementById('sketchArea');
 	let divsPerSide = document.getElementById('divsPerSide').value;
 	let divCount = divsPerSide ** 2;
+	//*** 60 [as in rem] is used to maintain consistent height & *****/
+	//*** width regardless of user wanting 16 or 100 DIVs per side ***/
 	let divWidth = 60 / divsPerSide;
 
-	sketchArea.style.gridTemplateColumns = `repeat(${divsPerSide}, calc(var(--font-size) * ${divWidth})`;
-	sketchArea.style.gridTemplateRows = `repeat(${divsPerSide}, calc(var(--font-size) * ${divWidth})`;
+	sketchArea.style.gridTemplateColumns = `repeat(${divsPerSide}, calc(var(--block-size) * ${divWidth})`;
+	sketchArea.style.gridTemplateRows = `repeat(${divsPerSide}, calc(var(--block-size) * ${divWidth})`;
 	sketchArea.innerText = '';
-	// console.log(`DIVs per Side = ${divsPerSide}`);
-	// console.log(`DIV Width = ${divWidth}rem`);
 	for (let i = 0; i < divCount; i++) {
 		const sketchDiv = document.createElement('div');
 		sketchDiv.classList.add('sketch-div');
 		// let hue = Math.floor(Math.random() * 361);
-		// sketchDiv.textContent = i + '–' + hue;
-		// sketchDiv.textContent = i + 1;
-		// sketchDiv.style.color = `hsl(${hue - 180}, 75%, 50%)`;
 		// sketchDiv.style.backgroundColor = `hsl(${hue}, 75%, 50%)`;
-		sketchDiv.addEventListener('mouseover', letsDraw);
+		sketchDiv.addEventListener('pointerover', letsDraw, true);
+		sketchDiv.addEventListener('pointerdown', letsDraw);
 		sketchDiv.style.backgroundColor = 'black';
 		sketchDiv.style.opacity = 0;
 		sketchArea.appendChild(sketchDiv);
@@ -31,7 +35,9 @@ buildGrid();
 //************************************************************/
 //****************** Begin code for DRAWING ******************/
 //************************************************************/
-function letsDraw() {
+function letsDraw(e) {
+	//*** if mouseover but NOT clicked, exit *******************/
+	if (e.type === 'pointerover' && !pointerDown) return;
 	//*** shade adds black to the color ************************/
 	let shade = Number(this.style.getPropertyValue('opacity'));
 
@@ -40,7 +46,6 @@ function letsDraw() {
 	//*** when incrementing by 0.1 *****************************/
 	if (Number(shade.toFixed(1)) <= 0.9) {
 		shade += 0.1;
-		// console.log(`Opacity set to ${shade}`);
 	}
 	this.style.opacity = shade;
 }
