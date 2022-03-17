@@ -37,7 +37,7 @@ buildGrid();
 //************************************************************/
 function letsDraw(e) {
 	//*** if mouseover but NOT clicked, exit *******************/
-	if (e.type === 'pointerover' && !pointerDown) return;
+	if (!pointerDown) return;
 	//*** shade adds black to the color ************************/
 	let shade = Number(this.style.getPropertyValue('opacity'));
 
