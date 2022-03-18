@@ -4,15 +4,14 @@
 /* @import 'open-props/colors-hsl'; */
 
 :root {
-	color-scheme: light dark;
+	/* color-scheme: light dark; */
 	--font-family: 'Oxanium', var(--font-sans);
 }
 
-/* 0.875rem(14px) @ 18rem(288px) increasing to 1.375rem(22px) @ 90rem(1440px) */
-/* Ems strongly recommended on media queries! */
+/* 0.9375rem(15px) @ 18rem(288px) increasing to 1.375rem(22px) @ 90rem(1440px) */
 @media (min-width: 18rem) {
 	:root {
-		--font-size: calc(0.875rem + ((1vw - 0.18rem) * 0.6944));
+		--font-size: calc(0.9375rem + ((1vw - 0.18rem) * 0.6076));
 		/* Where: 0.6944 = 100 * font-size_difference / viewport_width_difference */
 
 		/* Safari resize fix */
@@ -49,28 +48,36 @@
 	font-weight: 600;
 
 	/* border: 1px dotted var(--yellow-4); */
+	/* transition: all 400ms; */
 }
 
 html[color-mode='light'] {
 	--color-bg-1: var(--gray-2);
 	--color-bg-2: var(--indigo-5);
+	--color-bg-3: var(--indigo-3);
 	--color-bg-readout: var(--gray-0);
+	--color-text-1: var(--gray-8);
+	--color-text-2: var(--gray-2);
 
-	--color-num-btn-1: var(--gray-7);
+	--color-num-btn-1: var(--gray-8);
 	--color-num-btn-2: var(--gray-3);
 	--color-num-btn-3: var(--gray-5);
 	--color-oper-btn-1: var(--orange-2);
-	--color-oper-btn-2: var(--orange-3);
-	--color-oper-btn-3: var(--yellow-5);
-	--color-func-btn-1: var(--gray-3);
-	--color-func-btn-2: var(--gray-7);
+	--color-oper-btn-2: var(--orange-4);
+	--color-oper-btn-2: var(--yellow-5);
+	--color-func-btn-1: var(--gray-8);
+	--color-func-btn-2: var(--gray-5);
+	--color-func-btn-2: var(--indigo-3);
 	--color-func-btn-3: var(--gray-5);
 }
 
 html[color-mode='dark'] {
 	--color-bg-1: var(--gray-9);
 	--color-bg-2: var(--indigo-7);
+	--color-bg-3: var(--indigo-5);
 	--color-bg-readout: var(--gray-9);
+	--color-text-1: var(--gray-3);
+	--color-text-2: var(--gray-9);
 
 	--color-num-btn-1: var(--gray-3);
 	--color-num-btn-2: var(--gray-7);
@@ -98,9 +105,6 @@ header {
 	align-items: center;
 
 	grid-column: span 4;
-
-	/* max-width: calc(var(--font-size) * 12); */
-	/* max-height: fit-content; */
 }
 
 main {
@@ -112,33 +116,36 @@ main {
 	grid-template-rows: repeat(6, calc(var(--font-size) * 4));
 	gap: calc(var(--font-size) * 0.75);
 
-	/* min-height: 100vh; */
-	/* max-height: fit-content; */
-
-	/* max-width: calc(var(--font-size) * 15); */
+	margin: calc(var(--font-size) * 1);
 	padding: calc(var(--font-size) * 0.75);
 	border-radius: calc(var(--font-size) * 0.375);
 	background-color: var(--color-bg-2);
 }
 
+svg {
+	background-color: inherit;
+	stroke-width: 0;
+}
+
 button {
-	text-align: center;
-	padding: 0;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	padding: 0px;
+
+	height: calc(var(--font-size) * 4);
 
 	cursor: pointer;
-	outline: 0;
+	outline: none;
 	border: none;
 
 	background-color: var(--color-num-btn-2);
 	border-radius: calc(var(--font-size) * 0.25);
-	fill: var(--color-num-btn-1);
-
-	/* box-shadow: 1px 1px 2px 3px var(--gray-5); */
+	fill: var(--color-text-1);
 }
 
 button.operator {
 	background-color: var(--color-oper-btn-2);
-	fill: var(--color-oper-btn-1);
 }
 
 button.function {
@@ -148,10 +155,7 @@ button.function {
 button > svg {
 	height: calc(var(--font-size) * 4);
 	width: calc(var(--font-size) * 4);
-
-	border-radius: calc(var(--font-size) * 0.25);
-	fill: var(--color-num-btn-1);
-	stroke-width: 0px;
+	border-radius: inherit;
 }
 
 button.operator > svg,
@@ -160,77 +164,82 @@ button.function > svg {
 	width: calc(var(--font-size) * 2.5);
 }
 
-/* button.operator > svg {
-	stroke-width: 1;
-	stroke: var(--color-oper-btn-1);
-} */
-
-button.function > svg {
-	fill: var(--color-func-btn-1);
+button:hover,
+button:active {
+	background-color: var(--color-text-1);
 }
 
-button:hover {
-	background-color: var(--color-num-btn-1);
-	border-color: var(--color-num-btn-3);
+button:hover > svg,
+button:active > svg {
+	fill: var(--color-text-2);
 }
 
-button:hover > svg {
-	fill: var(--color-num-btn-2);
+.header-svg {
+	height: calc(var(--font-size) * 1.75);
+	width: calc(var(--font-size) * 1.75);
+	background-color: inherit;
+	stroke-width: 0px;
 }
 
-button > svg.power {
+.header-svg:active,
+.header-svg:hover {
+	fill: inherit;
+}
+
+.header-btn {
 	height: calc(var(--font-size) * 2);
 	width: calc(var(--font-size) * 2);
-
+	padding: calc(var(--font-size) * 0.125);
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	/* border-radius: 50%; */
 	border-radius: calc(var(--font-size) * 0.25);
-	fill: var(--color-num-btn-1);
-	background: none;
-	stroke-width: 0px;
+
+	background-color: inherit;
 }
 
-svg {
-	/* border: inset calc(var(--font-size) * 0.125) solid var(--color-num-btn-3); */
-	height: calc(var(--font-size) * 2);
-	width: calc(var(--font-size) * 2);
-
-	fill: var(--color-num-btn-1);
-	stroke-width: 0px;
+.header-btn:active,
+.header-btn:hover {
+	background-color: var(--color-bg-3);
 }
 
 .heading {
-	/* grid-column: span 2; */
+	margin: calc(var(--font-size) * 0.5) calc(var(--font-size) * 0.25)
+		calc(var(--font-size) * 0.25);
+	color: var(--color-text-2);
 	font-size: calc(var(--font-size) * 2);
-	text-align: center;
 }
 
 .readout {
 	grid-column: 1 / 5;
 	background-color: var(--color-bg-readout);
-	border-radius: calc(var(--font-size) * 0.125);
+	border-radius: calc(var(--font-size) * 0.375);
+	padding: calc(var(--font-size) * 0.25) calc(var(--font-size) * 0.75);
+	color: var(--color-text-1);
+	font-size: calc(var(--font-size) * 1);
+	letter-spacing: calc(var(--font-size) * 0.125);
+}
+
+.previous-operand,
+.current-operand {
+	text-align: right;
+}
+
+.previous-operand {
+	color: var(--color-bg-2);
+}
+
+.current-operand {
+	font-size: calc(var(--font-size) * 2);
 }
 
 .double-wide {
 	grid-column: span 2;
-	width: ;
 }
 
-.light--hidden > svg {
-	/* border-radius: calc(var(--font-size) * 0.25); */
-	/* stroke: var(--gray-9); */
-	stroke-width: 0px;
-	fill: var(--yellow-4);
-}
-
+.light--hidden > svg,
 .dark--hidden > svg {
-	/* border-radius: calc(var(--font-size) * 0.25); */
-	stroke-width: 0px;
-	/* stroke: var(--gray-2); */
-	fill: var(--gray-7);
-}
-
-.ionicon {
-	height: calc(var(--font-size) * 2);
-	width: calc(var(--font-size) * 2);
-	/* stroke-width: 32; */
-	/* stroke: var(--grape-5); */
+	fill: var(--color-text-1);
+	border-radius: inherit;
 }
