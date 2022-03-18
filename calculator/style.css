@@ -3,9 +3,117 @@
 @import 'https://unpkg.com/open-props/normalize.min.css';
 @import 'open-props/colors-hsl';
 
-* {
+:root {
+	color-scheme: light dark;
+}
+
+/* 0.875rem(14px) @ 18rem(288px) increasing to 1.375rem(22px) @ 90rem(1440px) */
+/* Ems strongly recommended on media queries! */
+@media (min-width: 18em) {
+	:root {
+		--font-size: calc(0.875rem + ((1vw - 0.18rem) * 0.6944));
+		/* Where: 0.6944 = 100 * font-size_difference / viewport_width_difference */
+
+		/* Safari resize fix */
+		min-height: 0vw;
+	}
+}
+/* Prevent scaling beyond this breakpoint */
+@media (min-width: 90em) {
+	:root {
+		--font-size: 1.375rem;
+	}
+}
+
+/*** "light--hidden" elements will be hidden **/
+/*** when the site is set to Light Mode *******/
+:root[color-mode='light'] .light--hidden {
+	display: none;
+}
+
+/*** "dark--hidden" elements will be hidden ***/
+/*** when the site is set to Dark Mode ********/
+:root[color-mode='dark'] .dark--hidden {
+	display: none;
+}
+
+*,
+*::after,
+*::before {
 	box-sizing: border-box;
 	margin: 0;
 	padding: 0;
+
+	/* border: 1px dotted var(--yellow-4); */
 }
 
+body {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
+header {
+	display: flex;
+	justify-content: flex-end;
+
+	max-width: calc(var(--font-size) * 32);
+	max-height: fit-content;
+}
+
+main {
+	display: grid;
+	gap: 8px;
+
+	max-width: calc(var(--font-size) * 32);
+	max-height: fit-content;
+}
+
+button {
+	all: unset;
+	cursor: pointer;
+}
+
+svg {
+	height: calc(var(--font-size) * 3);
+	width: calc(var(--font-size) * 3);
+
+	border: calc(var(--font-size) * 0.125) solid var(--gray-6);
+	border-radius: calc(var(--font-size) * 0.25);
+	background-color: var(--gray-7);
+	fill: var(--gray-3);
+	stroke-width: 0px;
+	/* border-radius: calc(var(--font-size) * 0.25); */
+	/* stroke-width: 0px; */
+}
+
+svg:hover {
+	background-color: var(--gray-5);
+	border-color: var(--gray-5);
+	fill: var(--gray-7);
+}
+
+/* div {
+	height: calc(var(--font-size) * 3);
+	width: calc(var(--font-size) * 3);
+} */
+
+.light--hidden > svg {
+	/* border-radius: calc(var(--font-size) * 0.25); */
+	/* stroke: var(--gray-9); */
+	stroke-width: 0px;
+	fill: var(--yellow-4);
+}
+
+.dark--hidden > svg {
+	/* border-radius: calc(var(--font-size) * 0.25); */
+	stroke-width: 0px;
+	/* stroke: var(--gray-2); */
+	fill: var(--gray-7);
+}
+
+.ionicon {
+	stroke-width: 32;
+	stroke: var(--grape-5);
+}
