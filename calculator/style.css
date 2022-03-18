@@ -1,15 +1,16 @@
-@import url('https://fonts.googleapis.com/css2?family=Oxanium:wght@200;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Oxanium:wght@200..800&display=swap');
 @import 'https://unpkg.com/open-props';
-@import 'https://unpkg.com/open-props/normalize.min.css';
-@import 'open-props/colors-hsl';
+/* @import 'https://unpkg.com/open-props/normalize.min.css'; */
+/* @import 'open-props/colors-hsl'; */
 
 :root {
 	color-scheme: light dark;
+	--font-family: 'Oxanium', var(--font-sans);
 }
 
 /* 0.875rem(14px) @ 18rem(288px) increasing to 1.375rem(22px) @ 90rem(1440px) */
 /* Ems strongly recommended on media queries! */
-@media (min-width: 18em) {
+@media (min-width: 18rem) {
 	:root {
 		--font-size: calc(0.875rem + ((1vw - 0.18rem) * 0.6944));
 		/* Where: 0.6944 = 100 * font-size_difference / viewport_width_difference */
@@ -19,7 +20,7 @@
 	}
 }
 /* Prevent scaling beyond this breakpoint */
-@media (min-width: 90em) {
+@media (min-width: 90rem) {
 	:root {
 		--font-size: 1.375rem;
 	}
@@ -44,7 +45,42 @@
 	margin: 0;
 	padding: 0;
 
+	font-family: var(--font-family);
+	font-weight: 600;
+
 	/* border: 1px dotted var(--yellow-4); */
+}
+
+html[color-mode='light'] {
+	--color-bg-1: var(--gray-2);
+	--color-bg-2: var(--indigo-5);
+	--color-bg-readout: var(--gray-0);
+
+	--color-num-btn-1: var(--gray-7);
+	--color-num-btn-2: var(--gray-3);
+	--color-num-btn-3: var(--gray-5);
+	--color-oper-btn-1: var(--orange-2);
+	--color-oper-btn-2: var(--orange-3);
+	--color-oper-btn-3: var(--yellow-5);
+	--color-func-btn-1: var(--gray-3);
+	--color-func-btn-2: var(--gray-7);
+	--color-func-btn-3: var(--gray-5);
+}
+
+html[color-mode='dark'] {
+	--color-bg-1: var(--gray-9);
+	--color-bg-2: var(--indigo-7);
+	--color-bg-readout: var(--gray-9);
+
+	--color-num-btn-1: var(--gray-3);
+	--color-num-btn-2: var(--gray-7);
+	--color-num-btn-3: var(--gray-5);
+	--color-oper-btn-1: var(--orange-2);
+	--color-oper-btn-2: var(--orange-5);
+	--color-oper-btn-3: var(--yellow-5);
+	--color-func-btn-1: var(--gray-3);
+	--color-func-btn-2: var(--indigo-5);
+	--color-func-btn-3: var(--gray-5);
 }
 
 body {
@@ -52,52 +88,131 @@ body {
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
+
+	background-color: var(--color-bg-1);
 }
 
 header {
 	display: flex;
-	justify-content: flex-end;
+	justify-content: space-between;
+	align-items: center;
 
-	max-width: calc(var(--font-size) * 32);
-	max-height: fit-content;
+	grid-column: span 4;
+
+	/* max-width: calc(var(--font-size) * 12); */
+	/* max-height: fit-content; */
 }
 
 main {
+	display: -ms-grid;
 	display: grid;
-	gap: 8px;
+	justify-content: center;
+	align-content: center;
+	grid-template-columns: repeat(4, calc(var(--font-size) * 4));
+	grid-template-rows: repeat(6, calc(var(--font-size) * 4));
+	gap: calc(var(--font-size) * 0.75);
 
-	max-width: calc(var(--font-size) * 32);
-	max-height: fit-content;
+	/* min-height: 100vh; */
+	/* max-height: fit-content; */
+
+	/* max-width: calc(var(--font-size) * 15); */
+	padding: calc(var(--font-size) * 0.75);
+	border-radius: calc(var(--font-size) * 0.375);
+	background-color: var(--color-bg-2);
 }
 
 button {
-	all: unset;
+	text-align: center;
+	padding: 0;
+
 	cursor: pointer;
+	outline: 0;
+	border: none;
+
+	background-color: var(--color-num-btn-2);
+	border-radius: calc(var(--font-size) * 0.25);
+	fill: var(--color-num-btn-1);
+
+	/* box-shadow: 1px 1px 2px 3px var(--gray-5); */
+}
+
+button.operator {
+	background-color: var(--color-oper-btn-2);
+	fill: var(--color-oper-btn-1);
+}
+
+button.function {
+	background-color: var(--color-func-btn-2);
+}
+
+button > svg {
+	height: calc(var(--font-size) * 4);
+	width: calc(var(--font-size) * 4);
+
+	border-radius: calc(var(--font-size) * 0.25);
+	fill: var(--color-num-btn-1);
+	stroke-width: 0px;
+}
+
+button.operator > svg,
+button.function > svg {
+	height: calc(var(--font-size) * 2.5);
+	width: calc(var(--font-size) * 2.5);
+}
+
+/* button.operator > svg {
+	stroke-width: 1;
+	stroke: var(--color-oper-btn-1);
+} */
+
+button.function > svg {
+	fill: var(--color-func-btn-1);
+}
+
+button:hover {
+	background-color: var(--color-num-btn-1);
+	border-color: var(--color-num-btn-3);
+}
+
+button:hover > svg {
+	fill: var(--color-num-btn-2);
+}
+
+button > svg.power {
+	height: calc(var(--font-size) * 2);
+	width: calc(var(--font-size) * 2);
+
+	border-radius: calc(var(--font-size) * 0.25);
+	fill: var(--color-num-btn-1);
+	background: none;
+	stroke-width: 0px;
 }
 
 svg {
-	height: calc(var(--font-size) * 3);
-	width: calc(var(--font-size) * 3);
+	/* border: inset calc(var(--font-size) * 0.125) solid var(--color-num-btn-3); */
+	height: calc(var(--font-size) * 2);
+	width: calc(var(--font-size) * 2);
 
-	border: calc(var(--font-size) * 0.125) solid var(--gray-6);
-	border-radius: calc(var(--font-size) * 0.25);
-	background-color: var(--gray-7);
-	fill: var(--gray-3);
+	fill: var(--color-num-btn-1);
 	stroke-width: 0px;
-	/* border-radius: calc(var(--font-size) * 0.25); */
-	/* stroke-width: 0px; */
 }
 
-svg:hover {
-	background-color: var(--gray-5);
-	border-color: var(--gray-5);
-	fill: var(--gray-7);
+.heading {
+	/* grid-column: span 2; */
+	font-size: calc(var(--font-size) * 2);
+	text-align: center;
 }
 
-/* div {
-	height: calc(var(--font-size) * 3);
-	width: calc(var(--font-size) * 3);
-} */
+.readout {
+	grid-column: 1 / 5;
+	background-color: var(--color-bg-readout);
+	border-radius: calc(var(--font-size) * 0.125);
+}
+
+.double-wide {
+	grid-column: span 2;
+	width: ;
+}
 
 .light--hidden > svg {
 	/* border-radius: calc(var(--font-size) * 0.25); */
@@ -114,6 +229,8 @@ svg:hover {
 }
 
 .ionicon {
-	stroke-width: 32;
-	stroke: var(--grape-5);
+	height: calc(var(--font-size) * 2);
+	width: calc(var(--font-size) * 2);
+	/* stroke-width: 32; */
+	/* stroke: var(--grape-5); */
 }
