@@ -1,19 +1,13 @@
 @import url('https://fonts.googleapis.com/css2?family=Oxanium:wght@200..800&display=swap');
-@import 'https://unpkg.com/open-props';
-/* @import 'https://unpkg.com/open-props/normalize.min.css'; */
-/* @import 'open-props/colors-hsl'; */
 
-:root {
-	/* color-scheme: light dark; */
-	--font-family: 'Oxanium', var(--font-sans);
-}
-
-/* 0.9375rem(15px) @ 18rem(288px) increasing to 1.375rem(22px) @ 90rem(1440px) */
 @media (min-width: 18rem) {
 	:root {
-		--font-size: calc(0.9375rem + ((1vw - 0.18rem) * 0.6076));
-		/* Where: 0.6944 = 100 * font-size_difference / viewport_width_difference */
-
+		/** Fluid typeography courtesy of ******************************/
+		/** https://websemantics.uk/tools/responsive-font-calculator/ **/
+		/*! used to calculate padding, border radius, etc., too !***/
+		/* 1rem(16px) @ 18rem(288px) increasing to 1.375rem(22px) @ 90rem(1440px) */
+		--font-size: calc(1rem + ((1vw - 0.18rem) * 0.5208));
+		/* Where: 0.5208 = 100 * font-size_difference / viewport_width_difference */
 		/* Safari resize fix */
 		min-height: 0vw;
 	}
@@ -23,6 +17,41 @@
 	:root {
 		--font-size: 1.375rem;
 	}
+}
+
+:root {
+	/** Colors taken from Open Color *******/
+	/** https://yeun.github.io/open-color/ */
+
+	--gray-9: #212529;
+	--gray-8: #343a40;
+	--gray-7: #495057;
+	--gray-5: #adb5bd;
+	--gray-3: #dee2e6;
+	--gray-2: #e9ecef;
+	--gray-0: #f8f9fa;
+
+	--indigo-7: #4263eb;
+	--indigo-5: #5c7cfa;
+	--indigo-3: #91a7ff;
+
+	--yellow-5: #fcc419;
+
+	--orange-5: #ff922b;
+
+	--font-family: 'Oxanium', system-ui, -apple-system, Segoe UI, Roboto, Ubuntu,
+		Cantarell, Noto Sans, sans-serif;
+
+	--size-btn-big: calc(var(--font-size) * 4);
+	--size-btn-mid: calc(var(--font-size) * 2.5);
+	--size-btn-small: calc(var(--font-size) * 2);
+
+	--size-spacing-xl: calc(var(--font-size) * 1);
+	--size-spacing-lg: calc(var(--font-size) * 0.75);
+	--size-spacing-md: calc(var(--font-size) * 0.5);
+	--size-spacing-sm: calc(var(--font-size) * 0.375);
+	--size-spacing-xs: calc(var(--font-size) * 0.25);
+	--size-spacing-xxs: calc(var(--font-size) * 0.125);
 }
 
 /*** "light--hidden" elements will be hidden **/
@@ -45,49 +74,35 @@
 	padding: 0;
 
 	font-family: var(--font-family);
-	font-weight: 600;
+	font-weight: 700;
 
-	/* border: 1px dotted var(--yellow-4); */
-	/* transition: all 400ms; */
+	/* border: 1px dotted #ffd43b !important; */
 }
 
 html[color-mode='light'] {
-	--color-bg-1: var(--gray-2);
-	--color-bg-2: var(--indigo-5);
-	--color-bg-3: var(--indigo-3);
-	--color-bg-readout: var(--gray-0);
-	--color-text-1: var(--gray-8);
-	--color-text-2: var(--gray-2);
+	--color-bg-body: var(--gray-2);
+	--color-bg-main: var(--indigo-5);
+	--color-bg-readout: var(--gray-7);
+	--color-bg-num-btn: var(--gray-3);
+	--color-bg-oper-btn: var(--yellow-5);
+	--color-bg-func-btn: var(--indigo-3);
 
-	--color-num-btn-1: var(--gray-8);
-	--color-num-btn-2: var(--gray-3);
-	--color-num-btn-3: var(--gray-5);
-	--color-oper-btn-1: var(--orange-2);
-	--color-oper-btn-2: var(--orange-4);
-	--color-oper-btn-2: var(--yellow-5);
-	--color-func-btn-1: var(--gray-8);
-	--color-func-btn-2: var(--gray-5);
-	--color-func-btn-2: var(--indigo-3);
-	--color-func-btn-3: var(--gray-5);
+	--color-text-1: var(--gray-8);
+	--color-text-2: var(--gray-0);
+	--color-text-3: var(--indigo-3);
 }
 
 html[color-mode='dark'] {
-	--color-bg-1: var(--gray-9);
-	--color-bg-2: var(--indigo-7);
-	--color-bg-3: var(--indigo-5);
-	--color-bg-readout: var(--gray-9);
+	--color-bg-body: var(--gray-9);
+	--color-bg-main: var(--indigo-7);
+	--color-bg-readout: var(--gray-5);
+	--color-bg-num-btn: var(--gray-7);
+	--color-bg-oper-btn: var(--orange-5);
+	--color-bg-func-btn: var(--indigo-5);
+
 	--color-text-1: var(--gray-3);
 	--color-text-2: var(--gray-9);
-
-	--color-num-btn-1: var(--gray-3);
-	--color-num-btn-2: var(--gray-7);
-	--color-num-btn-3: var(--gray-5);
-	--color-oper-btn-1: var(--orange-2);
-	--color-oper-btn-2: var(--orange-5);
-	--color-oper-btn-3: var(--yellow-5);
-	--color-func-btn-1: var(--gray-3);
-	--color-func-btn-2: var(--indigo-5);
-	--color-func-btn-3: var(--gray-5);
+	--color-text-3: var(--indigo-7);
 }
 
 body {
@@ -96,7 +111,7 @@ body {
 	justify-content: center;
 	align-items: center;
 
-	background-color: var(--color-bg-1);
+	background-color: var(--color-bg-body);
 }
 
 header {
@@ -104,6 +119,7 @@ header {
 	justify-content: space-between;
 	align-items: center;
 
+	-ms-grid-column: span 4;
 	grid-column: span 4;
 }
 
@@ -112,14 +128,16 @@ main {
 	display: grid;
 	justify-content: center;
 	align-content: center;
-	grid-template-columns: repeat(4, calc(var(--font-size) * 4));
-	grid-template-rows: repeat(6, calc(var(--font-size) * 4));
-	gap: calc(var(--font-size) * 0.75);
+	-ms-grid-columns: repeat(4, var(--size-btn-big));
+	grid-template-columns: repeat(4, var(--size-btn-big));
+	-ms-grid-rows: repeat(6, var(--size-btn-big));
+	grid-template-rows: repeat(6, var(--size-btn-big));
+	gap: var(--size-spacing-lg);
 
-	margin: calc(var(--font-size) * 1);
-	padding: calc(var(--font-size) * 0.75);
-	border-radius: calc(var(--font-size) * 0.375);
-	background-color: var(--color-bg-2);
+	margin: var(--size-spacing-xl);
+	padding: var(--size-spacing-lg);
+	border-radius: var(--size-spacing-sm);
+	background-color: var(--color-bg-main);
 }
 
 svg {
@@ -133,35 +151,35 @@ button {
 	align-items: center;
 	padding: 0px;
 
-	height: calc(var(--font-size) * 4);
+	height: var(--size-btn-big);
 
 	cursor: pointer;
 	outline: none;
 	border: none;
 
-	background-color: var(--color-num-btn-2);
-	border-radius: calc(var(--font-size) * 0.25);
+	background-color: var(--color-bg-num-btn);
+	border-radius: var(--size-spacing-xs);
 	fill: var(--color-text-1);
 }
 
 button.operator {
-	background-color: var(--color-oper-btn-2);
+	background-color: var(--color-bg-oper-btn);
 }
 
 button.function {
-	background-color: var(--color-func-btn-2);
+	background-color: var(--color-bg-func-btn);
 }
 
 button > svg {
-	height: calc(var(--font-size) * 4);
-	width: calc(var(--font-size) * 4);
+	height: var(--size-btn-big);
+	width: var(--size-btn-big);
 	border-radius: inherit;
 }
 
 button.operator > svg,
 button.function > svg {
-	height: calc(var(--font-size) * 2.5);
-	width: calc(var(--font-size) * 2.5);
+	height: var(--size-btn-small);
+	width: var(--size-btn-small);
 }
 
 button:hover,
@@ -175,8 +193,8 @@ button:active > svg {
 }
 
 .header-svg {
-	height: calc(var(--font-size) * 1.75);
-	width: calc(var(--font-size) * 1.75);
+	height: calc(var(--size-btn-small) * 0.875);
+	width: calc(var(--size-btn-small) * 0.875);
 	background-color: inherit;
 	stroke-width: 0px;
 }
@@ -184,57 +202,60 @@ button:active > svg {
 .header-svg:active,
 .header-svg:hover {
 	fill: inherit;
+	fill: var(--color-text-2);
 }
 
 .header-btn {
-	height: calc(var(--font-size) * 2);
-	width: calc(var(--font-size) * 2);
-	padding: calc(var(--font-size) * 0.125);
+	height: var(--size-btn-small);
+	width: var(--size-btn-small);
+	padding: var(--size-spacing-xxs);
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	/* border-radius: 50%; */
-	border-radius: calc(var(--font-size) * 0.25);
+	border-radius: var(--size-spacing-xs);
 
 	background-color: inherit;
 }
 
 .header-btn:active,
 .header-btn:hover {
-	background-color: var(--color-bg-3);
+	background-color: inherit;
 }
 
 .heading {
-	margin: calc(var(--font-size) * 0.5) calc(var(--font-size) * 0.25)
-		calc(var(--font-size) * 0.25);
+	margin: var(--size-spacing-md) var(--size-spacing-xxs) var(--size-spacing-xxs);
 	color: var(--color-text-2);
-	font-size: calc(var(--font-size) * 2);
+	font-size: var(--size-btn-small);
 }
 
 .readout {
-	grid-column: 1 / 5;
+	grid-column: span 4;
 	background-color: var(--color-bg-readout);
-	border-radius: calc(var(--font-size) * 0.375);
-	padding: calc(var(--font-size) * 0.25) calc(var(--font-size) * 0.75);
-	color: var(--color-text-1);
-	font-size: calc(var(--font-size) * 1);
-	letter-spacing: calc(var(--font-size) * 0.125);
+	border-radius: var(--size-spacing-sm);
+	height: fit-content;
+	padding: 0;
 }
 
 .previous-operand,
 .current-operand {
+	letter-spacing: var(--size-spacing-xxs);
 	text-align: right;
 }
 
 .previous-operand {
-	color: var(--color-bg-2);
+	color: var(--color-text-3);
+	font-size: calc(var(--font-size) * 0.875);
+	margin: var(--size-spacing-xs) var(--size-spacing-md) 0;
 }
 
 .current-operand {
+	color: var(--color-text-2);
 	font-size: calc(var(--font-size) * 2);
+	margin: 0 var(--size-spacing-md);
 }
 
 .double-wide {
+	-ms-grid-column: span 2;
 	grid-column: span 2;
 }
 
