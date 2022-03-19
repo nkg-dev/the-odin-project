@@ -42,9 +42,9 @@
 	--font-family: 'Oxanium', system-ui, -apple-system, Segoe UI, Roboto, Ubuntu,
 		Cantarell, Noto Sans, sans-serif;
 
-	--size-btn-big: calc(var(--font-size) * 4);
-	--size-btn-mid: calc(var(--font-size) * 2.5);
-	--size-btn-small: calc(var(--font-size) * 2);
+	--size-btn-lg: calc(var(--font-size) * 4);
+	--size-btn-md: calc(var(--font-size) * 2.5);
+	--size-btn-sm: calc(var(--font-size) * 2);
 
 	--size-spacing-xl: calc(var(--font-size) * 1);
 	--size-spacing-lg: calc(var(--font-size) * 0.75);
@@ -128,10 +128,10 @@ main {
 	display: grid;
 	justify-content: center;
 	align-content: center;
-	-ms-grid-columns: repeat(4, var(--size-btn-big));
-	grid-template-columns: repeat(4, var(--size-btn-big));
-	-ms-grid-rows: repeat(6, var(--size-btn-big));
-	grid-template-rows: repeat(6, var(--size-btn-big));
+	-ms-grid-columns: repeat(4, var(--size-btn-lg));
+	grid-template-columns: repeat(4, var(--size-btn-lg));
+	-ms-grid-rows: repeat(6, var(--size-btn-lg));
+	grid-template-rows: repeat(6, var(--size-btn-lg));
 	gap: var(--size-spacing-lg);
 
 	margin: var(--size-spacing-xl);
@@ -151,7 +151,7 @@ button {
 	align-items: center;
 	padding: 0px;
 
-	height: var(--size-btn-big);
+	height: var(--size-btn-lg);
 
 	cursor: pointer;
 	outline: none;
@@ -171,15 +171,15 @@ button.function {
 }
 
 button > svg {
-	height: var(--size-btn-big);
-	width: var(--size-btn-big);
+	height: var(--size-btn-lg);
+	width: var(--size-btn-lg);
 	border-radius: inherit;
 }
 
 button.operator > svg,
 button.function > svg {
-	height: var(--size-btn-small);
-	width: var(--size-btn-small);
+	height: var(--size-btn-md);
+	width: var(--size-btn-md);
 }
 
 button:hover,
@@ -193,8 +193,8 @@ button:active > svg {
 }
 
 .header-svg {
-	height: calc(var(--size-btn-small) * 0.875);
-	width: calc(var(--size-btn-small) * 0.875);
+	height: calc(var(--size-btn-sm) * 0.875);
+	width: calc(var(--size-btn-sm) * 0.875);
 	background-color: inherit;
 	stroke-width: 0px;
 }
@@ -206,8 +206,8 @@ button:active > svg {
 }
 
 .header-btn {
-	height: var(--size-btn-small);
-	width: var(--size-btn-small);
+	height: var(--size-btn-sm);
+	width: var(--size-btn-sm);
 	padding: var(--size-spacing-xxs);
 	display: flex;
 	justify-content: center;
@@ -225,7 +225,7 @@ button:active > svg {
 .heading {
 	margin: var(--size-spacing-md) var(--size-spacing-xxs) var(--size-spacing-xxs);
 	color: var(--color-text-2);
-	font-size: var(--size-btn-small);
+	font-size: var(--size-btn-sm);
 }
 
 .readout {
