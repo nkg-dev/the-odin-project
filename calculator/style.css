@@ -20,23 +20,23 @@
 }
 
 :root {
-	/** Colors taken from Open Color *******/
-	/** https://yeun.github.io/open-color/ */
+	/** Colors inspired by Open Color *******/
+	/** https://yeun.github.io/open-color/ **/
 
-	--gray-9: #212529;
-	--gray-8: #343a40;
-	--gray-7: #495057;
-	--gray-5: #adb5bd;
-	--gray-3: #dee2e6;
-	--gray-2: #e9ecef;
+	--gray-9: hsl(210, 11%, 15%);
+	--gray-8: hsl(210, 10%, 23%);
+	--gray-7: hsl(210, 9%, 31%);
+	--gray-5: hsl(210, 11%, 71%);
+	--gray-3: hsl(210, 14%, 89%);
+	--gray-2: hsl(210, 16%, 93%);
 
-	--indigo-7: #4263eb;
-	--indigo-5: #5c7cfa;
-	--indigo-3: #91a7ff;
+	--indigo-7: hsl(228, 81%, 59%);
+	--indigo-5: hsl(228, 94%, 67%);
+	--indigo-3: hsl(228, 100%, 78%);
 
-	--yellow-5: #fcc419;
-
-	--orange-5: #ff922b;
+	/* --orange-5: hsl(29, 100%, 58%); */
+	--orange-5: hsl(29, 80%, 58%);
+	--orange-3: hsl(32, 100%, 74%);
 
 	--font-family: 'Oxanium', system-ui, -apple-system, Segoe UI, Roboto, Ubuntu,
 		Cantarell, Noto Sans, sans-serif;
@@ -83,7 +83,7 @@ html[color-mode='light'] {
 	--color-bg-main: var(--indigo-5);
 	--color-bg-readout: var(--gray-7);
 	--color-bg-num-btn: var(--gray-3);
-	--color-bg-oper-btn: var(--yellow-5);
+	--color-bg-oper-btn: var(--orange-3);
 	--color-bg-func-btn: var(--indigo-3);
 
 	--color-text-1: var(--gray-8);
@@ -123,13 +123,10 @@ header {
 }
 
 main {
-	display: -ms-grid;
 	display: grid;
 	justify-content: center;
 	align-content: center;
-	-ms-grid-columns: repeat(4, var(--size-btn-lg));
 	grid-template-columns: repeat(4, var(--size-btn-lg));
-	-ms-grid-rows: repeat(6, var(--size-btn-lg));
 	grid-template-rows: repeat(6, var(--size-btn-lg));
 	gap: var(--size-spacing-lg);
 
@@ -181,11 +178,13 @@ button.function > svg {
 	width: var(--size-btn-md);
 }
 
+button.active,
 button:hover,
 button:active {
 	background-color: var(--color-text-1);
 }
 
+button.active > svg,
 button:hover > svg,
 button:active > svg {
 	fill: var(--color-text-2);
@@ -239,6 +238,8 @@ button:active > svg {
 .current-operand {
 	letter-spacing: var(--size-spacing-xxs);
 	text-align: right;
+	word-wrap: break-word;
+	word-break: break-all;
 }
 
 .previous-operand {
