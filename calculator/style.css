@@ -29,7 +29,6 @@
 	--gray-5: #adb5bd;
 	--gray-3: #dee2e6;
 	--gray-2: #e9ecef;
-	--gray-0: #f8f9fa;
 
 	--indigo-7: #4263eb;
 	--indigo-5: #5c7cfa;
@@ -88,7 +87,7 @@ html[color-mode='light'] {
 	--color-bg-func-btn: var(--indigo-3);
 
 	--color-text-1: var(--gray-8);
-	--color-text-2: var(--gray-0);
+	--color-text-2: var(--gray-2);
 	--color-text-3: var(--indigo-3);
 }
 
