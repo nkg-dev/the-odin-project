@@ -1,5 +1,8 @@
 'use strict';
 
+// keyvalues Return == Enter
+// BUT Clear button (on keyboards with numberpad) is Clear NOT Delete or Backspace
+
 function toggleActive(e) {
 	console.log(e);
 	//* remove Active class if present
@@ -22,12 +25,16 @@ function addActive(btn) {
 
 function keyPress(e) {
 	// match the button the key pressed
+	console.log(`e.key value is ${e.key}`);
 	const btn = document.querySelector(`button[data-key='${e.key}']`);
 	// if no button matches, exit function
 	if (!btn) return;
 	// toggleActive(btn);
 	btn.classList.add('active');
+	// routeKeyPress(e.key);
 }
+
+// function routeKeyPress(key)
 
 function mouseClick(e) {
 	// match the button the key pressed
@@ -58,6 +65,10 @@ btns.forEach((key) =>
 
 document.addEventListener('keydown', keyPress);
 document.addEventListener('pointerdown', toggleActive);
+document.addEventListener('pointerdown', (e) => {
+	console.log(e.target.value);
+	console.log(e.target.name);
+});
 document.addEventListener('pointerup', toggleActive);
 // window.addEventListener('click', (e) => {
 // 	e.classList.add('active');
