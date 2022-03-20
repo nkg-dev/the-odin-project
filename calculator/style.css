@@ -44,6 +44,7 @@
 	--size-btn-lg: calc(var(--font-size) * 4);
 	--size-btn-md: calc(var(--font-size) * 2.5);
 	--size-btn-sm: calc(var(--font-size) * 2);
+	--size-btn-xs: calc(var(--font-size) * 1.75);
 
 	--size-spacing-xl: calc(var(--font-size) * 1);
 	--size-spacing-lg: calc(var(--font-size) * 0.75);
@@ -170,8 +171,6 @@ button > svg {
 	width: var(--size-btn-lg);
 	border-radius: inherit;
 	stroke-width: 0px;
-
-	/* transition: all var(--transition-time); */
 }
 
 button.operator > svg,
@@ -207,8 +206,8 @@ button:hover > svg {
 }
 
 .header-svg {
-	height: calc(var(--size-btn-sm) * 0.875);
-	width: calc(var(--size-btn-sm) * 0.875);
+	height: var(--size-btn-xs);
+	width: var(--size-btn-xs);
 	background-color: inherit;
 	stroke-width: 0px;
 }
@@ -246,7 +245,6 @@ button:hover > svg {
 	grid-column: span 4;
 	background-color: var(--color-bg-readout);
 	border-radius: var(--size-spacing-sm);
-	/* margin: 0 0 var(--size-spacing-lg); */
 	padding: 0;
 	height: fit-content;
 }
