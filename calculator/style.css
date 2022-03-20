@@ -288,11 +288,11 @@ button:hover > svg {
 	border-radius: inherit;
 }
 
-.info {
+.tool-tip {
 	position: relative;
 }
 
-.info::before {
+.tool-tip::before {
 	--scale: 0;
 	/* --color-bg-tooltip: var(--color-bg-num-btn); */
 	--color-text-tooltip: var(--color-text-1);
@@ -302,6 +302,8 @@ button:hover > svg {
 	position: absolute;
 	top: var(--size-btn-xs);
 	padding: var(--size-spacing-sm) var(--size-spacing-lg);
+	min-width: 12ch;
+	max-width: 16ch;
 
 	font-family: var(--font-tooltip);
 	font-size: var(--size-spacing-lg);
@@ -318,6 +320,6 @@ button:hover > svg {
 	transition: transform var(--transition-time-long) ease;
 }
 
-.info:hover::before {
+.tool-tip:hover::before {
 	--scale: 1;
 }
