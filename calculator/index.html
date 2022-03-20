@@ -13,9 +13,9 @@
 		<title>Calculator</title>
 		<link rel="stylesheet" href="/style.css" />
 		<script>
-			// retrieves data-theme preference from localStorage
-			console.log(document.querySelector('meta[name="color-scheme"]').content);
+			// console.log(document.querySelector('meta[name="color-scheme"]').content);
 
+			// retrieves data-theme preference from localStorage
 			if (
 				localStorage.getItem('data-theme') === 'dark' ||
 				(window.matchMedia('(prefers-color-scheme: dark)').matches &&
@@ -94,8 +94,9 @@
 				</div>
 			</header>
 			<div class="readout">
-				<div class="previous-operand">4&#43;5&#8722;6&#215;7&#247;8.9&#61;</div>
-				<div class="current-operand">123.06</div>
+				<!-- 4&#43;5&#8722;6&#215;7&#247;8.9&#61; -->
+				<div class="previous-operand"></div>
+				<div class="current-operand"></div>
 			</div>
 			<div class="buttons-container">
 				<button class="function" data-key="Delete" type="button"
