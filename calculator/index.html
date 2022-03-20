@@ -30,7 +30,10 @@
 	<body>
 		<main>
 			<header>
-				<button class="header-btn info" data-tooltip="Use keyboard or mouse">
+				<button
+					class="header-btn tool-tip"
+					data-tooltip="Use keyboard or mouse"
+				>
 					<!-- <svg
 						xmlns="http://www.w3.org/2000/svg"
 						aria-hidden="true"
@@ -60,7 +63,8 @@
 				<div>
 					<button
 						type="button"
-						class="data-theme__btn light--hidden header-btn"
+						class="data-theme__btn light--hidden header-btn tool-tip"
+						data-tooltip="Switch to Light Mode"
 					>
 						<svg
 							xmlns="http://www.w3.org/2000/svg"
@@ -76,7 +80,11 @@
 							/>
 						</svg>
 					</button>
-					<button type="button" class="data-theme__btn dark--hidden header-btn">
+					<button
+						type="button"
+						class="data-theme__btn dark--hidden header-btn tool-tip"
+						data-tooltip="Switch to Dark Mode"
+					>
 						<svg
 							xmlns="http://www.w3.org/2000/svg"
 							aria-hidden="true"
