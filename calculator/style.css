@@ -51,17 +51,19 @@
 	--size-spacing-sm: calc(var(--font-size) * 0.375);
 	--size-spacing-xs: calc(var(--font-size) * 0.25);
 	--size-spacing-xxs: calc(var(--font-size) * 0.125);
+
+	--transition-time: 40ms;
 }
 
 /*** "light--hidden" elements will be hidden **/
 /*** when the site is set to Light Mode *******/
-:root[color-mode='light'] .light--hidden {
+:root[data-theme='light'] .light--hidden {
 	display: none;
 }
 
 /*** "dark--hidden" elements will be hidden ***/
 /*** when the site is set to Dark Mode ********/
-:root[color-mode='dark'] .dark--hidden {
+:root[data-theme='dark'] .dark--hidden {
 	display: none;
 }
 
@@ -78,7 +80,7 @@
 	/* border: 1px dotted #ffd43b !important; */
 }
 
-html[color-mode='light'] {
+html[data-theme='light'] {
 	--color-bg-body: var(--gray-2);
 	--color-bg-main: var(--indigo-5);
 	--color-bg-readout: var(--gray-7);
@@ -91,7 +93,7 @@ html[color-mode='light'] {
 	--color-text-3: var(--indigo-3);
 }
 
-html[color-mode='dark'] {
+html[data-theme='dark'] {
 	--color-bg-body: var(--gray-9);
 	--color-bg-main: var(--indigo-7);
 	--color-bg-readout: var(--gray-5);
@@ -117,27 +119,22 @@ header {
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
-
-	-ms-grid-column: span 4;
-	grid-column: span 4;
 }
 
 main {
-	display: grid;
-	justify-content: center;
-	align-content: center;
-	grid-template-columns: repeat(4, var(--size-btn-lg));
-	grid-template-rows: repeat(6, var(--size-btn-lg));
-	gap: var(--size-spacing-lg);
-
 	margin: var(--size-spacing-xl);
 	padding: var(--size-spacing-lg);
 	border-radius: var(--size-spacing-sm);
 	background-color: var(--color-bg-main);
+
+	display: flex;
+	flex-direction: column;
+	gap: var(--size-spacing-lg) 0;
 }
 
 svg {
 	background-color: inherit;
+	stroke: var(--color-text-1);
 	stroke-width: 0;
 }
 
@@ -156,6 +153,8 @@ button {
 	background-color: var(--color-bg-num-btn);
 	border-radius: var(--size-spacing-xs);
 	fill: var(--color-text-1);
+
+	transition: all var(--transition-time);
 }
 
 button.operator {
@@ -170,6 +169,9 @@ button > svg {
 	height: var(--size-btn-lg);
 	width: var(--size-btn-lg);
 	border-radius: inherit;
+	stroke-width: 0px;
+
+	/* transition: all var(--transition-time); */
 }
 
 button.operator > svg,
@@ -178,16 +180,30 @@ button.function > svg {
 	width: var(--size-btn-md);
 }
 
+button.operator > svg {
+	stroke: var(--color-text-1);
+	stroke-width: 1px;
+}
+
 button.active,
-button:hover,
-button:active {
+button:hover {
 	background-color: var(--color-text-1);
 }
 
 button.active > svg,
-button:hover > svg,
-button:active > svg {
+button:hover > svg {
+	stroke: var(--color-text-2);
 	fill: var(--color-text-2);
+	pointer-events: none;
+}
+
+.buttons-container {
+	display: grid;
+	justify-content: center;
+	align-content: center;
+	grid-template-columns: repeat(4, var(--size-btn-lg));
+	grid-template-rows: repeat(5, var(--size-btn-lg));
+	gap: var(--size-spacing-lg);
 }
 
 .header-svg {
@@ -230,8 +246,9 @@ button:active > svg {
 	grid-column: span 4;
 	background-color: var(--color-bg-readout);
 	border-radius: var(--size-spacing-sm);
-	height: fit-content;
+	/* margin: 0 0 var(--size-spacing-lg); */
 	padding: 0;
+	height: fit-content;
 }
 
 .previous-operand,
@@ -244,18 +261,18 @@ button:active > svg {
 
 .previous-operand {
 	color: var(--color-text-3);
-	font-size: calc(var(--font-size) * 0.875);
+	font-size: calc(var(--font-size) * 1.125);
 	margin: var(--size-spacing-xs) var(--size-spacing-md) 0;
 }
 
 .current-operand {
 	color: var(--color-text-2);
-	font-size: calc(var(--font-size) * 2);
-	margin: 0 var(--size-spacing-md);
+	font-size: calc(var(--font-size) * 2.5);
+	/* Setting bottom margin to NEGATIVE value to decrease unsightly extra space */
+	margin: 0 var(--size-spacing-md) calc(var(--font-size) * -0.25);
 }
 
 .double-wide {
-	-ms-grid-column: span 2;
 	grid-column: span 2;
 }
 
