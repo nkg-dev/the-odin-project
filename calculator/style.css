@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Oxanium:wght@200..800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Oxanium:wght@700&display=swap');
 
 @media (min-width: 18rem) {
 	:root {
@@ -38,8 +38,11 @@
 	--orange-5: hsl(29, 80%, 58%);
 	--orange-3: hsl(32, 100%, 74%);
 
-	--font-family: 'Oxanium', system-ui, -apple-system, Segoe UI, Roboto, Ubuntu,
+	--font-main: 'Oxanium', system-ui, -apple-system, Segoe UI, Roboto, Ubuntu,
 		Cantarell, Noto Sans, sans-serif;
+
+	--font-tooltip: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell,
+		Noto Sans, sans-serif;
 
 	--size-btn-lg: calc(var(--font-size) * 4);
 	--size-btn-md: calc(var(--font-size) * 2.5);
@@ -53,7 +56,8 @@
 	--size-spacing-xs: calc(var(--font-size) * 0.25);
 	--size-spacing-xxs: calc(var(--font-size) * 0.125);
 
-	--transition-time: 40ms;
+	--transition-time-short: 40ms;
+	--transition-time-long: 160ms;
 }
 
 /*** "light--hidden" elements will be hidden **/
@@ -75,7 +79,7 @@
 	margin: 0;
 	padding: 0;
 
-	font-family: var(--font-family);
+	font-family: var(--font-main);
 	font-weight: 700;
 
 	/* border: 1px dotted #ffd43b !important; */
@@ -85,6 +89,7 @@ html[data-theme='light'] {
 	--color-bg-body: var(--gray-2);
 	--color-bg-main: var(--indigo-5);
 	--color-bg-readout: var(--gray-7);
+	--color-bg-tooltip: var(--gray-3);
 	--color-bg-num-btn: var(--gray-3);
 	--color-bg-oper-btn: var(--orange-3);
 	--color-bg-func-btn: var(--indigo-3);
@@ -98,6 +103,7 @@ html[data-theme='dark'] {
 	--color-bg-body: var(--gray-9);
 	--color-bg-main: var(--indigo-7);
 	--color-bg-readout: var(--gray-5);
+	--color-bg-tooltip: var(--gray-7);
 	--color-bg-num-btn: var(--gray-7);
 	--color-bg-oper-btn: var(--orange-5);
 	--color-bg-func-btn: var(--indigo-5);
@@ -155,7 +161,7 @@ button {
 	border-radius: var(--size-spacing-xs);
 	fill: var(--color-text-1);
 
-	transition: all var(--transition-time);
+	transition: all var(--transition-time-short);
 }
 
 button.operator {
@@ -280,4 +286,38 @@ button:hover > svg {
 .dark--hidden > svg {
 	fill: var(--color-text-1);
 	border-radius: inherit;
+}
+
+.info {
+	position: relative;
+}
+
+.info::before {
+	--scale: 0;
+	/* --color-bg-tooltip: var(--color-bg-num-btn); */
+	--color-text-tooltip: var(--color-text-1);
+
+	content: attr(data-tooltip);
+
+	position: absolute;
+	top: var(--size-btn-xs);
+	padding: var(--size-spacing-sm) var(--size-spacing-lg);
+
+	font-family: var(--font-tooltip);
+	font-size: var(--size-spacing-lg);
+	line-height: 1.5;
+
+	color: var(--color-text-tooltip);
+	background-color: var(--color-bg-tooltip);
+	/* border: 2px solid var(--color-text-1); */
+	border-radius: var(--size-spacing-xs);
+
+	transform: translateY(var(--size-spacing-md)) scale(var(--scale));
+	transform-origin: top center;
+
+	transition: transform var(--transition-time-long) ease;
+}
+
+.info:hover::before {
+	--scale: 1;
 }
