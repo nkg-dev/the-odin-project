@@ -270,7 +270,7 @@ button.active > svg {
 	color: var(--color-text-2);
 	font-size: calc(var(--font-size) * 2.5);
 	min-height: calc(var(--font-size) * 3.25);
-	/* Setting bottom margin to NEGATIVE value to decrease unsightly extra space */
+	/** Setting bottom margin to NEGATIVE value to decrease unsightly extra space */
 	margin: 0 var(--size-spacing-md) calc(var(--font-size) * -0.25);
 }
 
@@ -290,7 +290,6 @@ button.active > svg {
 
 .tool-tip::before {
 	--scale: 0;
-	/* --color-bg-tooltip: var(--color-bg-num-btn); */
 	--color-text-tooltip: var(--color-text-1);
 
 	content: attr(data-tooltip);
@@ -298,8 +297,8 @@ button.active > svg {
 	position: absolute;
 	top: var(--size-btn-xs);
 	padding: var(--size-spacing-sm) var(--size-spacing-lg);
-	min-width: 12ch;
-	max-width: 16ch;
+	min-width: 13ch;
+	max-width: 18ch;
 
 	font-family: var(--font-tooltip);
 	font-size: var(--size-spacing-lg);
@@ -307,7 +306,6 @@ button.active > svg {
 
 	color: var(--color-text-tooltip);
 	background-color: var(--color-bg-tooltip);
-	/* border: 2px solid var(--color-text-1); */
 	border-radius: var(--size-spacing-xs);
 
 	transform: translateY(var(--size-spacing-md)) scale(var(--scale));
