@@ -190,13 +190,11 @@ button.operator > svg {
 	stroke-width: 1px;
 }
 
-button.active,
-button:hover {
+button.active {
 	background-color: var(--color-text-1);
 }
 
-button.active > svg,
-button:hover > svg {
+button.active > svg {
 	stroke: var(--color-text-2);
 	fill: var(--color-text-2);
 	pointer-events: none;
@@ -218,8 +216,7 @@ button:hover > svg {
 	stroke-width: 0px;
 }
 
-.header-svg:active,
-.header-svg:hover {
+.header-svg:active {
 	fill: inherit;
 	fill: var(--color-text-2);
 }
@@ -236,8 +233,7 @@ button:hover > svg {
 	background-color: inherit;
 }
 
-.header-btn:active,
-.header-btn:hover {
+.header-btn:active {
 	background-color: inherit;
 }
 
@@ -320,6 +316,23 @@ button:hover > svg {
 	transition: transform var(--transition-time-long) ease;
 }
 
-.tool-tip:hover::before {
-	--scale: 1;
+@media (hover: hover) {
+	button:hover {
+		background-color: var(--color-text-1);
+	}
+	button:hover > svg {
+		stroke: var(--color-text-2);
+		fill: var(--color-text-2);
+		pointer-events: none;
+	}
+	.header-svg:hover {
+		fill: inherit;
+		fill: var(--color-text-2);
+	}
+	.header-btn:hover {
+		background-color: inherit;
+	}
+	.tool-tip:hover::before {
+		--scale: 1;
+	}
 }
