@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" color-mode="light">
+<html lang="en-us" data-theme="light">
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="color-scheme" content="light dark" />
@@ -13,15 +13,15 @@
 		<title>Calculator</title>
 		<link rel="stylesheet" href="/style.css" />
 		<script>
-			// retrieves color-mode preference from localStorage
+			// retrieves data-theme preference from localStorage
 			console.log(document.querySelector('meta[name="color-scheme"]').content);
 
 			if (
-				localStorage.getItem('color-mode') === 'dark' ||
+				localStorage.getItem('data-theme') === 'dark' ||
 				(window.matchMedia('(prefers-color-scheme: dark)').matches &&
-					!localStorage.getItem('color-mode'))
+					!localStorage.getItem('data-theme'))
 			) {
-				document.documentElement.setAttribute('color-mode', 'dark');
+				document.documentElement.setAttribute('data-theme', 'dark');
 			}
 		</script>
 
@@ -60,7 +60,7 @@
 				<div>
 					<button
 						type="button"
-						class="color-mode__btn light--hidden header-btn"
+						class="data-theme__btn light--hidden header-btn"
 					>
 						<svg
 							xmlns="http://www.w3.org/2000/svg"
@@ -76,7 +76,7 @@
 							/>
 						</svg>
 					</button>
-					<button type="button" class="color-mode__btn dark--hidden header-btn">
+					<button type="button" class="data-theme__btn dark--hidden header-btn">
 						<svg
 							xmlns="http://www.w3.org/2000/svg"
 							aria-hidden="true"
@@ -97,228 +97,230 @@
 				<div class="previous-operand">4&#43;5&#8722;6&#215;7&#247;8.9&#61;</div>
 				<div class="current-operand">123.06</div>
 			</div>
-			<button class="function"
-				><svg
-					xmlns="http://www.w3.org/2000/svg"
-					aria-hidden="true"
-					role="img"
-					preserveAspectRatio="xMidYMid meet"
-					viewBox="0 0 24 24"
-				>
-					<title>Clear All</title>
-					<path
-						d="M9 3v1H4v2h1v13a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V6h1V4h-5V3H9M7 6h10v13H7V6m2 2v9h2V8H9m4 0v9h2V8h-2Z"
-					/></svg
-			></button>
-			<button class="function double-wide"
-				><svg
-					xmlns="http://www.w3.org/2000/svg"
-					aria-hidden="true"
-					role="img"
-					preserveAspectRatio="xMidYMid meet"
-					viewBox="0 0 24 24"
-				>
-					<title>Delete</title>
-					<path
-						d="M19 15.59L17.59 17L14 13.41L10.41 17L9 15.59L12.59 12L9 8.41L10.41 7L14 10.59L17.59 7L19 8.41L15.41 12L19 15.59M22 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H7c-.69 0-1.23-.36-1.59-.89L0 12l5.41-8.12C5.77 3.35 6.31 3 7 3h15m0 2H7l-4.72 7L7 19h15V5Z"
-					/></svg
-			></button>
-			<button class="operator"
-				><svg
-					xmlns="http://www.w3.org/2000/svg"
-					aria-hidden="true"
-					role="img"
-					preserveAspectRatio="xMidYMid meet"
-					viewBox="0 0 24 24"
-				>
-					<title>Divide</title>
-					<path
-						d="M19 13H5v-2h14v2m-7-8a2 2 0 0 1 2 2a2 2 0 0 1-2 2a2 2 0 0 1-2-2a2 2 0 0 1 2-2m0 10a2 2 0 0 1 2 2a2 2 0 0 1-2 2a2 2 0 0 1-2-2a2 2 0 0 1 2-2Z"
-					/></svg
-			></button>
-			<button id="num7"
-				><svg
-					xmlns="http://www.w3.org/2000/svg"
-					aria-hidden="true"
-					role="img"
-					preserveAspectRatio="xMidYMid meet"
-					viewBox="0 0 24 24"
-				>
-					<title>7</title>
-					<path d="m11 17l4-8V7H9v2h4l-4 8" /></svg
-			></button>
-			<button
-				><svg
-					xmlns="http://www.w3.org/2000/svg"
-					aria-hidden="true"
-					role="img"
-					preserveAspectRatio="xMidYMid meet"
-					viewBox="0 0 24 24"
-				>
-					<title>8</title>
-					<path
-						d="M11 13h2v2h-2m0-6h2v2h-2m0 6h2a2 2 0 0 0 2-2v-1.5a1.5 1.5 0 0 0-1.5-1.5a1.5 1.5 0 0 0 1.5-1.5V9a2 2 0 0 0-2-2h-2a2 2 0 0 0-2 2v1.5a1.5 1.5 0 0 0 1.5 1.5A1.5 1.5 0 0 0 9 13.5V15a2 2 0 0 0 2 2"
-					/></svg
-			></button>
-			<button
-				><svg
-					xmlns="http://www.w3.org/2000/svg"
-					aria-hidden="true"
-					role="img"
-					preserveAspectRatio="xMidYMid meet"
-					viewBox="0 0 24 24"
-				>
-					<title>9</title>
-					<path
-						d="M13 17a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-2a2 2 0 0 0-2 2v2a2 2 0 0 0 2 2h2v2H9v2h4m0-6h-2V9h2v2Z"
-					/></svg
-			></button>
-			<button class="operator"
-				><svg
-					xmlns="http://www.w3.org/2000/svg"
-					aria-hidden="true"
-					role="img"
-					preserveAspectRatio="xMidYMid meet"
-					viewBox="0 0 24 24"
-				>
-					<title>Multiply</title>
-					<path
-						d="M19 6.41L17.59 5L12 10.59L6.41 5L5 6.41L10.59 12L5 17.59L6.41 19L12 13.41L17.59 19L19 17.59L13.41 12L19 6.41Z"
-					/></svg
-			></button>
-			<button
-				><svg
-					xmlns="http://www.w3.org/2000/svg"
-					aria-hidden="true"
-					role="img"
-					preserveAspectRatio="xMidYMid meet"
-					viewBox="0 0 24 24"
-				>
-					<title>4</title>
-					<path fill="" d="M9 7v6h4v4h2V7h-2v4h-2V7H9Z" /></svg
-			></button>
-			<button
-				><svg
-					xmlns="http://www.w3.org/2000/svg"
-					aria-hidden="true"
-					role="img"
-					preserveAspectRatio="xMidYMid meet"
-					viewBox="0 0 24 24"
-				>
-					<title>5</title>
-					<path
-						d="M9 7v6h4v2H9v2h4a2 2 0 0 0 2-2v-2a2 2 0 0 0-2-2h-2V9h4V7H9Z"
-					/></svg
-			></button>
-			<button
-				><svg
-					xmlns="http://www.w3.org/2000/svg"
-					aria-hidden="true"
-					role="img"
-					preserveAspectRatio="xMidYMid meet"
-					viewBox="0 0 24 24"
-				>
-					<title>6</title>
-					<path
-						d="M11 7a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h2a2 2 0 0 0 2-2v-2a2 2 0 0 0-2-2h-2V9h4V7h-4m0 6h2v2h-2v-2Z"
-					/></svg
-			></button>
-			<button class="operator"
-				><svg
-					xmlns="http://www.w3.org/2000/svg"
-					aria-hidden="true"
-					role="img"
-					preserveAspectRatio="xMidYMid meet"
-					viewBox="0 0 24 24"
-				>
-					<title>Subtract</title>
-					<path d="M19 13H5v-2h14v2Z" /></svg
-			></button>
-			<button
-				><svg
-					xmlns="http://www.w3.org/2000/svg"
-					aria-hidden="true"
-					role="img"
-					preserveAspectRatio="xMidYMid meet"
-					viewBox="0 0 24 24"
-				>
-					<title>1</title>
-					<path d="M10 7v2h2v8h2V7h-4Z" /></svg
-			></button>
-			<button>
-				<svg
-					xmlns="http://www.w3.org/2000/svg"
-					aria-hidden="true"
-					role="img"
-					preserveAspectRatio="xMidYMid meet"
-					viewBox="0 0 24 24"
-				>
-					<title>2</title>
-					<path
-						d="M9 7v2h4v2h-2a2 2 0 0 0-2 2v4h6v-2h-4v-2h2a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2H9Z"
-					/>
-				</svg>
-			</button>
-			<button
-				><svg
-					xmlns="http://www.w3.org/2000/svg"
-					aria-hidden="true"
-					role="img"
-					preserveAspectRatio="xMidYMid meet"
-					viewBox="0 0 24 24"
-				>
-					<title>3</title>
-					<path
-						d="M15 15v-1.5a1.5 1.5 0 0 0-1.5-1.5a1.5 1.5 0 0 0 1.5-1.5V9a2 2 0 0 0-2-2H9v2h4v2h-2v2h2v2H9v2h4a2 2 0 0 0 2-2"
-					/></svg
-			></button>
-			<button class="operator"
-				><svg
-					xmlns="http://www.w3.org/2000/svg"
-					aria-hidden="true"
-					role="img"
-					preserveAspectRatio="xMidYMid meet"
-					viewBox="0 0 24 24"
-				>
-					<title>Add</title>
-					<path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2Z" /></svg
-			></button>
-			<button class="double-wide"
-				><svg
-					xmlns="http://www.w3.org/2000/svg"
-					aria-hidden="true"
-					role="img"
-					preserveAspectRatio="xMidYMid meet"
-					viewBox="0 0 24 24"
-				>
-					<title>0</title>
-					<path
-						d="M11 7a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h2a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-2m0 2h2v6h-2V9Z"
-					/></svg
-			></button>
-			<button
-				><svg
-					xmlns="http://www.w3.org/2000/svg"
-					aria-hidden="true"
-					role="img"
-					preserveAspectRatio="xMidYMid meet"
-					viewBox="0 0 24 24"
-				>
-					<title>Decimal</title>
-					<circle r="1.4458202" cy="16" cx="12" />
-				</svg>
-			</button>
-			<button class="operator"
-				><svg
-					xmlns="http://www.w3.org/2000/svg"
-					aria-hidden="true"
-					role="img"
-					preserveAspectRatio="xMidYMid meet"
-					viewBox="0 0 24 24"
-				>
-					<title>Equals</title>
-					<path d="M19 10H5V8h14v2m0 6H5v-2h14v2Z" /></svg
-			></button>
+			<div class="buttons-container">
+				<button class="function" data-key="Delete" type="button"
+					><svg
+						xmlns="http://www.w3.org/2000/svg"
+						aria-hidden="true"
+						role="img"
+						preserveAspectRatio="xMidYMid meet"
+						viewBox="0 0 24 24"
+					>
+						<title>Clear All</title>
+						<path
+							d="M9 3v1H4v2h1v13a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V6h1V4h-5V3H9M7 6h10v13H7V6m2 2v9h2V8H9m4 0v9h2V8h-2Z"
+						/></svg
+				></button>
+				<button class="function double-wide" data-key="Backspace" type="button"
+					><svg
+						xmlns="http://www.w3.org/2000/svg"
+						aria-hidden="true"
+						role="img"
+						preserveAspectRatio="xMidYMid meet"
+						viewBox="0 0 24 24"
+					>
+						<title>Delete</title>
+						<path
+							d="M19 15.59L17.59 17L14 13.41L10.41 17L9 15.59L12.59 12L9 8.41L10.41 7L14 10.59L17.59 7L19 8.41L15.41 12L19 15.59M22 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H7c-.69 0-1.23-.36-1.59-.89L0 12l5.41-8.12C5.77 3.35 6.31 3 7 3h15m0 2H7l-4.72 7L7 19h15V5Z"
+						/></svg
+				></button>
+				<button class="operator" data-key="/" type="button"
+					><svg
+						xmlns="http://www.w3.org/2000/svg"
+						aria-hidden="true"
+						role="img"
+						preserveAspectRatio="xMidYMid meet"
+						viewBox="0 0 24 24"
+					>
+						<title>Divide</title>
+						<path
+							d="M19 13H5v-2h14v2m-7-8a2 2 0 0 1 2 2a2 2 0 0 1-2 2a2 2 0 0 1-2-2a2 2 0 0 1 2-2m0 10a2 2 0 0 1 2 2a2 2 0 0 1-2 2a2 2 0 0 1-2-2a2 2 0 0 1 2-2Z"
+						/></svg
+				></button>
+				<button data-key="7" type="button"
+					><svg
+						xmlns="http://www.w3.org/2000/svg"
+						aria-hidden="true"
+						role="img"
+						preserveAspectRatio="xMidYMid meet"
+						viewBox="0 0 24 24"
+					>
+						<title>7</title>
+						<path d="m11 17l4-8V7H9v2h4l-4 8" /></svg
+				></button>
+				<button data-key="8" type="button"
+					><svg
+						xmlns="http://www.w3.org/2000/svg"
+						aria-hidden="true"
+						role="img"
+						preserveAspectRatio="xMidYMid meet"
+						viewBox="0 0 24 24"
+					>
+						<title>8</title>
+						<path
+							d="M11 13h2v2h-2m0-6h2v2h-2m0 6h2a2 2 0 0 0 2-2v-1.5a1.5 1.5 0 0 0-1.5-1.5a1.5 1.5 0 0 0 1.5-1.5V9a2 2 0 0 0-2-2h-2a2 2 0 0 0-2 2v1.5a1.5 1.5 0 0 0 1.5 1.5A1.5 1.5 0 0 0 9 13.5V15a2 2 0 0 0 2 2"
+						/></svg
+				></button>
+				<button data-key="9" type="button"
+					><svg
+						xmlns="http://www.w3.org/2000/svg"
+						aria-hidden="true"
+						role="img"
+						preserveAspectRatio="xMidYMid meet"
+						viewBox="0 0 24 24"
+					>
+						<title>9</title>
+						<path
+							d="M13 17a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-2a2 2 0 0 0-2 2v2a2 2 0 0 0 2 2h2v2H9v2h4m0-6h-2V9h2v2Z"
+						/></svg
+				></button>
+				<button class="operator" data-key="*" type="button"
+					><svg
+						xmlns="http://www.w3.org/2000/svg"
+						aria-hidden="true"
+						role="img"
+						preserveAspectRatio="xMidYMid meet"
+						viewBox="0 0 24 24"
+					>
+						<title>Multiply</title>
+						<path
+							d="M19 6.41L17.59 5L12 10.59L6.41 5L5 6.41L10.59 12L5 17.59L6.41 19L12 13.41L17.59 19L19 17.59L13.41 12L19 6.41Z"
+						/></svg
+				></button>
+				<button data-key="4" type="button"
+					><svg
+						xmlns="http://www.w3.org/2000/svg"
+						aria-hidden="true"
+						role="img"
+						preserveAspectRatio="xMidYMid meet"
+						viewBox="0 0 24 24"
+					>
+						<title>4</title>
+						<path fill="" d="M9 7v6h4v4h2V7h-2v4h-2V7H9Z" /></svg
+				></button>
+				<button data-key="5" type="button"
+					><svg
+						xmlns="http://www.w3.org/2000/svg"
+						aria-hidden="true"
+						role="img"
+						preserveAspectRatio="xMidYMid meet"
+						viewBox="0 0 24 24"
+					>
+						<title>5</title>
+						<path
+							d="M9 7v6h4v2H9v2h4a2 2 0 0 0 2-2v-2a2 2 0 0 0-2-2h-2V9h4V7H9Z"
+						/></svg
+				></button>
+				<button data-key="6" type="button"
+					><svg
+						xmlns="http://www.w3.org/2000/svg"
+						aria-hidden="true"
+						role="img"
+						preserveAspectRatio="xMidYMid meet"
+						viewBox="0 0 24 24"
+					>
+						<title>6</title>
+						<path
+							d="M11 7a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h2a2 2 0 0 0 2-2v-2a2 2 0 0 0-2-2h-2V9h4V7h-4m0 6h2v2h-2v-2Z"
+						/></svg
+				></button>
+				<button class="operator" data-key="-" type="button"
+					><svg
+						xmlns="http://www.w3.org/2000/svg"
+						aria-hidden="true"
+						role="img"
+						preserveAspectRatio="xMidYMid meet"
+						viewBox="0 0 24 24"
+					>
+						<title>Subtract</title>
+						<path d="M19 13H5v-2h14v2Z" /></svg
+				></button>
+				<button data-key="1" type="button"
+					><svg
+						xmlns="http://www.w3.org/2000/svg"
+						aria-hidden="true"
+						role="img"
+						preserveAspectRatio="xMidYMid meet"
+						viewBox="0 0 24 24"
+					>
+						<title>1</title>
+						<path d="M10 7v2h2v8h2V7h-4Z" /></svg
+				></button>
+				<button data-key="2" type="button">
+					<svg
+						xmlns="http://www.w3.org/2000/svg"
+						aria-hidden="true"
+						role="img"
+						preserveAspectRatio="xMidYMid meet"
+						viewBox="0 0 24 24"
+					>
+						<title>2</title>
+						<path
+							d="M9 7v2h4v2h-2a2 2 0 0 0-2 2v4h6v-2h-4v-2h2a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2H9Z"
+						/>
+					</svg>
+				</button>
+				<button data-key="3" type="button"
+					><svg
+						xmlns="http://www.w3.org/2000/svg"
+						aria-hidden="true"
+						role="img"
+						preserveAspectRatio="xMidYMid meet"
+						viewBox="0 0 24 24"
+					>
+						<title>3</title>
+						<path
+							d="M15 15v-1.5a1.5 1.5 0 0 0-1.5-1.5a1.5 1.5 0 0 0 1.5-1.5V9a2 2 0 0 0-2-2H9v2h4v2h-2v2h2v2H9v2h4a2 2 0 0 0 2-2"
+						/></svg
+				></button>
+				<button class="operator" data-key="+" type="button"
+					><svg
+						xmlns="http://www.w3.org/2000/svg"
+						aria-hidden="true"
+						role="img"
+						preserveAspectRatio="xMidYMid meet"
+						viewBox="0 0 24 24"
+					>
+						<title>Add</title>
+						<path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2Z" /></svg
+				></button>
+				<button class="double-wide" data-key="0" type="button"
+					><svg
+						xmlns="http://www.w3.org/2000/svg"
+						aria-hidden="true"
+						role="img"
+						preserveAspectRatio="xMidYMid meet"
+						viewBox="0 0 24 24"
+					>
+						<title>0</title>
+						<path
+							d="M11 7a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h2a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-2m0 2h2v6h-2V9Z"
+						/></svg
+				></button>
+				<button data-key="." type="button"
+					><svg
+						xmlns="http://www.w3.org/2000/svg"
+						aria-hidden="true"
+						role="img"
+						preserveAspectRatio="xMidYMid meet"
+						viewBox="0 0 24 24"
+					>
+						<title>Decimal</title>
+						<circle r="1.4458202" cy="16" cx="12" />
+					</svg>
+				</button>
+				<button class="operator" data-key="=" type="button"
+					><svg
+						xmlns="http://www.w3.org/2000/svg"
+						aria-hidden="true"
+						role="img"
+						preserveAspectRatio="xMidYMid meet"
+						viewBox="0 0 24 24"
+					>
+						<title>Equals</title>
+						<path d="M19 10H5V8h14v2m0 6H5v-2h14v2Z" /></svg
+				></button>
+			</div>
 		</main>
 		<!-- <footer>
 			Icons from
