@@ -1,7 +1,70 @@
 'use strict';
 
+function toggleActive(e) {
+	console.log(e);
+	//* remove Active class if present
+	if (e.target.classList.contains('active')) {
+		console.log(`REMOVE active class`);
+		// transition is called to make swap more elegant
+		e.target.classList.remove('active');
+		return;
+	}
+	//* Make Active
+	console.log(`ADD active class`);
+	e.target.classList.add('active');
+}
+
+function addActive(btn) {
+	btn.classList.add('active');
+	// btn.classList.add('active');
+	// this.addEventListener('transitionend', addActive(btn));
+}
+
+function keyPress(e) {
+	// match the button the key pressed
+	const btn = document.querySelector(`button[data-key='${e.key}']`);
+	// if no button matches, exit function
+	if (!btn) return;
+	// toggleActive(btn);
+	btn.classList.add('active');
+}
+
+function mouseClick(e) {
+	// match the button the key pressed
+	const btn = document.querySelector(`button[data-key='${e.key}']`);
+	// if no button matches, exit function
+	if (!btn) return;
+	// addActive(btn);
+	btn.classList.add('active');
+}
+
+// get all the buttons which will be mapped to keyboard entry
+const btns = document.querySelectorAll('button[data-key]');
+
+// btns.forEach((key) =>
+// 	key.addEventListener('click', () => {
+// 		key.classList.add('active');
+// 	})
+// );
+
+btns.forEach((key) =>
+	key.addEventListener('transitionend', () => {
+		key.classList.remove('active');
+	})
+);
+// btns.forEach((key) => key.addEventListener('transitionend', toggleActive(key)));
+// btns.forEach((key) => key.addEventListener('click', toggleActive(key)));
+// btns.forEach((key) => key.addEventListener('pointerup', toggleActive(key)));
+
+document.addEventListener('keydown', keyPress);
+document.addEventListener('pointerdown', toggleActive);
+document.addEventListener('pointerup', toggleActive);
+// window.addEventListener('click', (e) => {
+// 	e.classList.add('active');
+// });
+
 //************************************************************/
-//************** Begin code for COLOR-MODE swap **************/
+//************** Begin code for data-theme swap **************/
 //************************************************************/
 let toggleColorMode = function swapColorMode(e) {
 	//* Switch to Light Mode
@@ -9,19 +72,19 @@ let toggleColorMode = function swapColorMode(e) {
 		// transition is called to make swap more elegant
 		transition();
 		// Sets the custom HTML tag attribute
-		document.documentElement.setAttribute('color-mode', 'light');
+		document.documentElement.setAttribute('data-theme', 'light');
 		// Sets the user's preference in local storage
-		localStorage.setItem('color-mode', 'light');
+		localStorage.setItem('data-theme', 'light');
 		return;
 	}
 	//* Switch to Dark Mode
 	transition();
-	document.documentElement.setAttribute('color-mode', 'dark');
-	localStorage.setItem('color-mode', 'dark');
+	document.documentElement.setAttribute('data-theme', 'dark');
+	localStorage.setItem('data-theme', 'dark');
 };
 
-// Get the two .color-mode__btn buttons in the DOM
-let toggleColorButtons = document.querySelectorAll('.color-mode__btn');
+// Get the two .data-theme__btn buttons in the DOM
+let toggleColorButtons = document.querySelectorAll('.data-theme__btn');
 
 // Set up event listeners for each
 toggleColorButtons.forEach(function (btn) {
@@ -32,5 +95,5 @@ function transition() {
 	document.documentElement.classList.add('transition');
 	window.setTimeout(() => {
 		document.documentElement.classList.remove('transition');
-	}, 600);
+	}, 1200);
 }
