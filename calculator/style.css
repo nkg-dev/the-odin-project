@@ -244,19 +244,21 @@ button.active > svg {
 }
 
 .readout {
-	grid-column: span 4;
+	display: flex;
+	flex-direction: column;
+
 	background-color: var(--color-bg-readout);
 	border-radius: var(--size-spacing-sm);
 	padding: 0;
-	height: fit-content;
+	/* height: fit-content; */
+	word-wrap: break-word;
+	word-break: break-all;
 }
 
 .previous-operand,
 .current-operand {
 	letter-spacing: var(--size-spacing-xxs);
 	text-align: right;
-	word-wrap: break-word;
-	word-break: break-all;
 }
 
 .previous-operand {
