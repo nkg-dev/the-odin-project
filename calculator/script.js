@@ -96,12 +96,15 @@ class Calculator {
 }
 
 const numberButtons = document.querySelectorAll('[data-number]');
+// console.log(numberButtons);
 const operationButtons = document.querySelectorAll('[data-operation]');
 const equalsButton = document.querySelector('[data-equals]');
 const deleteButton = document.querySelector('[data-delete]');
 const allClearButton = document.querySelector('[data-all-clear]');
 const previousOperandText = document.querySelector('[data-previous-operand]');
 const currentOperandText = document.querySelector('[data-current-operand]');
+
+// const numberButtonsArray = [...numberButtons.value];
 
 const calculator = new Calculator(previousOperandText, currentOperandText);
 // keyvalues Return == Enter
@@ -126,12 +129,15 @@ function addActive(btn) {
 }
 
 function keyPress(e) {
-	// match the button the key pressed
+	// match the button with the key pressed
 	console.log(`e.key value is ${e.key}`);
 	let keyValue = e.key;
 	switch (keyValue) {
 		case 'Enter':
 			keyValue = '=';
+			break;
+		case 'x':
+			keyValue = '*';
 			break;
 		case 'Clear':
 			keyValue = 'Delete';
