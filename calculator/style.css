@@ -22,6 +22,7 @@
 :root {
 	/** Colors inspired by Open Color *******/
 	/** https://yeun.github.io/open-color/ **/
+	/** (tho adjusted somewhat) *************/
 
 	--gray-9: hsl(210, 11%, 15%);
 	--gray-8: hsl(210, 10%, 23%);
