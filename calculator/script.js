@@ -4,16 +4,16 @@
 // BUT Clear button (on keyboards with numberpad) is Clear NOT Delete or Backspace
 
 function toggleActive(e) {
-	console.log(e);
+	// console.log(e);
 	//* remove Active class if present
 	if (e.target.classList.contains('active')) {
-		console.log(`REMOVE active class`);
+		// console.log(`REMOVE active class`);
 		// transition is called to make swap more elegant
 		e.target.classList.remove('active');
 		return;
 	}
 	//* Make Active
-	console.log(`ADD active class`);
+	// console.log(`ADD active class`);
 	e.target.classList.add('active');
 }
 
@@ -31,12 +31,15 @@ function keyPress(e) {
 	if (!btn) return;
 	// toggleActive(btn);
 	btn.classList.add('active');
-	// routeKeyPress(e.key);
+	// routeKey(e.key);
 }
 
 // function routeKeyPress(key)
 
 function mouseClick(e) {
+	// console.log(e.target.value);
+	if (!e.target.value) return;
+	
 	// match the button the key pressed
 	const btn = document.querySelector(`button[data-key='${e.key}']`);
 	// if no button matches, exit function
@@ -64,12 +67,15 @@ btns.forEach((key) =>
 // btns.forEach((key) => key.addEventListener('pointerup', toggleActive(key)));
 
 document.addEventListener('keydown', keyPress);
-document.addEventListener('pointerdown', toggleActive);
-document.addEventListener('pointerdown', (e) => {
-	console.log(e.target.value);
-	console.log(e.target.name);
-});
-document.addEventListener('pointerup', toggleActive);
+// document.addEventListener('pointerdown', toggleActive);
+document.addEventListener('pointerdown', mouseClick);
+// document.addEventListener('pointerdown', (e) => {
+// 	console.log(e.target.value);
+// 	if (!e.target.value) {
+// 		console.log('FALSE');
+// 	}
+// });
+// document.addEventListener('pointerup', toggleActive);
 // window.addEventListener('click', (e) => {
 // 	e.classList.add('active');
 // });
