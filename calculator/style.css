@@ -251,7 +251,8 @@ button.active > svg {
 	background-color: var(--color-bg-readout);
 	border-radius: var(--size-spacing-sm);
 	padding: 0;
-	/* height: fit-content; */
+
+	max-width: calc(var(--font-size) * 18.25);
 	word-wrap: break-word;
 	word-break: break-all;
 }
