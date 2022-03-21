@@ -55,7 +55,7 @@ class Calculator {
 		}
 		if (calculation == Infinity) {
 			window.alert(
-				"⛔️ C'mon, you can't divide by zero!\n\n⚠️ Enter new number(s) or Clear All."
+				"\n⛔️  C'mon, you can't divide by zero!\n\n⚠️  Enter new number(s) or Clear All.\n"
 			);
 			return (this.currentOperand = '');
 		}
@@ -65,9 +65,10 @@ class Calculator {
 	}
 
 	getDisplayNumber(number) {
-		const stringNumber = number.toString();
-		const integerDigits = parseFloat(stringNumber.split('.')[0]);
-		const decimalDigits = stringNumber.split('.')[1];
+		const stringNumber = number?.toString() || '';
+		if (stringNumber === '') return '';
+		const [integerDigits, decimalDigits] = stringNumber.split('.');
+		// const decimalDigits = stringNumber.split('.')[1];
 		let integerDisplay;
 		if (isNaN(integerDigits)) {
 			integerDisplay = '';
@@ -94,6 +95,13 @@ class Calculator {
 		}
 	}
 }
+
+const NUMBER_FORMATTER = new Intl.NumberFormat('en-US', {
+	maximumSignificantDigits: 11,
+	// notation: 'engineering',
+});
+
+console.log(NUMBER_FORMATTER.format(''));
 
 const numberButtons = document.querySelectorAll('[data-number]');
 // console.log(numberButtons);
