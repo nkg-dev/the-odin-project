@@ -4,17 +4,16 @@
 // BUT Clear button (on keyboards with numberpad) is Clear NOT Delete or Backspace
 
 function toggleActive(e) {
-	// console.log(e);
 	//* remove Active class if present
 	if (e.target.classList.contains('active')) {
-		// console.log(`REMOVE active class`);
-		// transition is called to make swap more elegant
+		console.log('Remove');
 		e.target.classList.remove('active');
 		return;
 	}
 	//* Make Active
-	// console.log(`ADD active class`);
+	console.log('Add');
 	e.target.classList.add('active');
+	return;
 }
 
 function addActive(btn) {
@@ -37,48 +36,46 @@ function keyPress(e) {
 // function routeKeyPress(key)
 
 function mouseClick(e) {
-	// console.log(e.target.value);
+	console.log(e.target.value);
 	if (!e.target.value) return;
-	
-	// match the button the key pressed
-	const btn = document.querySelector(`button[data-key='${e.key}']`);
+	// routeKey(e.target.value);
+	// const btn = document.querySelector(`button[data-key='${e.key}']`);
 	// if no button matches, exit function
-	if (!btn) return;
+	// if (!btn) return;
 	// addActive(btn);
-	btn.classList.add('active');
+	// e.target.addEventListener('transitionend', toggleActive);
+	e.target.classList.add('active');
+}
+
+function routeKey(key) {
+	switch (key) {
+		case '0':
+	}
 }
 
 // get all the buttons which will be mapped to keyboard entry
 const btns = document.querySelectorAll('button[data-key]');
-
-// btns.forEach((key) =>
-// 	key.addEventListener('click', () => {
-// 		key.classList.add('active');
-// 	})
-// );
 
 btns.forEach((key) =>
 	key.addEventListener('transitionend', () => {
 		key.classList.remove('active');
 	})
 );
-// btns.forEach((key) => key.addEventListener('transitionend', toggleActive(key)));
-// btns.forEach((key) => key.addEventListener('click', toggleActive(key)));
-// btns.forEach((key) => key.addEventListener('pointerup', toggleActive(key)));
 
 document.addEventListener('keydown', keyPress);
-// document.addEventListener('pointerdown', toggleActive);
-document.addEventListener('pointerdown', mouseClick);
-// document.addEventListener('pointerdown', (e) => {
-// 	console.log(e.target.value);
-// 	if (!e.target.value) {
-// 		console.log('FALSE');
-// 	}
+document.addEventListener('pointerdown', (e) => {
+	console.log(e.target.value);
+	toggleActive(e);
+});
+// document.addEventListener('touchstart', (e) => {
+// 	toggleActive(e);
 // });
-// document.addEventListener('pointerup', toggleActive);
-// window.addEventListener('click', (e) => {
-// 	e.classList.add('active');
+// document.addEventListener('touchend', (e) => {
+// 	toggleActive(e);
 // });
+document.addEventListener('pointerup', (e) => {
+	e.target.addEventListener('transitionend', toggleActive(e));
+});
 
 //************************************************************/
 //************** Begin code for data-theme swap **************/
