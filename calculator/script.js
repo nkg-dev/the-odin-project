@@ -49,13 +49,21 @@ class Calculator {
 				break;
 			case '÷':
 				calculation = previous / current;
+				console.log(calculation);
 				break;
 			default:
 				return;
 		}
-		this.currentOperand = calculation;
-		this.operation = undefined;
-		this.previousOperand = '';
+		if (calculation != Infinity) {
+			this.currentOperand = calculation;
+			this.operation = undefined;
+			this.previousOperand = '';
+		} else {
+			window.alert(
+				'⛔️ You cannot divide by zero!\n\n⚠️ Enter new number(s) or Clear All.'
+			);
+			this.currentOperand = '';
+		}
 	}
 
 	getDisplayNumber(number) {
