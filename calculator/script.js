@@ -49,21 +49,19 @@ class Calculator {
 				break;
 			case '÷':
 				calculation = previous / current;
-				console.log(calculation);
 				break;
 			default:
 				return;
 		}
-		if (calculation != Infinity) {
-			this.currentOperand = calculation;
-			this.operation = undefined;
-			this.previousOperand = '';
-		} else {
+		if (calculation == Infinity) {
 			window.alert(
-				'⛔️ You cannot divide by zero!\n\n⚠️ Enter new number(s) or Clear All.'
+				"⛔️ C'mon, you can't divide by zero!\n\n⚠️ Enter new number(s) or Clear All."
 			);
-			this.currentOperand = '';
+			return (this.currentOperand = '');
 		}
+		this.currentOperand = calculation;
+		this.operation = undefined;
+		this.previousOperand = '';
 	}
 
 	getDisplayNumber(number) {
@@ -210,23 +208,13 @@ btns.forEach((key) =>
 		key.classList.remove('active');
 	})
 );
+btns.forEach((key) =>
+	key.addEventListener('pointerdown', () => {
+		routeInput(key.value);
+	})
+);
 
 document.addEventListener('keydown', keyPress);
-document.addEventListener('pointerdown', (e) => {
-	if (!e.target.value) return;
-	routeInput(e.target.value);
-	// toggleActive(e);
-	// mouseClick(e);
-});
-// document.addEventListener('touchstart', (e) => {
-// 	toggleActive(e);
-// });
-// document.addEventListener('touchend', (e) => {
-// 	toggleActive(e);
-// });
-// document.addEventListener('pointerup', (e) => {
-// 	e.target.addEventListener('transitionend', toggleActive(e));
-// });
 
 //************************************************************/
 //************** Begin code for data-theme swap **************/
@@ -252,7 +240,7 @@ let toggleColorMode = function swapColorMode(e) {
 let toggleColorButtons = document.querySelectorAll('.data-theme__btn');
 
 // Set up event listeners for each
-toggleColorButtons.forEach(function (btn) {
+toggleColorButtons.forEach((btn) => {
 	btn.addEventListener('click', toggleColorMode);
 });
 
