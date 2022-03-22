@@ -2,6 +2,28 @@
 
 const maxDecimalLength = 4;
 
+const INTEGER_FORMATTER = new Intl.NumberFormat('en-US', {
+	maximumFractionDigits: 0,
+});
+const DECIMAL_FORMATTER = new Intl.NumberFormat('en-US', {
+	maximumFractionDigits: maxDecimalLength,
+});
+
+// get all the clickable buttons
+const calculatorButtons = document.querySelectorAll('[data-key]');
+
+const numberButtons = document.querySelectorAll('[data-number]');
+const numberButtonsArray = Array.from(numberButtons, (key) => key.value).sort();
+
+const operationButtons = document.querySelectorAll('[data-operation]');
+const operationButtonsArray = Array.from(
+	operationButtons,
+	(key) => key.value
+).sort();
+
+const previousOperandText = document.querySelector('[data-previous-operand]');
+const currentOperandText = document.querySelector('[data-current-operand]');
+
 class Calculator {
 	constructor(previousOperandText, currentOperandText) {
 		this.previousOperandText = previousOperandText;
@@ -17,6 +39,35 @@ class Calculator {
 
 	backSpace() {
 		this.currentOperand = this.currentOperand.toString().slice(0, -1);
+	}
+
+	routeInput(key) {
+		if (numberButtonsArray.includes(key)) {
+			this.appendNumber(key);
+			this.updateDisplay();
+		}
+		if (operationButtonsArray.includes(key)) {
+			if (key === '/') {
+				key = '÷';
+			}
+			if (key === '*') {
+				key = '×';
+			}
+			this.chooseOperation(key);
+			this.updateDisplay();
+		}
+		if (key === '=') {
+			this.operate();
+			this.updateDisplay();
+		}
+		if (key === 'Backspace') {
+			this.backSpace();
+			this.updateDisplay();
+		}
+		if (key === 'Delete') {
+			this.clear();
+			this.updateDisplay();
+		}
 	}
 
 	appendNumber(number) {
@@ -96,33 +147,12 @@ class Calculator {
 	}
 }
 
-const INTEGER_FORMATTER = new Intl.NumberFormat('en-US', {
-	maximumFractionDigits: 0,
-});
-const DECIMAL_FORMATTER = new Intl.NumberFormat('en-US', {
-	maximumFractionDigits: maxDecimalLength,
-});
-
-// get all the clickable buttons
-const calculatorButtons = document.querySelectorAll('[data-key]');
-
-const numberButtons = document.querySelectorAll('[data-number]');
-const numberButtonsArray = Array.from(numberButtons, (key) => key.value).sort();
-
-const operationButtons = document.querySelectorAll('[data-operation]');
-const operationButtonsArray = Array.from(
-	operationButtons,
-	(key) => key.value
-).sort();
-
-const previousOperandText = document.querySelector('[data-previous-operand]');
-const currentOperandText = document.querySelector('[data-current-operand]');
-
 const calculator = new Calculator(previousOperandText, currentOperandText);
 
 function keyPress(e) {
 	let keyValue = e.key;
-	//*** A few keys mapped as alternates ('Enter' alternate to '=' ) ***/
+	//*** Some keys mapped with alternates ****/
+	//*** ('Enter' alternate to '=' ) *********/
 	switch (keyValue) {
 		case 'Enter':
 			keyValue = '=';
@@ -134,47 +164,18 @@ function keyPress(e) {
 			keyValue = 'Delete';
 			break;
 	}
-	const calculatorButton = document.querySelector(`[data-key='${keyValue}']`);
-	if (!calculatorButton) return;
-	calculatorButton.classList.add('active');
-	calculatorButton.addEventListener('transitionend', () => {
-		calculatorButton.classList.remove('active');
+	const mappedButton = document.querySelector(`[data-key='${keyValue}']`);
+	if (!mappedButton) return;
+	mappedButton.classList.add('active');
+	mappedButton.addEventListener('transitionend', () => {
+		mappedButton.classList.remove('active');
 	});
-	routeInput(keyValue);
-}
-
-function routeInput(key) {
-	if (numberButtonsArray.includes(key)) {
-		calculator.appendNumber(key);
-		calculator.updateDisplay();
-	}
-	if (operationButtonsArray.includes(key)) {
-		if (key === '/') {
-			key = '÷';
-		}
-		if (key === '*') {
-			key = '×';
-		}
-		calculator.chooseOperation(key);
-		calculator.updateDisplay();
-	}
-	if (key === '=') {
-		calculator.operate();
-		calculator.updateDisplay();
-	}
-	if (key === 'Backspace') {
-		calculator.backSpace();
-		calculator.updateDisplay();
-	}
-	if (key === 'Delete') {
-		calculator.clear();
-		calculator.updateDisplay();
-	}
+	calculator.routeInput(keyValue);
 }
 
 calculatorButtons.forEach((key) =>
 	key.addEventListener('pointerdown', () => {
-		routeInput(key.value);
+		calculator.routeInput(key.value);
 	})
 );
 
