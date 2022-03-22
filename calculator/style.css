@@ -36,7 +36,7 @@
 	--indigo-3: hsl(228, 100%, 78%);
 
 	/* --orange-5: hsl(29, 100%, 58%); */
-	--orange-5: hsl(29, 80%, 58%);
+	--orange-5: hsl(27, 77%, 50%);
 	--orange-3: hsl(32, 100%, 74%);
 
 	--font-main: 'Oxanium', system-ui, -apple-system, Segoe UI, Roboto, Ubuntu,
@@ -58,7 +58,8 @@
 	--size-spacing-xxs: calc(var(--font-size) * 0.125);
 
 	--transition-time-short: 40ms;
-	--transition-time-long: 160ms;
+	--transition-time-med: 160ms;
+	--transition-time-long: 750ms;
 }
 
 /*** "light--hidden" elements will be hidden **/
@@ -82,8 +83,6 @@
 
 	font-family: var(--font-main);
 	font-weight: 700;
-
-	/* border: 1px dotted #ffd43b !important; */
 }
 
 html[data-theme='light'] {
@@ -121,6 +120,8 @@ body {
 	align-items: center;
 
 	background-color: var(--color-bg-body);
+
+	transition: all var(--transition-time-long) ease;
 }
 
 header {
@@ -238,6 +239,10 @@ button.active > svg {
 	background-color: inherit;
 }
 
+.hover-only {
+	opacity: 0;
+}
+
 .heading {
 	margin: var(--size-spacing-md) var(--size-spacing-xxs) var(--size-spacing-xxs);
 	color: var(--color-text-2);
@@ -300,7 +305,7 @@ button.active > svg {
 
 	position: absolute;
 	top: var(--size-btn-xs);
-	padding: var(--size-spacing-sm) var(--size-spacing-lg);
+	padding: var(--size-spacing-md) var(--size-spacing-md);
 	min-width: 13ch;
 	max-width: 18ch;
 
@@ -315,7 +320,7 @@ button.active > svg {
 	transform: translateY(var(--size-spacing-md)) scale(var(--scale));
 	transform-origin: top center;
 
-	transition: transform var(--transition-time-long) ease;
+	transition: transform var(--transition-time-med) ease;
 }
 
 @media (hover: hover) {
@@ -336,5 +341,9 @@ button.active > svg {
 	}
 	.tool-tip:hover::before {
 		--scale: 1;
+	}
+	.hover-only {
+		opacity: 1;
+		cursor: default;
 	}
 }
