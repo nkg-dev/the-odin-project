@@ -13,8 +13,6 @@
 		<title>Calculator</title>
 		<link rel="stylesheet" href="/style.css" />
 		<script>
-			// console.log(document.querySelector('meta[name="color-scheme"]').content);
-
 			// retrieves data-theme preference from localStorage
 			if (
 				localStorage.getItem('data-theme') === 'dark' ||
@@ -31,21 +29,9 @@
 		<main>
 			<header>
 				<button
-					class="header-btn tool-tip"
-					data-tooltip="Use keyboard or mouse"
+					class="header-btn tool-tip hover-only"
+					data-tooltip="Use your keyboard too!"
 				>
-					<!-- <svg
-						xmlns="http://www.w3.org/2000/svg"
-						aria-hidden="true"
-						role="img"
-						preserveAspectRatio="xMidYMid meet"
-						viewBox="0 0 24 24"
-						class="header-svg"
-						>
-						<path
-						d="M13 3h-2v10h2V3m4.83 2.17l-1.42 1.42A6.944 6.944 0 0 1 19 12a7 7 0 0 1-7 7A6.995 6.995 0 0 1 7.58 6.58L6.17 5.17a9.001 9.001 0 0 0-1.03 12.69c3.22 3.78 8.9 4.24 12.69 1.02A9.003 9.003 0 0 0 21 12c0-2.63-1.16-5.13-3.17-6.83Z"
-						/>
-					</svg> -->
 					<svg
 						xmlns="http://www.w3.org/2000/svg"
 						aria-hidden="true"
@@ -55,7 +41,7 @@
 						class="header-svg"
 					>
 						<path
-							d="M11 9h2V7h-2m1 13c-4.41 0-8-3.59-8-8s3.59-8 8-8s8 3.59 8 8s-3.59 8-8 8m0-18A10 10 0 0 0 2 12a10 10 0 0 0 10 10a10 10 0 0 0 10-10A10 10 0 0 0 12 2m-1 15h2v-6h-2v6Z"
+							d="M6 16h12v2H6v-2m0-3v2H2v-2h4m1 2v-2h3v2H7m4 0v-2h2v2h-2m3 0v-2h3v2h-3m4 0v-2h4v2h-4M2 10h3v2H2v-2m17 2v-2h3v2h-3m-1 0h-2v-2h2v2M8 12H6v-2h2v2m4 0H9v-2h3v2m3 0h-2v-2h2v2M2 9V7h2v2H2m3 0V7h2v2H5m3 0V7h2v2H8m3 0V7h2v2h-2m3 0V7h2v2h-2m3 0V7h5v2h-5Z"
 						/>
 					</svg>
 				</button>
@@ -261,7 +247,7 @@
 					>
 						<path d="M19 13H5v-2h14v2Z" /></svg
 				></button>
-				<button data-key="1" type="button" value="1" name="Number 1"
+				<button data-key="1" data-number type="button" value="1" name="Number 1"
 					><svg
 						xmlns="http://www.w3.org/2000/svg"
 						aria-hidden="true"
@@ -336,7 +322,7 @@
 							d="M11 7a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h2a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-2m0 2h2v6h-2V9Z"
 						/></svg
 				></button>
-				<button data-key="." type="button" value="." name="Decimal"
+				<button data-key="." data-number type="button" value="." name="Decimal"
 					><svg
 						xmlns="http://www.w3.org/2000/svg"
 						aria-hidden="true"
